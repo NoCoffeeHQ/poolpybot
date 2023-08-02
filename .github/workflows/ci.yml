@@ -13,6 +13,8 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_USER: "postgres"
+          POSTGRES_PASSWORD: "password"
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
       redis:
         image: redis:latest
@@ -34,14 +36,14 @@ jobs:
       - name: Setup Database
         env:
           RAILS_ENV: test
-          DB_HOST: localhost
-          DB_USER: postgres
+          POOLPYBOT_DB_USERNAME: "postgres"
+          POOLPYBOT_DB_PASSWORD: "password"
         run: bin/rails db:create db:schema:load
 
       - name: Build and test with rspec
         env:
           RAILS_ENV: test
-          DB_HOST: localhost
-          DB_USER: postgres
+          POOLPYBOT_DB_USERNAME: "postgres"
+          POOLPYBOT_DB_PASSWORD: "password"
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: bundle exec rspec
