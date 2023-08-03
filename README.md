@@ -37,6 +37,14 @@ Open your browser and type the following address: http://app.poolpybot.local:510
 bundle exec rspec
 ```
 
+### Generators
+
+Generate new component for the UIKIt. Example:
+
+```bash
+bin/rails generate component UIKit::FormInput form attribute --sidecar
+```
+
 ### Deployment
 
 TODO

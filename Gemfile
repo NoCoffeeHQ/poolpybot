@@ -70,3 +70,7 @@ group :development, :test do
   gem 'rubocop-rails_config'
   gem 'rubocop-rspec'
 end
+
+# TO BE ADDED TO THE SaaS Rails template
+gem "service_orchestrator", "~> 0.1.0"
+gem 'email_validator'

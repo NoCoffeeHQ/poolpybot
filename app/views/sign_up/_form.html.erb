@@ -1,0 +1,9 @@
+<%= fields_for :company, company do |company_form| %>
+  <%= ui_kit :text_field, form: company_form, attribute: :name %>
+<% end %>
+
+<%= fields_for :user, user do |user_form| %>
+  <%= ui_kit :text_field, form: user_form, attribute: :username %>
+  <%= ui_kit :email_field, form: user_form, attribute: :email %>
+  <%= ui_kit :password_field, form: user_form, attribute: :password %>
+<% end %>

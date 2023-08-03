@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+class UIKit::<%= class_name %>::<%= class_name %>Component < ViewComponent::Base
+<%- if accessors -%>
+  attr_reader <%= accessors %>
+<%- end -%>
+
+<%- if initialize_signature -%>
+  def initialize(<%= initialize_signature %>)
+    <%= initialize_body %>
+  end
+<%- end -%>
+end

@@ -1,0 +1,17 @@
+<%= content_tag :div do %>
+  <div class="flex items-center justify-between">
+    <div class="space-x-2 flex items-center">
+      <%= form.label attribute, label? ? label : nil, class: 'block text-sm font-medium leading-6 text-gray-900', for: form_for %>
+      <p class="text-sm text-red-500"><%= errors %></p>
+    </div>
+
+    <%= label_hint %>
+  </div>
+  <div class="mt-2">
+    <%= content %>
+  </div>
+
+  <% if hint? %>
+    <p class="mt-2 text-sm text-gray-500"><%= hint %></p>
+  <% end %>
+<% end %>

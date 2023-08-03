@@ -31,3 +31,17 @@
 
 en:
   hello: "Hello world"
+
+  helpers:
+    label:
+      company:
+        name: "Company name"
+
+  notice:
+    sign_up:
+      success: "Your account was successfully created."
+
+  sign_up:
+    new:
+      title: "Create an account"
+      submit_button: "Sign up"

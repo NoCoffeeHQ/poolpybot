@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Authentication
+  get 'sign_up', to: 'sign_up#new', as: :new_sign_up
+  post 'sign_up', to: 'sign_up#create', as: :sign_up
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  root 'home#index'
 end
