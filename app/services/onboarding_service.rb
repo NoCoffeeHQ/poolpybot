@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OnboardingService < ServiceOrchestrator::Service
   def call(user:, company:)
     ActiveRecord::Base.transaction do

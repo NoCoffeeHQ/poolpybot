@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-class UIKit::EmailField::EmailFieldComponent < UIKit::FormInput::FormInputComponent
-  attr_reader :form, :attribute, :locale, :max_length
-
-  def initialize(form:, attribute:, locale: nil)
-    @form = form
-    @attribute = attribute
-    @locale = locale
+module UIKit
+  module EmailField
+    class EmailFieldComponent < UIKit::FormInput::FormInputComponent
+    end
   end
 end

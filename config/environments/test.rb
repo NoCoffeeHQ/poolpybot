@@ -62,4 +62,5 @@ Rails.application.configure do
 
   config.hosts << 'www.poolpybot.local'
   config.hosts << 'app.poolpybot.local'
+  config.hosts << 'www.example.com'
 end

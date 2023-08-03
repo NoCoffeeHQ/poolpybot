@@ -9,7 +9,7 @@ RSpec.describe OnboardingService do
   describe '#call' do
     let(:company) { build(:company) }
     let(:user) { build(:user, company: nil) }
-    
+
     subject { instance.call(company: company, user: user) }
 
     it { is_expected.to eq true }
@@ -28,5 +28,4 @@ RSpec.describe OnboardingService do
       end
     end
   end
-  
 end

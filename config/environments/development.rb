@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/integer/time'
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -73,3 +74,4 @@ Rails.application.configure do
   config.hosts << 'www.poolpybot.local'
   config.hosts << 'app.poolpybot.local'
 end
+# rubocop:enable Metrics/BlockLength
