@@ -38,10 +38,12 @@ en:
         name: "Company name"
 
   notice:
-    sign_up:
-      success: "Your account was successfully created."
+    authentication:
+      sign_up:
+        success: "Your account was successfully created."
 
-  sign_up:
-    new:
-      title: "Create an account"
-      submit_button: "Sign up"
+  authentication:
+    sign_up:
+      new:
+        title: "Create an account"
+        submit_button: "Sign up"

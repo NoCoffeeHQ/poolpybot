@@ -1,5 +1,4 @@
-class SignUpController < ApplicationController
-  layout 'authentication'
+class Authentication::SignUpController < Authentication::BaseController
   
   # GET /sign_up
   def new
