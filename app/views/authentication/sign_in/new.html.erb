@@ -1,0 +1,22 @@
+<div class="space-y-10">
+  <div>
+    <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=600" alt="Your Company">
+    <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900"><%= t('.title') %></h2>
+    <p class="mt-2 text-sm leading-6 text-gray-500">
+      Don't have an account yet?
+      <%= link_to 'Sign up here', new_sign_up_path, class: 'font-semibold text-emerald-600 hover:text-emerald-500' %>
+    </p>
+  </div>
+
+  <%= ui_kit :notification, flash: flash %>
+
+  <div>
+    <%= form_for @user, url: sign_in_path, html: { class: 'space-y-6' } do |form| %>
+      <%= render 'form', form: form %>
+
+      <div>
+        <%= ui_kit :primary_button, type: :submit, label: t('.submit_button'), full_width: true %>
+      </div>
+    <% end %>
+  </div>
+</div>

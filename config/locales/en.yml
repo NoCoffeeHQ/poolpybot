@@ -30,20 +30,27 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
   helpers:
     label:
       company:
         name: "Company name"
 
   notice:
-    authentication:
-      sign_up:
-        success: "Your account was successfully created."
-
+    not_authenticated: "Please login first"
+      
   authentication:
     sign_up:
       new:
         title: "Create an account"
         submit_button: "Sign up"
+      create:
+        notice:
+          success: "Your account was successfully created."
+    sign_in:
+      new:
+        title: "Sign in to your account"
+        submit_button: "Sign in"
+      create:
+        notice:
+          success: "Login successful."
+          fail: 'Login failed.'

@@ -7,4 +7,7 @@ module ApplicationHelper
     instance = "UIKit::#{name.to_s.camelize}::#{name.to_s.camelize}Component".constantize.new(**args)
     render(instance, &block)
   end
+
+  # Notification
+  def notification; end
 end

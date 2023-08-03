@@ -1,0 +1,22 @@
+<div class="space-y-5">
+  <% flash.each do |type, message| %>
+    <div class="rounded-md bg-red-50 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <% if type == 'notice' %>
+            <i class="ri-checkbox-circle-line text-green-400 text-2xl"></i>
+          <% else %>
+            <i class="ri-error-warning-line text-red-400 text-2xl"></i>
+          <% end %>
+        </div>
+        <div class="ml-3">
+          <% if type == 'notice' %>
+            <h3 class="text-sm font-medium text-green-800"><%= message %></h3>
+          <% else %>
+            <h3 class="text-sm font-medium text-red-800"><%= message %></h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
