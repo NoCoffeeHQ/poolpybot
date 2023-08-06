@@ -54,7 +54,9 @@ group :development do
   # gem "spring"
 end
 
+gem 'brevo-ruby', '~> 1.0'
 gem 'image_processing', '~> 1.2'
+gem 'ruby-openai'
 gem 'sorcery', '~> 0.16.5'
 gem 'tailwindcss-rails'
 gem 'turbo-rails'

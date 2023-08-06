@@ -42,3 +42,8 @@ node_modules
 !/app/assets/builds/.keep
 
 .DS_Store
+
+/config/credentials/production.key
+
+.env.local
+.env.test

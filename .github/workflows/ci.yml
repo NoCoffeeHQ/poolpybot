@@ -46,4 +46,6 @@ jobs:
           POOLPYBOT_DB_USERNAME: "postgres"
           POOLPYBOT_DB_PASSWORD: "password"
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          INBOUND_REPLY_EMAIL_DOMAIN: "reply.poolpybot.fr"
+          RSPEC_DISABLE_OPENAI_CALLS: "1"
         run: bundle exec rspec

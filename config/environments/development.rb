@@ -73,5 +73,8 @@ Rails.application.configure do
 
   config.hosts << 'www.poolpybot.local'
   config.hosts << 'app.poolpybot.local'
+  config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
+
+  config.action_mailbox.ingress = :brevo
 end
 # rubocop:enable Metrics/BlockLength

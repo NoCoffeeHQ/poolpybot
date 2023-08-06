@@ -23,6 +23,20 @@ Create the DB:
 rails db:setup
 ```
 
+### Run Ngrok for the ActionMailbox feature
+
+This step is required to receive emails locally. 
+
+```bash
+ngrok http 5100
+```
+
+Get the URL and create Brevo weebhook.
+
+```bash
+rails brevo:create_local_webhook https://def1-2a01-cb19-8a61-e000-b598-f01-c3ec-2956.ngrok-free.app
+```
+
 ### Run the server
 
 ```bash

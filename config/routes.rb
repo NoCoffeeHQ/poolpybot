@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   # Routes when logged in
   get 'dashboard', to: 'dashboard#index', as: :dashboard
 
+  # ActionMailbox
+  scope '/rails/action_mailbox', module: 'action_mailbox/ingresses' do
+    post '/brevo/inbound_emails/:password', to: 'brevo/inbound_emails#create', as: :rails_brevo_inbound_emails
+  end
+
   # Defines the root path route ("/")
   root 'home#index'
 end
