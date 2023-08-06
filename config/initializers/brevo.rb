@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'brevo-ruby'
+require 'action_mailbox_brevo'
 
 # Setup authorization
 BrevoRuby.configure do |config|

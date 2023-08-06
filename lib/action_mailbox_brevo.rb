@@ -1,0 +1,1 @@
+require 'action_mailbox/mail_ext/from_brevo.rb'

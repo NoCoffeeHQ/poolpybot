@@ -62,6 +62,8 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :test
 
+  config.action_mailbox.ingress = :brevo
+
   config.hosts << 'www.poolpybot.local'
   config.hosts << 'app.poolpybot.local'
   config.hosts << 'www.example.com'

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class ApplicationMailbox < ActionMailbox::Base
-  # routing /something/i => :somewhere
+  routing /\@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}$/i => :invoices
 end

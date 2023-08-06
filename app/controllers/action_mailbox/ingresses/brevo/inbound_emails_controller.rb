@@ -31,12 +31,11 @@ module ActionMailbox
         before_action :authenticate_by_password
 
         def create
-          logger.info '🔥🔥🔥🔥🔥'
+          params[:items].each do |item|
+            ActionMailbox::InboundEmail.create_and_extract_message_id!(mail(item))
+          end
+
           head :ok
-          # ActionMailbox::InboundEmail.create_and_extract_message_id! mail
-          # rescue JSON::ParserError => error
-          #   logger.error error.message
-          #   head :unprocessable_entity
         end
 
         private
@@ -47,15 +46,9 @@ module ActionMailbox
           head :unauthorized unless password == params[:password]
         end
 
-        # def mail
-        #   params.require(:email).tap do |raw_email|
-        #     envelope["to"].each { |to| raw_email.prepend("X-Original-To: ", to, "\n") } if params.key?(:envelope)
-        #   end
-        # end
-
-        # def envelope
-        #   JSON.parse(params.require(:envelope))
-        # end
+        def mail(item)
+          Mail.from_brevo(item).to_s
+        end
       end
     end
   end
