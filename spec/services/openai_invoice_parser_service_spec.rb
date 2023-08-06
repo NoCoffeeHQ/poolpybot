@@ -72,7 +72,7 @@ RSpec.describe OpenaiInvoiceParserService do
     end
 
     it 'extracts the correct information' do
-      skip if ENV['RSPEC_DISABLE_OPENAI_CALLS'] == '1'
+      skip 'No need to spend money on that test' if ENV['RSPEC_DISABLE_OPENAI_CALLS'] == '1'
       is_expected.to eq({
         company_name: 'Apple',
         date: '2023/06/26',

@@ -3,6 +3,7 @@
 class Company < ApplicationRecord
   ## associations ##
   has_many :users, dependent: :destroy
+  has_many :invoice_suppliers, dependent: :destroy
 
   ## validations ##
   validates :name, presence: true

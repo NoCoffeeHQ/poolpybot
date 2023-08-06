@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_04_131852) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -60,6 +60,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_04_131852) do
     t.index ["uuid"], name: "index_companies_on_uuid", unique: true
   end
 
+  create_table "invoice_suppliers", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_invoice_suppliers_on_company_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "invoice_supplier_id"
+    t.bigint "user_id", null: false
+    t.string "message_id", null: false
+    t.integer "status", default: 0
+    t.date "date"
+    t.float "total_amount"
+    t.float "tax_rate"
+    t.string "currency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_invoices_on_company_id"
+    t.index ["invoice_supplier_id"], name: "index_invoices_on_invoice_supplier_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -74,4 +99,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_04_131852) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "invoice_suppliers", "companies"
+  add_foreign_key "invoices", "companies"
+  add_foreign_key "invoices", "invoice_suppliers"
+  add_foreign_key "invoices", "users"
 end
