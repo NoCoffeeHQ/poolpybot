@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/support/mailbox.rb
 require 'action_mailbox/test_helper'
 

@@ -7,7 +7,7 @@ RSpec.describe 'ActionMailbox::Ingresses::Brevo::InboundEmails', type: :request 
     let(:params) { { items: brevo_items(:apple) } }
     it 'returns http success' do
       expect(ActionMailbox::InboundEmail).to receive(:create_and_extract_message_id!).once
-      post "/rails/action_mailbox/brevo/inbound_emails/helloworld", params: params, as: :json
+      post '/rails/action_mailbox/brevo/inbound_emails/helloworld', params: params, as: :json
       expect(response).to have_http_status(:success)
     end
   end

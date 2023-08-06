@@ -1,11 +1,10 @@
+# frozen_string_literal: true
+
 class InvoicesMailbox < ApplicationMailbox
-
   def process
-    pp "🔥🎉😘"
-    pp mail.subject
+    Rails.logger.debug '🔥🎉😘'
+    Rails.logger.debug mail.subject
   end
-
-  private 
 
   # # Callbacks specify prerequisites to processing
   # before_processing :require_projects

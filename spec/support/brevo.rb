@@ -16,7 +16,6 @@ module BrevoApiHelper
   end
 end
 
-
 RSpec.configure do |config|
   config.include BrevoApiHelper
 end

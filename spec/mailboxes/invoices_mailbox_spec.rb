@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe InvoicesMailbox, type: :mailbox do
-  let(:company) { create(:company, :with_uuid)}
+  let(:company) { create(:company, :with_uuid) }
   let!(:user) { create(:user, company: company) }
 
   subject { receive_inbound_email_from_source(mail.to_s) }
