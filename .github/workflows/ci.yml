@@ -38,7 +38,8 @@ jobs:
           RAILS_ENV: test
           POOLPYBOT_DB_USERNAME: "postgres"
           POOLPYBOT_DB_PASSWORD: "password"
-        run: bin/rails db:create db:schema:load
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: bin/rails db:setup
 
       - name: Build and test with rspec
         env:

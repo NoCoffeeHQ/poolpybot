@@ -13,15 +13,16 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  company_id          :bigint           not null
+#  external_id         :string           not null
 #  invoice_supplier_id :bigint
-#  message_id          :string           not null
 #  user_id             :bigint           not null
 #
 # Indexes
 #
-#  index_invoices_on_company_id           (company_id)
-#  index_invoices_on_invoice_supplier_id  (invoice_supplier_id)
-#  index_invoices_on_user_id              (user_id)
+#  index_invoices_on_company_id                  (company_id)
+#  index_invoices_on_company_id_and_external_id  (company_id,external_id) UNIQUE
+#  index_invoices_on_invoice_supplier_id         (invoice_supplier_id)
+#  index_invoices_on_user_id                     (user_id)
 #
 # Foreign Keys
 #
@@ -35,7 +36,7 @@ FactoryBot.define do
     user { create(:user) }
     invoice_supplier { create(:invoice_supplier) }
 
-    message_id { 'long-uuid@doe.net' }
+    external_id { 'mail-provider-uuid@doe.net' }
     status { :created }
 
     date { nil }

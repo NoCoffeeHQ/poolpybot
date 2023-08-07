@@ -14,7 +14,7 @@ RSpec.describe 'Mail' do
       expect(subject.from).to eq ['didier.lafforgue@gmail.com']
       expect(subject.to).to eq ['a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr']
       expect(subject.subject).to eq 'Fwd: Votre facture Apple'
-      expect(subject.text_part.body.to_s.strip).to match(/^> Begin forwarded message:\r\n> \r\n> From: Apple/)
+      expect(subject.text_part.body.to_s.strip).to match(/^Begin forwarded message:\r\n\r\nFrom: Apple/)
       expect(subject.html_part.body.to_s.strip).to match(/^<html><head>/)
     end
 

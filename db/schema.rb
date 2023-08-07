@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
     t.bigint "company_id", null: false
     t.bigint "invoice_supplier_id"
     t.bigint "user_id", null: false
-    t.string "message_id", null: false
+    t.string "external_id", null: false
     t.integer "status", default: 0
     t.date "date"
     t.float "total_amount"
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
     t.string "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id", "external_id"], name: "index_invoices_on_company_id_and_external_id", unique: true
     t.index ["company_id"], name: "index_invoices_on_company_id"
     t.index ["invoice_supplier_id"], name: "index_invoices_on_invoice_supplier_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"

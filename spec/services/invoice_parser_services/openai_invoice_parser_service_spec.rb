@@ -2,9 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe AlephAlphaInvoiceParserService do
+RSpec.describe InvoiceParserServices::OpenaiService do
   let(:container) { ApplicationContainer.new }
-  let(:instance) { described_class.new(aleph_alpha_client: container.aleph_alpha_client) }
+  let(:client) { container.openai_client }
+  let(:instance) { described_class.new(openai_client: client) }
 
   subject { instance.call(text: text) }
 
@@ -71,8 +72,24 @@ RSpec.describe AlephAlphaInvoiceParserService do
     end
 
     it 'extracts the correct information' do
-      skip 'Waiting for extra credits'
-      is_expected.to eq({ company: 'Apple', amount: 12.99, currency: 'EUR', date: '26/06/2023' })
+      skip 'No need to spend money on that test' if ENV['RSPEC_DISABLE_OPENAI_CALLS'] == '1'
+      is_expected.to eq({
+        company_name: 'Apple',
+        date: '2023/06/26',
+        total_amount: 12.99,
+        tax_rate: 2.1,
+        currency: 'EUR'
+      }.with_indifferent_access)
+    end
+  end
+
+  describe 'Given Openai hallucinated and doesn\'t return the expected JSON structure' do
+    let(:response) { { choices: [{ text: '{"company":"Apple"}' }] } }
+    let(:client) { instance_double('OpenaiClient', completions: response) }
+    let(:text) { 'Lorem ipsum...' }
+
+    it 'returns false' do
+      is_expected.to eq false
     end
   end
 end

@@ -4,7 +4,7 @@ class CreateInvoices < ActiveRecord::Migration[7.0]
       t.references :company, null: false, foreign_key: true
       t.references :invoice_supplier, null: true, foreign_key: true
       t.references :user, null: false, foreign_key: true
-      t.string :message_id, null: false
+      t.string :external_id, null: false
       t.integer :status, default: 0
       t.date :date, null: true
       t.float :total_amount, null: true
@@ -13,5 +13,7 @@ class CreateInvoices < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :invoices, [:company_id, :external_id], unique: true
   end
 end

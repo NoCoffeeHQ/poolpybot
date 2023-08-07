@@ -22,11 +22,11 @@ module BrevoSupport
 
   def brevo_set_text_and_html_parts(mail, item)
     mail.text_part = Mail::Part.new do
-      body item['RawTextBody']
+      body item['RawTextBody'].gsub(/^> /, '')
     end
     mail.html_part = Mail::Part.new do
       content_type 'text/html; charset=UTF-8'
-      body item['RawHtmlBody']
+      body item['RawHtmlBody'].gsub(/^> /, '')
     end
   end
 
