@@ -76,5 +76,7 @@ Rails.application.configure do
   config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
 
   config.action_mailbox.ingress = :brevo
+
+  config.active_job.queue_adapter = :sidekiq
 end
 # rubocop:enable Metrics/BlockLength
