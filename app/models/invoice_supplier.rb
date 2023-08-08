@@ -3,6 +3,7 @@
 class InvoiceSupplier < ApplicationRecord
   ## associations ##
   belongs_to :company
+  has_many :invoices, dependent: :destroy
 
   ## validations ##
   validates :name, presence: true

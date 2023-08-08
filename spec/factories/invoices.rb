@@ -7,6 +7,7 @@
 #  id                  :bigint           not null, primary key
 #  currency            :string
 #  date                :date
+#  error               :string
 #  status              :integer          default("created")
 #  tax_rate            :float
 #  total_amount        :float

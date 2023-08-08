@@ -76,6 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
     t.float "total_amount"
     t.float "tax_rate"
     t.string "currency"
+    t.string "error"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id", "external_id"], name: "index_invoices_on_company_id_and_external_id", unique: true

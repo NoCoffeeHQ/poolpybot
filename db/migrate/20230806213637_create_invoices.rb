@@ -10,6 +10,7 @@ class CreateInvoices < ActiveRecord::Migration[7.0]
       t.float :total_amount, null: true
       t.float :tax_rate, null: true
       t.string :currency, null: true
+      t.string :error, null: true
 
       t.timestamps
     end
