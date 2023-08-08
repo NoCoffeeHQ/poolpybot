@@ -13,6 +13,11 @@ class User < ApplicationRecord
 
   ## behaviors ##
   authenticates_with_sorcery!
+
+  ## methods ##
+  def reply_email
+    "#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}"
+  end
 end
 
 # == Schema Information
@@ -24,6 +29,7 @@ end
 #  email            :string           not null
 #  salt             :string
 #  username         :string           not null
+#  uuid             :uuid             not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  company_id       :bigint           not null
@@ -32,4 +38,5 @@ end
 #
 #  index_users_on_company_id  (company_id)
 #  index_users_on_email       (email) UNIQUE
+#  index_users_on_uuid        (uuid) UNIQUE
 #

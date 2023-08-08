@@ -4,10 +4,10 @@ class Company < ApplicationRecord
   ## associations ##
   has_many :users, dependent: :destroy
   has_many :invoice_suppliers, dependent: :destroy
+  has_many :invoices, dependent: :destroy
 
   ## validations ##
   validates :name, presence: true
-  # validates :uuid, presence: true, uniqueness: true
 end
 
 # == Schema Information
@@ -16,11 +16,6 @@ end
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
-#  uuid       :uuid             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_companies_on_uuid  (uuid) UNIQUE
 #

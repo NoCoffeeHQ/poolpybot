@@ -3,8 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe InvoicesMailbox, type: :mailbox do
-  let(:company) { create(:company, :with_uuid) }
-  let!(:user) { create(:user, company: company) }
+  let!(:user) { create(:user, :with_uuid) }
 
   subject { receive_inbound_email_from_source(mail.to_s) }
 

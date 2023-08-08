@@ -54,10 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["uuid"], name: "index_companies_on_uuid", unique: true
   end
 
   create_table "invoice_suppliers", force: :cascade do |t|
@@ -94,8 +92,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
     t.datetime "updated_at", null: false
     t.string "username", null: false
     t.bigint "company_id", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
