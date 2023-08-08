@@ -69,6 +69,17 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: ENV.fetch('HOST'), protocol: 'https', port: 443 }
+  config.action_mailer.asset_host = "https://#{ENV.fetch('HOST')}"
+  config.action_mailer.delivery_method = ENV.fetch('MAILER_DELIVERY_METHOD').to_sym
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch('MAILER_ADDRESS'),
+    port: ENV.fetch('MAILER_PORT').to_i,
+    user_name: ENV.fetch('MAILER_USERNAME'),
+    password: ENV.fetch('MAILER_PASSWORD'),
+    authentication: ENV.fetch('MAILER_AUTHENTICATION'),
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -96,4 +107,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  Rails.application.routes.default_url_options[:host] = ENV['HOST']
 end
