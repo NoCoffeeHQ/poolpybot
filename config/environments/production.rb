@@ -71,13 +71,13 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = { host: ENV.fetch('HOST'), protocol: 'https', port: 443 }
   config.action_mailer.asset_host = "https://#{ENV.fetch('HOST')}"
-  config.action_mailer.delivery_method = ENV.fetch('MAILER_DELIVERY_METHOD').to_sym
+  config.action_mailer.delivery_method = Rails.application.credentials.mailer.delivery_method.to_sym
   config.action_mailer.smtp_settings = {
-    address: ENV.fetch('MAILER_ADDRESS'),
-    port: ENV.fetch('MAILER_PORT').to_i,
-    user_name: ENV.fetch('MAILER_USERNAME'),
-    password: ENV.fetch('MAILER_PASSWORD'),
-    authentication: ENV.fetch('MAILER_AUTHENTICATION'),
+    address: Rails.application.credentials.mailer.address,
+    port: Rails.application.credentials.mailer.port.to_i,
+    user_name: Rails.application.credentials.mailer.username,
+    password: Rails.application.credentials.mailer.password,
+    authentication: Rails.application.credentials.mailer.authentication,
     enable_starttls_auto: true
   }
 
