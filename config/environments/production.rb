@@ -108,5 +108,10 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.hosts << 'www.poolpybot.fr'
+  config.hosts << 'app.poolpybot.fr'
+  config.hosts << 'poolpybot.osc-fr1.scalingo.io'
+
+
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
 end

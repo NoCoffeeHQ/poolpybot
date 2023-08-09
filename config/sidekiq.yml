@@ -1,0 +1,6 @@
+# config/sidekiq.yml
+concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+timeout: 60
+verbose: true
+queues:
+  - default
