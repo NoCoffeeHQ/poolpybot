@@ -29,12 +29,14 @@ module ApiClients
       }
     end
 
+    # rubocop:disable Style/StringHashKeys
     def http_headers
       {
-        Authorization: "Bearer #{api_token}",
-        Accept: 'application/json',
-        "Content-Type": 'application/json'
+        'Authorization' => "Bearer #{api_token}",
+        'Accept' => 'application/json',
+        "Content-Type" => 'application/json'
       }
     end
+    # rubocop:enable Style/StringHashKeys
   end
 end

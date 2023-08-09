@@ -2,20 +2,24 @@
 
 class ApplicationContainer < ServiceOrchestrator::Container
   # API clients
-  register :aleph_alpha_client do
-    ApiClients::AlephAlphaClient.new(
-      api_token: Rails.application.credentials.aleph_alpha.api_token
-    )
-  end
-  register :openai_client do
-    OpenAI::Client.new
-  end
+  register(:aleph_alpha_client) { ApiClients::AlephAlphaClient.new(api_token: credentials.aleph_alpha.api_token) }
+  register(:openai_client) { OpenAI::Client.new }
+  register(:pdfkit_client) { ApiClients::PdfkitClient.new(api_key: credentials.pdfkit.api_key) }
+
+  # PDF services
+  register :pdf_to_text, 'PdfServices::Pdfkit::PdfToTextService'
+  register :html_to_pdf, 'PdfServices::Pdfkit::HtmlToPdfService'
 
   # Business logic services
   register :onboarding, 'OnboardingService'
   register :invoice_parser, 'AlephAlphaInvoiceParserService'
   register :mail_invoice_creator, 'InvoiceCreatorServices::MailService'
+  # TODO
   # register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
 
-  # register :brevo_ingress, 'BrevoIngressService'
+  private 
+
+  def credentials
+    Rails.application.credentials
+  end
 end
