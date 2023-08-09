@@ -4,7 +4,7 @@ module InvoiceParserServices
   class OpenaiService < ApplicationService
     dependency :openai_client
 
-    JSON_KEYS = %w[company_name date total_amount tax_rate currency].sort.freeze
+    JSON_KEYS = %w[company_name identifier date total_amount tax_rate currency].sort.freeze
 
     def call(text:)
       build_json(
@@ -27,6 +27,8 @@ module InvoiceParserServices
     end
 
     def build_json(response)
+      raise 'No valid response' if response['choices'].blank?
+
       JSON.parse(response['choices'].map { |c| c['text'] }.join("\n")).with_indifferent_access.tap do |json|
         raise 'Wrong JSON keys' unless json.keys.sort == JSON_KEYS
       end
@@ -45,9 +47,10 @@ module InvoiceParserServices
 
               From the provided email, you will extract the following information and present it in a valid JSON format without the backticks:
               - Company Name (without the email address)
+              - Invoice Identifier (if you don't find it, use the command number. name the attribute as "identifier")
               - Invoice Date (in the date "yyyy/mm/dd" format and name the attribute as "date")
               - Total Amount of the Invoice (without the currency and in English format, it's a float number)
-              - TVA rate (if you don't found it, put null. name the attribute as "tax_rate", it's a float number
+              - TVA rate (if you don't find it, put null. name the attribute as "tax_rate", it's a float number
         )
               - Currency (not the ASCII symbol but the ISO 4217 code instead)
       PROMPT
