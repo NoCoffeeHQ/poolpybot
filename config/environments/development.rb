@@ -78,5 +78,7 @@ Rails.application.configure do
   config.action_mailbox.ingress = :brevo
 
   config.active_job.queue_adapter = :sidekiq
+
+  ActiveStorage::Current.url_options = { host: ENV['HOST'] }
 end
 # rubocop:enable Metrics/BlockLength

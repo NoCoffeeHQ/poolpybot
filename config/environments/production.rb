@@ -114,4 +114,6 @@ Rails.application.configure do
 
 
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
+
+  ActiveStorage::Current.url_options = { host: ENV['HOST'] }
 end

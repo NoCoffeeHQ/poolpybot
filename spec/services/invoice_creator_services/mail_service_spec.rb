@@ -7,9 +7,11 @@ RSpec.describe InvoiceCreatorServices::MailService do
   let(:instance) { container.mail_invoice_creator }
   let!(:user) { create(:user, :with_uuid) }
   let(:parser_response) { nil }
+  let(:pdf_io) { nil }
 
   before do
     allow(container.invoice_parser).to receive(:call).and_return(parser_response)
+    allow(container.html_to_pdf).to receive(:call).and_return(pdf_io)
   end
 
   subject { instance.call(mail: mail) }
@@ -36,6 +38,7 @@ RSpec.describe InvoiceCreatorServices::MailService do
           total_amount: 12.99, tax_rate: 2.1, currency: 'EUR'
         } 
       }
+      let(:pdf_io) { StringIO.new('randombytes') }
 
       it 'creates the invoice in DB' do
         expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(1)
@@ -49,11 +52,16 @@ RSpec.describe InvoiceCreatorServices::MailService do
         expect(subject.date.to_s).to eq '2023-06-26'
       end
 
+      it 'generates a PDF out of the HTML part' do
+        expect(subject.pdf_document.attached?).to eq true
+      end
+
       describe 'Given we try to process twice the same mail' do
         before { instance.call(mail: mail) }
 
         it "doesn\'t create a duplicated invoice in DB" do
           expect { subject }.not_to change(Invoice, :count)
+          expect(subject.external_id).to eq 'INVOICE-1'
         end
       end
     end

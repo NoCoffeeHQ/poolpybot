@@ -14,6 +14,7 @@ class Invoice < ApplicationRecord
 
   ## attachments ##
   has_one_attached :pdf_document
+  has_one_attached :html_document
 end
 
 # == Schema Information
