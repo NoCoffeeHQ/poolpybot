@@ -34,7 +34,7 @@ module ApiClients
       {
         'Authorization' => "Bearer #{api_token}",
         'Accept' => 'application/json',
-        "Content-Type" => 'application/json'
+        'Content-Type' => 'application/json'
       }
     end
     # rubocop:enable Style/StringHashKeys

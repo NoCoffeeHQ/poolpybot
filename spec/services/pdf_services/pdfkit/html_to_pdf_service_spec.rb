@@ -13,7 +13,7 @@ RSpec.describe PdfServices::Pdfkit::HtmlToPdfService do
     let(:url) { 'https://poolpybot-pdfkit.osc-fr1.scalingo.io/samples/invoice.html' }
 
     it 'converts the HTML page into a PDF' do
-      expect(subject.size).to eq 64202
+      expect(subject.size).to eq 64_202
     end
   end
 end

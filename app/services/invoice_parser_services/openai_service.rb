@@ -29,12 +29,16 @@ module InvoiceParserServices
     def build_json(response)
       raise 'No valid response' if response['choices'].blank?
 
-      JSON.parse(response['choices'].map { |c| c['text'] }.join("\n")).with_indifferent_access.tap do |json|
+      core_build_json(response).tap do |json|
         raise 'Wrong JSON keys' unless json.keys.sort == JSON_KEYS
       end
     rescue StandardError => e
       Rails.logger.warn "🚨 Unable to get a valid response from Openai, error=#{e.message}"
       false
+    end
+
+    def core_build_json(response)
+      JSON.parse(response['choices'].map { |c| c['text'] }.join("\n")).with_indifferent_access
     end
 
     def build_prompt(text, company_name)

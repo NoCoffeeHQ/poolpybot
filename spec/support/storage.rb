@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveStorageTestHelper
   def attachable_pdf(pdf_io)
     {

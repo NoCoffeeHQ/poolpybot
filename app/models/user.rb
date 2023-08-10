@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   ## associations ##
   belongs_to :company
-  has_many :invoices
+  has_many :invoices, dependent: :destroy
 
   ## validations ##
   validates :username, presence: true
@@ -23,10 +23,10 @@ class User < ApplicationRecord
     "#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}"
   end
 
-  private 
+  private
 
   def cant_delete_if_invoices
-    throw :abort if invoices.count > 0
+    throw :abort if invoices.count.positive?
   end
 end
 

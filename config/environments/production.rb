@@ -2,6 +2,7 @@
 
 require 'active_support/core_ext/integer/time'
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Prepare the ingress controller used to receive mail
   # config.action_mailbox.ingress = :relay
@@ -114,3 +115,4 @@ Rails.application.configure do
 
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
 end
+# rubocop:enable Metrics/BlockLength

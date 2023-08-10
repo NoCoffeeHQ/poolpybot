@@ -43,7 +43,7 @@ module BrevoSupport
 
     mail.attachments.each do |attachment|
       next unless attachment.filename =~ /^brevo-attachment-\d+\.json/
-    
+
       decoded = brevo_decode_attachment(mail, attachment, only_pdf: only_pdf, api_instance: api_instance)
 
       brevo_attachment_filenames << attachment.filename if decoded
@@ -57,7 +57,7 @@ module BrevoSupport
   def brevo_decode_attachment(mail, attachment, only_pdf: false, api_instance: nil)
     json = JSON.parse(attachment.read)
 
-    # hack to avoid downloading unecessary attachment document
+    # HACK: to avoid downloading unecessary attachment document
     return if only_pdf && json['ContentType'] != 'application/pdf'
 
     brevo_add_file_from_json(mail, json, api_instance)
@@ -65,10 +65,10 @@ module BrevoSupport
 
   def brevo_add_file_from_json(mail, json, api_instance)
     mail.attachments[json['Name']] = {
-                                         :filename => json['Name'],
-                                         :mime_type => json['ContentType'],
-                                         :content => api_instance.get_inbound_email_attachment(json['DownloadToken']).read 
-                                       }
+      filename: json['Name'],
+      mime_type: json['ContentType'],
+      content: api_instance.get_inbound_email_attachment(json['DownloadToken']).read
+    }
   end
 end
 

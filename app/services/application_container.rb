@@ -16,7 +16,7 @@ class ApplicationContainer < ServiceOrchestrator::Container
   register :mail_invoice_creator, 'InvoiceCreatorServices::MailService'
   register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
 
-  private 
+  private
 
   def credentials
     Rails.application.credentials

@@ -10,10 +10,10 @@ module InvoiceCreatorServices
 
       # extract the text from the PDF
       text = extract_text(invoice)
-      
-      # call the AI to get the information about the invoice we need 
+
+      # call the AI to get the information about the invoice we need
       invoice_info = parse_text(invoice, text)
-      
+
       # set the supplier, change the status and set the invoice information to the invoice
       complete_invoice(invoice, invoice_info)
     rescue FailInvoiceError => e
@@ -29,7 +29,7 @@ module InvoiceCreatorServices
     end
 
     def parse_text(invoice, text)
-      invoice_info = invoice_parser.call(text: text, company_name: invoice.company.name).tap do |info|
+      invoice_parser.call(text: text, company_name: invoice.company.name).tap do |info|
         raise_error(invoice, :parse_with_ai) if info.blank?
       end
     end
@@ -37,19 +37,19 @@ module InvoiceCreatorServices
     def check_invoice_uniqueness(invoice, invoice_info)
       raise_error(invoice, :missing_identifier) if invoice_info[:identifier].blank?
 
-      if original = invoice.company.invoices.find_by(external_id: invoice_info[:identifier])
-        raise_error(invoice, :duplicated, { duplicate_of: original })
-      end
+      return unless (original = invoice.company.invoices.find_by(external_id: invoice_info[:identifier]))
+
+      raise_error(invoice, :duplicated, { duplicate_of: original })
     end
 
     def complete_invoice(invoice, invoice_info)
       check_invoice_uniqueness(invoice, invoice_info)
 
       invoice.update(
-        { 
+        {
           status: :processed,
           invoice_supplier: find_or_create_invoice_supplier(invoice.company, invoice_info),
-          external_id: invoice_info[:identifier],
+          external_id: invoice_info[:identifier]
         }.merge(invoice_info.slice(:date, :total_amount, :tax_rate, :currency))
       )
 
@@ -66,13 +66,15 @@ module InvoiceCreatorServices
 
     def raise_error(invoice, error, attributes = {})
       invoice.update({ status: :failed, error: error }.merge(attributes))
-      raise FailInvoiceError.new(invoice)
+      raise FailInvoiceError, invoice
     end
 
     class FailInvoiceError < StandardError
       attr_reader :invoice
+
       def initialize(invoice)
         @invoice = invoice
+        super
       end
     end
   end

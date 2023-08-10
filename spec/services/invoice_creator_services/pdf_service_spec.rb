@@ -18,13 +18,13 @@ RSpec.describe InvoiceCreatorServices::PdfService do
   subject { instance.call(user: user, pdf: pdf) }
 
   describe 'Given our AI was able to extract the information out of the PDF' do
-    let(:parser_response) { 
-      { 
-        company_name: 'Apple', date: '2023/06/26', identifier: 'INVOICE-1', 
+    let(:parser_response) do
+      {
+        company_name: 'Apple', date: '2023/06/26', identifier: 'INVOICE-1',
         total_amount: 12.99, tax_rate: 2.1, currency: 'EUR'
-      } 
-    }
-    
+      }
+    end
+
     it 'creates the invoice in DB' do
       expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(1)
     end
@@ -70,4 +70,3 @@ RSpec.describe InvoiceCreatorServices::PdfService do
     end
   end
 end
-

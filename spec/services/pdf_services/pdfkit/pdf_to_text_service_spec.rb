@@ -13,7 +13,7 @@ RSpec.describe PdfServices::Pdfkit::PdfToTextService do
     let(:url) { 'https://poolpybot-pdfkit.osc-fr1.scalingo.io/samples/invoice.pdf' }
 
     it 'extracts the text out of the PDF' do
-      is_expected.to match /Invoice:\s+#51105001/
+      is_expected.to match(/Invoice:\s+#51105001/)
     end
   end
 end

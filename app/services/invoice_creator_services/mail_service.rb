@@ -7,9 +7,9 @@ module InvoiceCreatorServices
     def call(mail:)
       user = find_user(mail)
 
-      return if !user
+      return unless user
 
-      if pdf_document = find_pdf_attachment(mail)
+      if (pdf_document = find_pdf_attachment(mail))
         create_invoice_from_pdf(user, pdf_document)
       else
         create_invoice_from_mail(user, mail)
@@ -23,7 +23,7 @@ module InvoiceCreatorServices
     end
 
     def create_invoice_from_mail(user, mail)
-      # call the AI to get the information about the invoice we need 
+      # call the AI to get the information about the invoice we need
       parsed_information = invoice_parser.call(text: mail.text_part.body, company_name: user.company.name)
 
       # ok, the AI wasn't able to parse correctly the invoice, no big deal, just let us know!
@@ -45,12 +45,12 @@ module InvoiceCreatorServices
     def create_invoice(user, parsed_information)
       # create both the supplier (if new) and the invoice
       find_or_create_invoice_supplier(user, parsed_information)
-      .invoices
-      .create(invoice_attributes(user, parsed_information))
+        .invoices
+        .create(invoice_attributes(user, parsed_information))
     end
 
-    def invoice_attributes(user, parsed_information) 
-      { 
+    def invoice_attributes(user, parsed_information)
+      {
         company: user.company, user: user, status: :processed, external_id: parsed_information[:identifier]
       }.merge(
         parsed_information.slice(:date, :total_amount, :tax_rate, :currency)
@@ -74,11 +74,11 @@ module InvoiceCreatorServices
       attach_pdf_document(invoice, mail)
     end
 
-    def attach_pdf_document(invoice, mail)
+    def attach_pdf_document(invoice, _mail)
       pdf_io = html_to_pdf.call(
         url: invoice.html_document.url(expires_in: 5.minutes)
       )
-       
+
       invoice.pdf_document.attach(
         io: pdf_io, filename: 'invoice.pdf', content_type: 'application/pdf', identify: false
       )
@@ -101,10 +101,10 @@ module InvoiceCreatorServices
 
     def create_invoice_from_pdf(user, pdf_attachment)
       pdf_invoice_creator.call(user: user, pdf: {
-        io: StringIO.new(pdf_attachment.decoded),
-        filename: pdf_attachment.filename,
-        content_type: pdf_attachment.content_type
-      })
+                                 io: StringIO.new(pdf_attachment.decoded),
+                                 filename: pdf_attachment.filename,
+                                 content_type: pdf_attachment.content_type
+                               })
     end
   end
 end
