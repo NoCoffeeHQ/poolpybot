@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     post '/brevo/inbound_emails/:password', to: 'brevo/inbound_emails#create', as: :rails_brevo_inbound_emails
   end
 
+  # Very secure URLs to get the invoice HTML or PDF document
+  resources :invoice_documents, only: [:show]
+
   # Sidekiq
   if Rails.env.production?
     Sidekiq::Web.use Rack::Auth::Basic do |username, password|
@@ -35,7 +38,6 @@ Rails.application.routes.draw do
         )
     end
   end
-
   mount Sidekiq::Web, at: '/sidekiq'
 
   # Defines the root path route ("/")

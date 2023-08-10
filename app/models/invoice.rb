@@ -2,7 +2,7 @@
 
 class Invoice < ApplicationRecord
   ## enums ##
-  enum :status, %i[created processed failed]
+  enum :status, %i[created processing processed failed]
   enum :error, %i[none unknown parse_with_ai extract_text duplicated missing_identifier], suffix: true
 
   ## associations ##
@@ -17,6 +17,20 @@ class Invoice < ApplicationRecord
   ## attachments ##
   has_one_attached :pdf_document
   has_one_attached :html_document
+
+  ## methods ##
+
+  def supplier
+    invoice_supplier
+  end
+
+  def currency_symbol
+    case currency
+    when 'EUR' then '€'
+    when 'USD' then '$'
+    else '?'
+    end
+  end
 end
 
 # == Schema Information

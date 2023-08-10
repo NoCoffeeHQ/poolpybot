@@ -23,7 +23,7 @@ module InvoiceCreatorServices
     private
 
     def extract_text(invoice)
-      pdf_to_text.call(url: invoice.pdf_document.url(expires_in: 5.minutes)).tap do |text|
+      pdf_to_text.call(url: invoice_document_url(invoice, :pdf)).tap do |text|
         raise_error(invoice, :extract_text) if text.blank?
       end
     end
@@ -62,6 +62,12 @@ module InvoiceCreatorServices
 
     def create_basic_invoice(user, pdf)
       user.invoices.create(company: user.company, status: :created, pdf_document: pdf)
+    end
+
+    def invoice_document_url(invoice, type)
+      Rails.application.routes.url_helpers.invoice_document_url(
+        SimpleEncryption.encrypt("#{invoice.id}-#{5.minutes.after.to_i}"), format: type
+      )
     end
 
     def raise_error(invoice, error, attributes = {})

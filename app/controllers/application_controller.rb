@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  helper_method :current_company
+
   private
 
   def services
@@ -9,5 +11,9 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated
     redirect_to sign_in_path, alert: t('notice.not_authenticated')
+  end
+
+  def current_company
+    current_user&.company
   end
 end

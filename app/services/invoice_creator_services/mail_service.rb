@@ -51,7 +51,7 @@ module InvoiceCreatorServices
 
     def invoice_attributes(user, parsed_information)
       {
-        company: user.company, user: user, status: :processed, external_id: parsed_information[:identifier]
+        company: user.company, user: user, status: :processing, external_id: parsed_information[:identifier]
       }.merge(
         parsed_information.slice(:date, :total_amount, :tax_rate, :currency)
       )
@@ -72,11 +72,14 @@ module InvoiceCreatorServices
 
       # call our Pdfkit to generate the PDF out of the HTML doc
       attach_pdf_document(invoice, mail)
+
+      # and we're done 👍
+      invoice.processed!
     end
 
     def attach_pdf_document(invoice, _mail)
       pdf_io = html_to_pdf.call(
-        url: invoice.html_document.url(expires_in: 5.minutes)
+        url: invoice_document_url(invoice, :html)
       )
 
       invoice.pdf_document.attach(
@@ -105,6 +108,12 @@ module InvoiceCreatorServices
                                  filename: pdf_attachment.filename,
                                  content_type: pdf_attachment.content_type
                                })
+    end
+
+    def invoice_document_url(invoice, type)
+      Rails.application.routes.url_helpers.invoice_document_url(
+        SimpleEncryption.encrypt("#{invoice.id}-#{5.minutes.after.to_i}"), format: type
+      )
     end
   end
 end
