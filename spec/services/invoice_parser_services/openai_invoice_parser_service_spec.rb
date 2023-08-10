@@ -7,7 +7,7 @@ RSpec.describe InvoiceParserServices::OpenaiService do
   let(:client) { container.openai_client }
   let(:instance) { described_class.new(openai_client: client) }
 
-  subject { instance.call(text: text) }
+  subject { instance.call(text: text, company_name: 'NoCoffee') }
 
   describe 'Given the invoice is from an Apple email' do
     let(:text) do

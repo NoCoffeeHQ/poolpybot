@@ -112,8 +112,5 @@ Rails.application.configure do
   config.hosts << 'app.poolpybot.fr'
   config.hosts << 'poolpybot.osc-fr1.scalingo.io'
 
-
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
-
-  ActiveStorage::Current.url_options = { host: ENV['HOST'] }
 end

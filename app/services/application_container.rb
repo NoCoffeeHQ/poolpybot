@@ -14,8 +14,7 @@ class ApplicationContainer < ServiceOrchestrator::Container
   register :onboarding, 'OnboardingService'
   register :invoice_parser, 'AlephAlphaInvoiceParserService'
   register :mail_invoice_creator, 'InvoiceCreatorServices::MailService'
-  # TODO
-  # register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
+  register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
 
   private 
 

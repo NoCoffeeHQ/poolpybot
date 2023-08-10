@@ -70,17 +70,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
     t.bigint "company_id", null: false
     t.bigint "invoice_supplier_id"
     t.bigint "user_id", null: false
-    t.string "external_id", null: false
+    t.bigint "duplicate_of_id"
+    t.string "external_id"
     t.integer "status", default: 0
+    t.integer "error", default: 0
     t.date "date"
     t.float "total_amount"
     t.float "tax_rate"
     t.string "currency"
-    t.string "error"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id", "external_id"], name: "index_invoices_on_company_id_and_external_id", unique: true
     t.index ["company_id"], name: "index_invoices_on_company_id"
+    t.index ["duplicate_of_id"], name: "index_invoices_on_duplicate_of_id"
     t.index ["invoice_supplier_id"], name: "index_invoices_on_invoice_supplier_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
@@ -104,5 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
   add_foreign_key "invoice_suppliers", "companies"
   add_foreign_key "invoices", "companies"
   add_foreign_key "invoices", "invoice_suppliers"
+  add_foreign_key "invoices", "invoices", column: "duplicate_of_id"
   add_foreign_key "invoices", "users"
 end

@@ -6,20 +6,20 @@ module InvoiceParserServices
 
     JSON_KEYS = %w[company_name identifier date total_amount tax_rate currency].sort.freeze
 
-    def call(text:)
+    def call(text:, company_name:)
       build_json(
         openai_client.completions(
-          parameters: build_parameters(text)
+          parameters: build_parameters(text, company_name)
         )
       )
     end
 
     private
 
-    def build_parameters(text)
+    def build_parameters(text, company_name)
       {
         model: 'text-davinci-003',
-        prompt: build_prompt(text),
+        prompt: build_prompt(text, company_name),
         temperature: 0.1,
         max_tokens: 150,
         stop: '\n'
@@ -37,7 +37,7 @@ module InvoiceParserServices
       false
     end
 
-    def build_prompt(text)
+    def build_prompt(text, company_name)
       <<~PROMPT
               I receive invoices by email from various companies. Please extract the following information from the provided email surrounded by backticks:
 
@@ -46,7 +46,7 @@ module InvoiceParserServices
               ```
 
               From the provided email, you will extract the following information and present it in a valid JSON format without the backticks:
-              - Company Name (without the email address)
+              - Company Name (without the email address and it can't be "#{company_name}" since it's my company)
               - Invoice Identifier (if you don't find it, use the command number. name the attribute as "identifier")
               - Invoice Date (in the date "yyyy/mm/dd" format and name the attribute as "date")
               - Total Amount of the Invoice (without the currency and in English format, it's a float number)

@@ -65,5 +65,23 @@ RSpec.describe InvoiceCreatorServices::MailService do
         end
       end
     end
+
+    describe 'Given our AI wasn\'t able to extract the information out of the mail body' do
+      let(:parser_response) { nil }
+
+      it 'creates an invoice in DB' do
+        expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(0)
+      end
+
+      it 'returns a failed invoice' do
+        expect(subject.failed?).to eq true
+        expect(subject.parse_with_ai_error?).to eq true
+      end
+
+      it 'attaches the source PDF to the invoice' do
+        skip 'Not sure if we need this "feature" right now'
+        expect(subject.pdf_document.attached?).to eq true
+      end
+    end
   end
 end

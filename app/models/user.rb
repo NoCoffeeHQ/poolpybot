@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   ## associations ##
   belongs_to :company
+  has_many :invoices
 
   ## validations ##
   validates :username, presence: true
@@ -11,12 +12,21 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
+  ## callbacks ##
+  before_destroy :cant_delete_if_invoices
+
   ## behaviors ##
   authenticates_with_sorcery!
 
   ## methods ##
   def reply_email
     "#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}"
+  end
+
+  private 
+
+  def cant_delete_if_invoices
+    throw :abort if invoices.count > 0
   end
 end
 

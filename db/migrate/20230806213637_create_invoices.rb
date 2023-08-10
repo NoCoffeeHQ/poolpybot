@@ -4,14 +4,15 @@ class CreateInvoices < ActiveRecord::Migration[7.0]
       t.references :company, null: false, foreign_key: true
       t.references :invoice_supplier, null: true, foreign_key: true
       t.references :user, null: false, foreign_key: true
-      t.string :external_id, null: false
+      t.references :duplicate_of, null: true, foreign_key: { to_table: :invoices }
+      t.string :external_id, null: true
       t.integer :status, default: 0
+      t.integer :error, default: 0
       t.date :date, null: true
       t.float :total_amount, null: true
       t.float :tax_rate, null: true
       t.string :currency, null: true
-      t.string :error, null: true
-
+      
       t.timestamps
     end
 

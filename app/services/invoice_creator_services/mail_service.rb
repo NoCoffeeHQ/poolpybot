@@ -21,10 +21,10 @@ module InvoiceCreatorServices
 
     def create_invoice_from_mail(user, mail)
       # call the AI to get the information about the invoice we need 
-      parsed_information = invoice_parser.call(text: mail.text_part.body)
+      parsed_information = invoice_parser.call(text: mail.text_part.body, company_name: user.company.name)
 
       # ok, the AI wasn't able to parse correctly the invoice, no big deal, just let us know!
-      return create_failed_invoice(user, mail, :mail_parsing) unless parsed_information
+      return create_failed_invoice(user, mail, :parse_with_ai) unless parsed_information
 
       # detect that we haven't already processed the invoice (thru the identifier attribute)
       existing_invoice = user.company.invoices.find_by(external_id: parsed_information[:identifier])
@@ -55,7 +55,8 @@ module InvoiceCreatorServices
     end
 
     def create_failed_invoice(user, mail, error)
-      user.company.invoices.create(
+      user.invoices.create!(
+        company: user.company,
         external_id: mail.message_id,
         status: :failed,
         error: error
