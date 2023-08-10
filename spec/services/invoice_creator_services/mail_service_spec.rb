@@ -84,4 +84,36 @@ RSpec.describe InvoiceCreatorServices::MailService do
       end
     end
   end
+
+  describe 'Given the email is a forward of a AWS Invoice with an attached PDF' do
+    let(:mail) { brevo_mails(:aws).first }
+    let(:parser_response) { 
+      { 
+        company_name: 'AWS', date: '2023/07/01', identifier: 'INVOICE-2', 
+        total_amount: 0.99, tax_rate: 0.0, currency: 'USD'
+      } 
+    }
+    let(:pdf_file) { File.open(file_fixture('invoices/aws.pdf').to_s) }
+    let(:pdf_text) { 'information about the AWS invoice' }
+    let(:brevo_parsing_api) { instance_double('FakeInboundParsingApi', get_inbound_email_attachment: pdf_file) }
+
+    before do
+      allow(container.pdf_to_text).to receive(:call).and_return(pdf_text)
+      # Download all the attachments from Brevo (stub mode)
+      Mail.brevo_decode_attachments(mail, only_pdf: true, api_instance: brevo_parsing_api)
+    end
+
+    it 'creates the invoice in DB' do
+      expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(1)
+    end
+
+    it 'returns a processed invoice' do
+      expect(subject.processed?).to eq true
+      expect(subject.invoice_supplier.name).to eq 'AWS'
+    end
+
+    it 'attaches the PDF' do
+      expect(subject.pdf_document.attached?).to eq true
+    end
+  end
 end

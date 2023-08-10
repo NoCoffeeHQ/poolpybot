@@ -35,6 +35,41 @@ module BrevoSupport
       mail.attachments["brevo-attachment-#{index}.json"] = attachment.to_json
     end
   end
+
+  def brevo_decode_attachments(mail, only_pdf: false, api_instance: nil)
+    api_instance ||= BrevoRuby::InboundParsingApi.new
+
+    brevo_attachment_filenames = []
+
+    mail.attachments.each do |attachment|
+      next unless attachment.filename =~ /^brevo-attachment-\d+\.json/
+    
+      decoded = brevo_decode_attachment(mail, attachment, only_pdf: only_pdf, api_instance: api_instance)
+
+      brevo_attachment_filenames << attachment.filename if decoded
+    end
+
+    mail.parts.recursive_delete_if { |part| brevo_attachment_filenames.include?(part.filename) }
+  end
+
+  private
+
+  def brevo_decode_attachment(mail, attachment, only_pdf: false, api_instance: nil)
+    json = JSON.parse(attachment.read)
+
+    # hack to avoid downloading unecessary attachment document
+    return if only_pdf && json['ContentType'] != 'application/pdf'
+
+    brevo_add_file_from_json(mail, json, api_instance)
+  end
+
+  def brevo_add_file_from_json(mail, json, api_instance)
+    mail.attachments[json['Name']] = {
+                                         :filename => json['Name'],
+                                         :mime_type => json['ContentType'],
+                                         :content => api_instance.get_inbound_email_attachment(json['DownloadToken']).read 
+                                       }
+  end
 end
 
 Mail.singleton_class.send :prepend, BrevoSupport

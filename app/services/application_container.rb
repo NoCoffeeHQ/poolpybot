@@ -12,7 +12,7 @@ class ApplicationContainer < ServiceOrchestrator::Container
 
   # Business logic services
   register :onboarding, 'OnboardingService'
-  register :invoice_parser, 'AlephAlphaInvoiceParserService'
+  register :invoice_parser, 'InvoiceParserServices::OpenaiService'
   register :mail_invoice_creator, 'InvoiceCreatorServices::MailService'
   register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
 

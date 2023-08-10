@@ -1,42 +1,19 @@
 # frozen_string_literal: true
 
 class InvoicesMailbox < ApplicationMailbox
+  before_processing :decode_brevo_attachments
+
   def process
-    Rails.logger.debug '🔥🎉😘'
-    Rails.logger.debug mail.subject
+    application_container.mail_invoice_creator.call(mail: mail)
   end
 
-  # # Callbacks specify prerequisites to processing
-  # before_processing :require_projects
+  private
 
-  # def process
-  #   # Record the forward on the one project, or…
-  #   if forwarder.projects.one?
-  #     record_forward
-  #   else
-  #     # …involve a second Action Mailer to ask which project to forward into.
-  #     request_forwarding_project
-  #   end
-  # end
+  def decode_brevo_attachments
+    Mail.brevo_decode_attachments(mail, only_pdf: true)
+  end
 
-  # private
-
-  # def require_projects
-  #   if forwarder.projects.none?
-  #     # Use Action Mailers to bounce incoming emails back to sender – this halts processing
-  #     bounce_with Forwards::BounceMailer.no_projects(inbound_email, forwarder: forwarder)
-  #   end
-  # end
-
-  # def record_forward
-  #   forwarder.forwards.create subject: mail.subject, content: mail.content
-  # end
-
-  # def request_forwarding_project
-  #   Forwards::RoutingMailer.choose_project(inbound_email, forwarder: forwarder).deliver_now
-  # end
-
-  # def forwarder
-  #   @forwarder ||= User.find_by(email_address: mail.from)
-  # end
+  def application_container
+    @application_container ||= ApplicationContainer.new
+  end
 end

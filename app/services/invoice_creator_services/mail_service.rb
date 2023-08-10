@@ -2,15 +2,18 @@
 
 module InvoiceCreatorServices
   class MailService < ApplicationService
-    dependencies :invoice_parser, :html_to_pdf
+    dependencies :invoice_parser, :pdf_invoice_creator, :html_to_pdf
 
     def call(mail:)
       user = find_user(mail)
 
       return if !user
 
-      # TODO: test if the mail has a PDF attached to it
-      create_invoice_from_mail(user, mail)
+      if pdf_document = find_pdf_attachment(mail)
+        create_invoice_from_pdf(user, pdf_document)
+      else
+        create_invoice_from_mail(user, mail)
+      end
     end
 
     private
@@ -91,10 +94,17 @@ module InvoiceCreatorServices
     end
 
     def find_pdf_attachment(mail)
-      raise 'TODO 2'
-      # mail.attachments.each do |attachment|
+      mail.attachments.find do |attachment|
+        attachment.content_type == 'application/pdf'
+      end
+    end
 
-      # end
+    def create_invoice_from_pdf(user, pdf_attachment)
+      pdf_invoice_creator.call(user: user, pdf: {
+        io: StringIO.new(pdf_attachment.decoded),
+        filename: pdf_attachment.filename,
+        content_type: pdf_attachment.content_type
+      })
     end
   end
 end
