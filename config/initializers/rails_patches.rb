@@ -7,13 +7,12 @@ ActionView::Base.field_error_proc = proc do |html_tag, _instance|
 end
 # rubocop:enable Rails/OutputSafety
 
-
 # Hack to prevent anybody to view an uploaded document
 Rails.application.config.after_initialize do
   ActiveStorage::BaseController.class_eval do
     before_action :require_login
 
-    private 
+    private
 
     def not_authenticated
       redirect_to main_app.sign_in_path, alert: t('notice.not_authenticated')

@@ -6,8 +6,8 @@ class InvoiceDocumentsController < ApplicationController
   def show
     invoice = Invoice.find(@invoice_id)
     respond_to do |format|
-      format.html { render html: invoice.html_document.download.html_safe }
-      format.pdf { render plain: invoice.pdf_document.download, content_type: 'application/pdf' }
+      format.html { render plain: invoice.html_document.download }
+      format.pdf { render plain: invoice.pdf_document.download }
     end
   end
 
@@ -15,6 +15,6 @@ class InvoiceDocumentsController < ApplicationController
 
   def fetch_invoice_id
     @invoice_id, time_in_seconds = SimpleEncryption.decrypt(params[:id]).split('-')
-    head :unauthorized if Time.now > Time.at(time_in_seconds.to_i)
+    head :unauthorized if Time.zone.now > Time.zone.at(time_in_seconds.to_i)
   end
 end
