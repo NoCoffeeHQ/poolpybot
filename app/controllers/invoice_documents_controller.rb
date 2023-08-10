@@ -7,7 +7,7 @@ class InvoiceDocumentsController < ApplicationController
     invoice = Invoice.find(@invoice_id)
     respond_to do |format|
       format.html { render html: invoice.html_document.download.html_safe }
-      format.pdf { render pdf: invoice.pdf_document.download }
+      format.pdf { render plain: invoice.pdf_document.download, content_type: 'application/pdf' }
     end
   end
 
