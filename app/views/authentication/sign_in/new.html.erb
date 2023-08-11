@@ -1,10 +1,10 @@
 <div class="space-y-10">
   <div>
-    <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=600" alt="Your Company">
+    <%= app_kit :logo, size: :lg %>
+
     <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900"><%= t('.title') %></h2>
     <p class="mt-2 text-sm leading-6 text-gray-500">
-      Don't have an account yet?
-      <%= link_to 'Sign up here', new_sign_up_path, class: 'font-semibold text-emerald-600 hover:text-emerald-500' %>
+      <%= t('.no_account', link: link_to(t('.sign_up_link'), new_sign_up_path, class: 'font-semibold text-gray-900 hover:text-gray-700')).html_safe %>
     </p>
   </div>
 

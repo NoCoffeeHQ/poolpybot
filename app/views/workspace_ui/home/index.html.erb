@@ -1,1 +1,41 @@
-index.html.erb
+<% content_for :header do %>
+  <h1 class="text-3xl font-semibold leading-tight tracking-tight text-gray-900">
+    <%= t('.main_title', name: current_user.username).html_safe %>
+  </h1>
+<% end %>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <h2 class="text-2xl font-semibold leading-6 text-gray-900">
+    <%= t('.title') %>
+  </h2>
+  <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
+
+  <div class="mt-10 space-y-10">
+    <div class="bg-gray-50 sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">
+          <%= t('.choice_1.title') %></h3>
+        <div class="mt-2 text-sm text-gray-500">
+          <p><%= t('.choice_1.description').html_safe %></p>
+        </div>
+        <div class="mt-5 flex items-center justify-center space-x-4">
+          <pre><code><%= current_user.reply_email %></code></pre>
+          <%= ui_kit :copy_to_clipboard, value: current_user.reply_email %>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-base font-semibold leading-6 text-gray-900">
+          <%= t('.choice_2.title') %></h3>
+        <div class="mt-2 text-sm text-gray-500">
+          <p><%= t('.choice_2.description') %></p>
+        </div>
+        <div class="mt-5">
+          <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" onclick="alert('🚧👷🏻‍♀️ We\'re working on it!')"><%= t('.choice_2.button_link') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

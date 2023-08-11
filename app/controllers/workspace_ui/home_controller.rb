@@ -1,7 +1,7 @@
 module WorkspaceUI
   class HomeController < BaseController
     def index
-      redirect_to workspace_invoices_path(month: Time.zone.now.strftime('%Y-%m')) if current_company.invoices.count > 0
+      redirect_to current_invoices_path if current_user.invoices.count > 0
     end
   end
 end

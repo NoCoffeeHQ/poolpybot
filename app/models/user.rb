@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   ## methods ##
   def reply_email
-    "#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}"
+    "#{ENV['INBOUND_REPLY_EMAIL_NAME']} <#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}>"
   end
 
   private

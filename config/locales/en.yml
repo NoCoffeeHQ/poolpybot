@@ -38,8 +38,33 @@ en:
     workspace_ui:
       header:
         logo_tagline: "Your accounting assistant"
+        invoices_link: "Invoices"
+        sign_out: "Sign out"
+
+  app_kit:
+    logo:
+      logo_component:
+        tagline: "Your accounting assistant"
+  ui_kit:
+    copy_to_clipboard:
+      copy_to_clipboard_component:
+        copy: "Copy to Clipboard"
+        copied: "Copied to Clipboard"
 
   workspace_ui:
+    home:
+      index:
+        main_title: "Welcome <span class=\"font-extrabold\">%{name}</span> 👋"
+        title: "Getting started"
+        description: "Don't worry, we're going to help you to send your first invoices to Poolpybot. First, pick one of the 2 ways:"
+        choice_1:
+          title: "Forward your emails to Poolpybot"
+          description: "Once you start forwarding your invoices to the following email, Poolpybot will process those emails and collect the right information.<br/> 
+          At some point, Poolpybot will be able to give you the forwarding rules for your Mail client."
+        choice_2:
+          title: "Upload the PDF document of an invoice"
+          description: "bla bla"
+          button_link: "Upload PDF"
     invoices:
       index:
         title: "Invoices"
@@ -70,6 +95,8 @@ en:
     sign_up:
       new:
         title: "Create an account"
+        existing_account: "Already have an account? %{link}."
+        sign_in_link: "Sign in here"
         submit_button: "Sign up"
       create:
         notice:
@@ -77,6 +104,8 @@ en:
     sign_in:
       new:
         title: "Sign in to your account"
+        no_account: "Don't have an account yet? %{link}."
+        sign_up_link: "Sign up here"
         submit_button: "Sign in"
       create:
         notice:

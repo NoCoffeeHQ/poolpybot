@@ -2,13 +2,8 @@
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 justify-between">
       <div class="flex">
-        <%= link_to workspace_root_path, class: 'flex flex-shrink-0 items-center space-x-4' do %>
-          <%= image_tag 'octopus.png', class: 'h-8', alt: 'Poolpybot' %>
-          <div class="flex flex-col">
-            <span class="font-extrabold text-sm uppercase">Poolpybot</span>
-            <span class="text-xs text-gray-400"><%= t('.logo_tagline') %></span>
-          </div>
-        <% end %>
+        <%= app_kit :logo, url: workspace_root_path %>
+
         <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
           &nbsp;
         </div>
@@ -39,8 +34,12 @@
               </p>
             </div>
 
+            <div role="none" class="space-y-1">
+              <%= link_to t('.invoices_link'), current_invoices_path, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
+            </div>
+
             <div role="none">
-              <%= button_to "Sign out", :sign_out, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900', data: { turbo_method: :post } %>
+              <%= button_to t('.sign_out'), :sign_out, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900', data: { turbo_method: :post } %>
             </div>
           <% end %>
         </div>

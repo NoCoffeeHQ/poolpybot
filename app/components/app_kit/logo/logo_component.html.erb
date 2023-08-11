@@ -1,0 +1,7 @@
+<%= link_to url, class: 'flex flex-shrink-0 items-center space-x-4' do %>
+  <%= image_tag 'octopus.png', class: classes[:img], alt: 'Poolpybot' %>
+  <div class="flex flex-col">
+    <span class="font-extrabold uppercase <%= classes[:title] %>">Poolpybot</span>
+    <span class="text-gray-400 <%= classes[:sub_title] %>"><%= t('.tagline') %></span>
+  </div>
+<% end %>
