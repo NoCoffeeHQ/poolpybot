@@ -15,6 +15,7 @@ class ApplicationContainer < ServiceOrchestrator::Container
   register :invoice_parser, 'InvoiceParserServices::OpenaiService'
   register :mail_invoice_creator, 'InvoiceCreatorServices::MailService'
   register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
+  register :pdf_retry_invoice_creator, 'InvoiceCreatorServices::PdfRetryService'
 
   private
 
