@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_105001) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -63,7 +64,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_06_213637) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "emails", default: [], array: true
+    t.string "display_name"
     t.index ["company_id"], name: "index_invoice_suppliers_on_company_id"
+    t.index ["name"], name: "index_invoice_suppliers_on_name_gin", opclass: :gin_trgm_ops, using: :gin
   end
 
   create_table "invoices", force: :cascade do |t|

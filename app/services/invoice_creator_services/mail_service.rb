@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module InvoiceCreatorServices
-  class MailService < ApplicationService
+  class MailService < InvoiceCreatorServices::BaseService
     dependencies :invoice_parser, :pdf_invoice_creator, :html_to_pdf
 
     def call(mail:)
@@ -24,36 +24,35 @@ module InvoiceCreatorServices
 
     def create_invoice_from_mail(user, mail)
       # call the AI to get the information about the invoice we need
-      parsed_information = invoice_parser.call(text: mail.text_part.body, company_name: user.company.name)
+      invoice_info = invoice_parser.call(text: mail.text_part.body, company_name: user.company.name)
 
       # ok, the AI wasn't able to parse correctly the invoice, no big deal, just let us know!
-      return create_failed_invoice(user, mail, :parse_with_ai) unless parsed_information
+      return create_failed_invoice(user, mail, :parse_with_ai) unless invoice_info
 
       # detect that we haven't already processed the invoice (thru the identifier attribute)
-      existing_invoice = user.company.invoices.find_by(external_id: parsed_information[:identifier])
+      existing_invoice = user.company.invoices.find_by(external_id: invoice_info[:identifier])
       return existing_invoice if existing_invoice
 
-      create_invoice(user, parsed_information).tap do |invoice|
+      create_invoice(user, mail, invoice_info).tap do |invoice|
         attach_documents(invoice, mail)
       end
     end
 
-    def find_or_create_invoice_supplier(user, parsed_information)
-      user.company.invoice_suppliers.find_or_create_by(name: parsed_information[:company_name])
+    def create_invoice(user, mail, invoice_info)
+      # in order to know which email addresses are important for our customer's invoicing
+      # and so to make smart mailbox filters, we need to extract those emails from the Forwarded mail.
+      email = mail.text_part.body.to_s[/^From: .*<(.*?)>\s*$/, 1]
+
+      supplier = find_or_create_invoice_supplier(user.company, invoice_info, email)
+      
+      supplier.invoices.create(invoice_attributes(user, invoice_info))
     end
 
-    def create_invoice(user, parsed_information)
-      # create both the supplier (if new) and the invoice
-      find_or_create_invoice_supplier(user, parsed_information)
-        .invoices
-        .create(invoice_attributes(user, parsed_information))
-    end
-
-    def invoice_attributes(user, parsed_information)
+    def invoice_attributes(user, invoice_info)
       {
-        company: user.company, user: user, status: :processing, external_id: parsed_information[:identifier]
+        company: user.company, user: user, status: :processing, external_id: invoice_info[:identifier]
       }.merge(
-        parsed_information.slice(:date, :total_amount, :tax_rate, :currency)
+        invoice_info.slice(:date, :total_amount, :tax_rate, :currency)
       )
     end
 
@@ -108,12 +107,6 @@ module InvoiceCreatorServices
                                  filename: pdf_attachment.filename,
                                  content_type: pdf_attachment.content_type
                                })
-    end
-
-    def invoice_document_url(invoice, type)
-      Rails.application.routes.url_helpers.invoice_document_url(
-        SimpleEncryption.encrypt("#{invoice.id}-#{5.minutes.after.to_i}"), format: type
-      )
     end
   end
 end

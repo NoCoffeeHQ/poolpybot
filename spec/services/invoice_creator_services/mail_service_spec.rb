@@ -47,6 +47,7 @@ RSpec.describe InvoiceCreatorServices::MailService do
       it 'returns a processed invoice' do
         expect(subject.processed?).to eq true
         expect(subject.invoice_supplier.name).to eq 'Apple'
+        expect(subject.invoice_supplier.emails).to eq ['no_reply@email.apple.com']
         expect(subject.total_amount).to eq 12.99
         expect(subject.currency).to eq 'EUR'
         expect(subject.date.to_s).to eq '2023-06-26'

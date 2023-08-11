@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module InvoiceCreatorServices
-  class PdfService < ApplicationService
+  class PdfService < InvoiceCreatorServices::BaseService
     dependencies :invoice_parser, :pdf_to_text
 
     # PDF is an attachable object (see ActiveStorage)
@@ -16,7 +16,7 @@ module InvoiceCreatorServices
 
       # set the supplier, change the status and set the invoice information to the invoice
       complete_invoice(invoice, invoice_info)
-    rescue FailInvoiceError => e
+    rescue InvoiceCreatorServices::FailInvoiceError => e
       e.invoice
     end
 
@@ -56,32 +56,8 @@ module InvoiceCreatorServices
       invoice
     end
 
-    def find_or_create_invoice_supplier(company, invoice_info)
-      company.invoice_suppliers.find_or_create_by(name: invoice_info[:company_name])
-    end
-
     def create_basic_invoice(user, pdf)
       user.invoices.create(company: user.company, status: :created, pdf_document: pdf)
-    end
-
-    def invoice_document_url(invoice, type)
-      Rails.application.routes.url_helpers.invoice_document_url(
-        SimpleEncryption.encrypt("#{invoice.id}-#{5.minutes.after.to_i}"), format: type
-      )
-    end
-
-    def raise_error(invoice, error, attributes = {})
-      invoice.update({ status: :failed, error: error }.merge(attributes))
-      raise FailInvoiceError, invoice
-    end
-
-    class FailInvoiceError < StandardError
-      attr_reader :invoice
-
-      def initialize(invoice)
-        @invoice = invoice
-        super
-      end
     end
   end
 end

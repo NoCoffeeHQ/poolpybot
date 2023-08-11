@@ -4,15 +4,18 @@
 #
 # Table name: invoice_suppliers
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  company_id :bigint           not null
+#  id           :bigint           not null, primary key
+#  display_name :string
+#  emails       :string           default([]), is an Array
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  company_id   :bigint           not null
 #
 # Indexes
 #
 #  index_invoice_suppliers_on_company_id  (company_id)
+#  index_invoice_suppliers_on_name_gin    (name) USING gin
 #
 # Foreign Keys
 #
