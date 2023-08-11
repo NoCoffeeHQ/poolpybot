@@ -67,7 +67,9 @@ module BrevoSupport
     mail.attachments[json['Name']] = {
       filename: json['Name'],
       mime_type: json['ContentType'],
-      content: api_instance.get_inbound_email_attachment(json['DownloadToken']).read
+      content: File.read(
+        api_instance.get_inbound_email_attachment(json['DownloadToken']).path # TmpFile
+      )
     }
   end
 end

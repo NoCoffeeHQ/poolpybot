@@ -27,7 +27,7 @@ RSpec.describe InvoicesMailbox, type: :mailbox do
     it 'creates a new invoice with a PDF attached to it' do
       expect_any_instance_of(BrevoRuby::InboundParsingApi).to receive(
         :get_inbound_email_attachment
-      ).once.and_return(StringIO.new('Hello!'))
+      ).once.and_return(File.open(file_fixture('invoices/aws.pdf')))
       expect(container.mail_invoice_creator).to receive(:call).once
       subject
     end

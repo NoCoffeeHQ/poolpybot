@@ -48,6 +48,11 @@ FactoryBot.define do
     tax_rate { nil }
     currency { nil }
 
+    trait :with_tax_rate do
+      total_amount { 0.99 }
+      tax_rate { 20.0 }
+    end
+
     after(:build) do |invoice|
       invoice.company ||= invoice.user.company
       invoice.invoice_supplier ||= create(:invoice_supplier, company: invoice.company)

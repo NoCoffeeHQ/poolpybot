@@ -7,7 +7,13 @@ module PdfServices
 
       def call(url:)
         response = pdfkit_client.pdf_to_text(url)
-        response ? response[:text] : nil
+        response ? clean(response[:text]) : nil
+      end
+
+      private 
+
+      def clean(text)
+        text.gsub(/\x0A[^\w]+$/, '').strip
       end
     end
   end

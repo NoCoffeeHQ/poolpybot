@@ -38,7 +38,10 @@
             <td><%= invoice.external_id %></td>
             <td><%= l(invoice.date, format: :invoice) %></td>
             <td><%= number_to_currency(invoice.total_amount, unit: invoice.currency_symbol) %></td>
-            <td><%= 'TODO' %></td>
+            <td>
+              <%= number_to_currency(invoice.tax_amount, unit: invoice.currency_symbol) %>
+              <span class="text-sm text-gray-400"><%= invoice.tax_rate %>%</span> 
+            </td>
             <td>
               <%= link_to url_for(invoice.pdf_document) do %>
                 <i class="ri-file-pdf-2-line text-2xl"></i>

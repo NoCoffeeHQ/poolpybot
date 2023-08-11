@@ -6,6 +6,11 @@ RSpec.describe Invoice, type: :model do
   it 'has a valid factory' do
     expect { create(:invoice) }.to change(Invoice, :count).by(1)
   end
+
+  it 'reverse calculates the tax amount' do
+    invoice = build(:invoice, :with_tax_rate)
+    expect(invoice.tax_amount).to eq 0.16
+  end
 end
 
 # == Schema Information
