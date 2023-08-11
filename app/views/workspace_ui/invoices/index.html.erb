@@ -1,0 +1,59 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-2xl font-semibold leading-6 text-gray-900">
+        <%= t('.title') %>
+      </h1>
+      <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
+    </div>
+    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center space-x-4">
+      <button type="button" class="block rounded-md bg-gray-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800" onclick="alert('🚧👷🏻‍♀️ We\'re working on it!')">
+        Upload Invoice PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-8 space-y-4">
+    <div class="flex justify-end">
+      <%= render 'workspace_ui/invoices/index/filter' %>
+    </div>
+
+    <%= render 'workspace_ui/invoices/index/table' %>
+  </div>
+</div>
+
+
+<% if false %>
+  <h2>Invoices</h2>
+  <table class="w-full">
+    <thead>
+      <tr>
+        <th>Supplier/Vendor</th>
+        <th>Identifier</th>
+        <th>Date</th>
+        <th>Total amount</th>
+        <th>Tax amount</th>
+        <th>PDF</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @invoices.each do |invoice| %>
+        <tr>
+          <td><%= invoice.supplier.name %></td>
+          <td><%= invoice.external_id %></td>
+          <td><%= l(invoice.date) %></td>
+          <td></td>
+          <td>
+            <%= number_to_currency(invoice.tax_amount, unit: invoice.currency_symbol) %>
+            <span class="text-sm text-gray-400"><%= invoice.tax_rate %>%</span> 
+          </td>
+          <td>
+            <%= link_to url_for(invoice.pdf_document) do %>
+              <i class="ri-file-pdf-2-line text-2xl"></i>
+            <% end if invoice.pdf_document.attached? %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

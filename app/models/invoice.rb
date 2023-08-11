@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Invoice < ApplicationRecord
+  ## concerns ##
+  include TranslateEnum
+
   ## enums ##
   enum :status, %i[created processing processed failed]
   enum :error, %i[none unknown parse_with_ai extract_text duplicated missing_identifier], suffix: true
@@ -17,6 +20,14 @@ class Invoice < ApplicationRecord
   ## attachments ##
   has_one_attached :pdf_document
   has_one_attached :html_document
+
+  ## scopes ##
+  scope :by_status, ->(status) { where(status: status.presence || :processed) }
+  scope :by_month, ->(date) { where(Invoice[:date].between(date.beginning_of_month..date.end_of_month)) }
+  scope :by_supplier, ->(id) { id.present? ? where(invoice_supplier_id: id) : all }
+
+  ## behaviors ##
+  translate_enum :status
 
   ## methods ##
 
@@ -36,6 +47,18 @@ class Invoice < ApplicationRecord
     when 'USD' then '$'
     else '?'
     end
+  end
+
+  ## class methods ##
+
+  def self.foo_filter(month: nil, status: nil, supplier_id: nil)
+    query = all
+
+    query = query.by_month(month.is_a?(String) ? Date.parse("#{month}-01") : month) if month.present?
+    query = query.by_status(status) if status.present?
+    query = query.by_supplier(supplier_id) if supplier_id.present?
+
+    query.order(Invoice[:date].desc)
   end
 end
 

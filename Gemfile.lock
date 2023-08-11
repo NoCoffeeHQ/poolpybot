@@ -312,6 +312,8 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.4.0)
+    translate_enum (0.2.0)
+      activesupport
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -370,6 +372,7 @@ DEPENDENCIES
   sorcery (~> 0.16.5)
   sprockets-rails
   tailwindcss-rails
+  translate_enum (~> 0.2.0)
   turbo-rails
   tzinfo-data
   view_component

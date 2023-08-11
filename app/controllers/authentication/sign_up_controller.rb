@@ -13,7 +13,7 @@ module Authentication
 
       if services.onboarding.call(company: @company, user: @user)
         auto_login(@user)
-        redirect_to dashboard_path, notice: t('notice.sign_up.success')
+        redirect_to workspace_root_path, notice: t('notice.sign_up.success')
       else
         render :new, status: :unprocessable_entity
       end

@@ -1,0 +1,50 @@
+<nav class="bg-white shadow-sm">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 justify-between">
+      <div class="flex">
+        <%= link_to workspace_root_path, class: 'flex flex-shrink-0 items-center space-x-4' do %>
+          <%= image_tag 'octopus.png', class: 'h-8', alt: 'Poolpybot' %>
+          <div class="flex flex-col">
+            <span class="font-extrabold text-sm uppercase">Poolpybot</span>
+            <span class="text-xs text-gray-400"><%= t('.logo_tagline') %></span>
+          </div>
+        <% end %>
+        <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+          &nbsp;
+        </div>
+      </div>
+      <div class="sm:ml-6 sm:flex sm:items-center">
+        <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onclick="alert('🚧👷🏻‍♀️ We\'re working on it!')">
+          <span class="absolute -inset-1.5"></span>
+          <span class="sr-only">View notifications</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+          </svg>
+        </button>
+
+        <!-- Profile dropdown -->
+        <div class="relative ml-3">
+          <%= ui_kit :dropdown, orientation: :right do |c| %>
+            <% c.with_label do %>
+              <%= image_tag 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80', class: 'inline-block h-6 w-6 rounded-full' %>
+              <span class="font-semibold text-sm ml-2 mr-1"><%= current_user.username %></span>
+            <% end %>
+
+            <div class="px-4 py-2 space-y-1" role="none">
+              <p class="text-gray-400 text-sm">
+                Signed in as 
+              </p>
+              <p class="text-black text-sm font-semibold">
+                <%= current_user.email %>
+              </p>
+            </div>
+
+            <div role="none">
+              <%= button_to "Sign out", :sign_out, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900', data: { turbo_method: :post } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

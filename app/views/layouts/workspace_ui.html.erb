@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html class="h-full">
   <head>
-    <title>PoolpyBot</title>
+    <title>PoolpyBot - <%= current_company.name %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <%= stylesheet_link_tag "application" %>
     <%= vite_client_tag %>
@@ -25,17 +24,23 @@
 
   </head>
 
-  <body class="h-full bg-white">
-    <div class="flex min-h-full">
-      <div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div class="mx-auto w-full max-w-xl lg:w-144">
-          <div class="mx-auto max-w-sm lg:w-96">
-            <%= yield %>
+  <body class="h-full bg-slate-100">
+    <div class="min-h-full">
+      <%= render 'layouts/workspace_ui/header' %>
+      
+      <div class="py-10">
+        <!-- <header>
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">Dashboard</h1>
           </div>
-        </div>
-      </div>
-      <div class="relative hidden w-0 flex-1 lg:block">
-        <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80" alt="">
+        </header> -->
+        <main>
+          <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="bg-white py-10">
+              <%= yield %>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   </body>

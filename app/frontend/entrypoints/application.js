@@ -17,6 +17,9 @@ console.log('Visit the guide for more information: ', 'https://vite-ruby.netlify
 //
 import * as Turbo from '@hotwired/turbo'
 Turbo.start()
+
+import '../controllers'
+
 //
 // import ActiveStorage from '@rails/activestorage'
 // ActiveStorage.start()

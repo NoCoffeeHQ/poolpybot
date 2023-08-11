@@ -34,6 +34,30 @@ en:
     formats:
       invoice: "%Y-%m"
 
+  layouts:
+    workspace_ui:
+      header:
+        logo_tagline: "Your accounting assistant"
+
+  workspace_ui:
+    invoices:
+      index:
+        title: "Invoices"
+        description: "List of all the invoices Poolpybot received so far."
+        table:
+          columns:
+            vendor: "Vendor"
+            invoice_id: "Invoice ID"
+            date: "Date"
+            total_amount: "Total amount"
+            tax_amount: "Tax amount"
+            status: "Status"
+            pdf_document: "PDF"
+            actions: "Actions"
+        filter:
+          all_suppliers: "Any supplier"
+          any_status: "Any status"
+
   helpers:
     label:
       company:
@@ -58,3 +82,12 @@ en:
         notice:
           success: "Login successful."
           fail: 'Login failed.'
+
+  activerecord:
+    attributes:
+      invoice:
+        status_list:
+          created: "Created"
+          processing: "In progress"
+          processed: "Processed"
+          failed: "Error"

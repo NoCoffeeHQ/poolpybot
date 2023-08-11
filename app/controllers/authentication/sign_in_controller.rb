@@ -10,7 +10,7 @@ module Authentication
       @user = login(sign_in_params[:email], sign_in_params[:password]) || User.new
 
       if @user.persisted?
-        redirect_back_or_to dashboard_path, notice: t('.notice.success')
+        redirect_back_or_to workspace_root_path, notice: t('.notice.success')
       else
         flash.now[:alert] = t('.notice.fail')
         render action: 'new', status: :unprocessable_entity

@@ -9,12 +9,14 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'authentication/sign_in#create', as: :sign_in
   post 'sign_out', to: 'authentication/sign_in#destroy', as: :sign_out
 
-  # Routes when logged in
-  get 'dashboard', to: 'dashboard#index', as: :dashboard
-
   # ActionMailbox
   scope '/rails/action_mailbox', module: 'action_mailbox/ingresses' do
     post '/brevo/inbound_emails/:password', to: 'brevo/inbound_emails#create', as: :rails_brevo_inbound_emails
+  end
+
+  scope '/workspace', module: 'workspace_ui', as: :workspace do
+    root to: 'home#index'
+    resources :invoices, only: [:index, :create]
   end
 
   # Very secure URLs to get the invoice HTML or PDF document

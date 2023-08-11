@@ -1,0 +1,24 @@
+<div data-controller="dropdown" class="relative shrink-0">
+  <button type="button" class="flex items-center cursor-pointer select-none <%= @label_class %>" data-action="click->dropdown#toggle">
+    <%= label %>
+    <% if arrow? %><i class="ri-arrow-down-s-line ml-auto"></i><% end %>
+  </button>
+  <%= tag.div class: ['hidden absolute mt-4 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none overflow-hidden min-w-full z-10', @content_class, 'origin-top-left left-0' => @orientation == :left, 'origin-top-right right-0' => @orientation == :right], 
+      aria: { 
+        orientation: 'vertical', 
+        labelledby: 'dropdown-button',
+      }, 
+      tabindex: '-1', 
+      data: {
+        'dropdown-target' => 'modal',
+        controller: 'transition',
+        'transition-enter-active' => 'transition ease-out duration-100',
+        'transition-enter-from' => 'transform opacity-0 scale-95',
+        'transition-enter-to' => 'transform opacity-100 scale-100',
+        'transition-leave-active' => 'transition ease-in duration-75',
+        'transition-leave-from' => 'transform opacity-100 scale-100',
+        'transition-leave-to' => 'transform opacity-0 scale-95'
+      } do %>
+    <%= content %>
+  <% end %>
+</div>

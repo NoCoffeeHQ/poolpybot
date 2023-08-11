@@ -78,3 +78,5 @@ gem 'email_validator'
 gem 'service_orchestrator', '~> 0.1.0'
 
 gem 'sidekiq', '~> 7.1'
+
+gem "translate_enum", "~> 0.2.0"

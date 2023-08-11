@@ -13,6 +13,12 @@ class InvoiceSupplier < ApplicationRecord
                        where(InvoiceSupplier[:name].similar_to(n).gteq(0.6))
                          .order(InvoiceSupplier[:name].similar_to(n).desc)
                      }
+
+  ## methods ##
+
+  def display_name
+    super.presence || name
+  end
 end
 
 # == Schema Information
