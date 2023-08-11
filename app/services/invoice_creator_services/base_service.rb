@@ -2,7 +2,6 @@
 
 module InvoiceCreatorServices
   class BaseService < ApplicationService
-
     private
 
     def find_or_create_invoice_supplier(company, invoice_info, email = nil)

@@ -26,6 +26,7 @@ class Invoice < ApplicationRecord
 
   def tax_amount
     return 0.0 if tax_rate.blank? || tax_rate.zero? || total_amount.zero?
+
     (total_amount * (1.0 - (1 / (1.0 + tax_rate.to_f / 100.0)).to_f)).round(2)
   end
 

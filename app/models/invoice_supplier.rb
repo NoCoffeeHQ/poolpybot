@@ -9,11 +9,10 @@ class InvoiceSupplier < ApplicationRecord
   validates :name, presence: true
 
   ## scopes ##
-  scope :similar_to, ->(n) { 
-      where(InvoiceSupplier[:name].similar_to(n).gteq(0.6))
-      .order(InvoiceSupplier[:name].similar_to(n).desc)
-    }
-
+  scope :similar_to, lambda { |n|
+                       where(InvoiceSupplier[:name].similar_to(n).gteq(0.6))
+                         .order(InvoiceSupplier[:name].similar_to(n).desc)
+                     }
 end
 
 # == Schema Information

@@ -10,7 +10,7 @@ module PdfServices
         response ? clean(response[:text]) : nil
       end
 
-      private 
+      private
 
       def clean(text)
         text.gsub(/\x0A[^\w]+$/, '').strip

@@ -44,7 +44,7 @@ module InvoiceCreatorServices
       email = mail.text_part.body.to_s[/^From: .*<(.*?)>\s*$/, 1]
 
       supplier = find_or_create_invoice_supplier(user.company, invoice_info, email)
-      
+
       supplier.invoices.create(invoice_attributes(user, invoice_info))
     end
 
