@@ -1,12 +1,12 @@
 <tr>
   <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-    <%= invoice.supplier.name %>
+    <%= invoice.supplier&.name || '-' %>
   </td>
   <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900 font-mono">
-    <%= invoice.external_id %>
+    <%= invoice.external_id.presence || '-' %>
   </td>
   <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-    <%= l(invoice.date) %>
+    <%= invoice.date ? l(invoice.date) : '-' %>
   </td>
   <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900 font-medium">
     <%= number_to_currency(invoice.total_amount, unit: invoice.currency_symbol) %>

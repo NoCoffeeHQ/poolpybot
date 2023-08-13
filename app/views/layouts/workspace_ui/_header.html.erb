@@ -34,7 +34,9 @@
               </p>
             </div>
 
-            <div role="none" class="space-y-1">
+            <div role="none" class="">
+              <%= link_to t('.instructions_link'), workspace_root_path(no_redirection: 1), class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
+
               <%= link_to t('.invoices_link'), current_invoices_path, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
             </div>
 

@@ -39,6 +39,7 @@ en:
       header:
         logo_tagline: "Your accounting assistant"
         invoices_link: "Invoices"
+        instructions_link: "Instructions"
         sign_out: "Sign out"
 
   app_kit:
@@ -70,6 +71,7 @@ en:
         title: "Invoices"
         description: "List of all the invoices Poolpybot received so far."
         table:
+          no_items: "No invoices"
           columns:
             vendor: "Vendor"
             invoice_id: "Invoice ID"

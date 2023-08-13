@@ -52,7 +52,7 @@ class Invoice < ApplicationRecord
   ## class methods ##
 
   def self.foo_filter(month: nil, status: nil, supplier_id: nil)
-    query = all
+    query = all.where.not(error: :duplicated)
 
     query = query.by_month(month.is_a?(String) ? Date.parse("#{month}-01") : month) if month.present?
     query = query.by_status(status) if status.present?

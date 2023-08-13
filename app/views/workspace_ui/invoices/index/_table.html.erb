@@ -19,8 +19,8 @@
         <tbody class="divide-y divide-gray-200 bg-white">
           <% if @invoices.empty? %>
             <tr>
-              <td colspan="8" class="text-center py-12">
-                  TODO
+              <td colspan="8" class="text-center py-12 text-sm font-semibold text-gray-900">
+                <%= t('.no_items') %>
               </td>
             </tr>
           <% else %>
