@@ -8,10 +8,10 @@ class User < ApplicationRecord
   ## validations ##
   validates :username, presence: true
   validates :email, email: true, presence: true, uniqueness: true
-  validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] || changing_password? }
-  validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] || changing_password? }
-  validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] || changing_password? }
-  
+  validates :password, length: { minimum: 6 }, if: :enable_password_validation?
+  validates :password_confirmation, presence: true, if: :enable_password_validation?
+  validates :password, confirmation: true, if: :enable_password_validation?
+
   ## callbacks ##
   before_destroy :cant_delete_if_invoices
 
@@ -39,6 +39,10 @@ class User < ApplicationRecord
 
   def cant_delete_if_invoices
     throw :abort if invoices.count.positive?
+  end
+
+  def enable_password_validation?
+    new_record? || changes[:crypted_password] || changing_password?
   end
 end
 

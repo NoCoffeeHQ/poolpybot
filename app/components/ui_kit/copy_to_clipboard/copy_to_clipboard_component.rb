@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-class UIKit::CopyToClipboard::CopyToClipboardComponent < ViewComponent::Base
-  attr_reader :value
+module UIKit
+  module CopyToClipboard
+    class CopyToClipboardComponent < ViewComponent::Base
+      attr_reader :value
 
-  def initialize(value:)
-    super
-    @value = value
+      def initialize(value:)
+        super
+        @value = value
+      end
+    end
   end
 end

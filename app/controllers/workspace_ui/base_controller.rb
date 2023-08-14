@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module WorkspaceUI
   class BaseController < ApplicationController
     layout 'workspace_ui'

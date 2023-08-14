@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
 
   describe 'change the password' do
     let(:user) { create(:user) }
-    let(:new_password) { 'newpassword'}
+    let(:new_password) { 'newpassword' }
     let(:new_password_confirmation) { 'newpassword' }
 
     before { user.password_confirmation = new_password_confirmation }
@@ -27,7 +27,6 @@ RSpec.describe User, type: :model do
 
       it { is_expected.to eq false }
     end
-
   end
 end
 

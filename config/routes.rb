@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
-
   # Authentication
   get 'sign_up', to: 'authentication/sign_up#new', as: :new_sign_up
   post 'sign_up', to: 'authentication/sign_up#create', as: :sign_up
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'sign_out', to: 'authentication/sign_in#destroy', as: :sign_out
 
   namespace :authentication do
-    resource :password_reset, controller: 'password_reset', only: [:new, :create, :edit, :update]
+    resource :password_reset, controller: 'password_reset', only: %i[new create edit update]
   end
 
   # ActionMailbox
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   scope '/workspace', module: 'workspace_ui', as: :workspace do
     root to: 'home#index'
-    resources :invoices, only: [:index, :create]
+    resources :invoices, only: %i[index create]
   end
 
   # Very secure URLs to get the invoice HTML or PDF document
@@ -50,3 +50,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 end
+# rubocop:enable Metrics/BlockLength
