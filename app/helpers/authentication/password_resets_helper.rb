@@ -1,0 +1,2 @@
+module Authentication::PasswordResetsHelper
+end

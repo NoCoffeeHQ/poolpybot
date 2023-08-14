@@ -1,0 +1,22 @@
+<div class="space-y-10">
+  <div>
+    <%= app_kit :logo, size: :lg %>
+
+    <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900"><%= t('.title') %></h2>
+    <p class="mt-2 text-sm leading-6 text-gray-500">
+      <%= t('.no_account', link: link_to(t('.sign_up_link'), new_sign_up_path, class: 'font-semibold text-gray-900 hover:text-gray-700')).html_safe %>
+    </p>
+  </div>
+
+  <%= ui_kit :notification, flash: flash %>
+
+  <div>
+    <%= form_for @user, url: authentication_password_reset_path, html: { class: 'space-y-6' } do |form| %>
+      <%= ui_kit :email_field, form: form, attribute: :email %>
+      
+      <div>
+        <%= ui_kit :primary_button, type: :submit, label: t('.submit_button'), full_width: true %>
+      </div>
+    <% end %>
+  </div>
+</div>

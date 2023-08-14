@@ -4,6 +4,6 @@
 <div class="flex items-center justify-between">
   <div></div>
   <div class="text-sm leading-6">
-    <a href="#" class="font-semibold text-gray-700 hover:text-gray-800">Forgot password?</a>
+    <%= link_to t('.forgot_password_link'), new_authentication_password_reset_path, class: 'font-semibold text-gray-700 hover:text-gray-800' %>
   </div>
 </div>
