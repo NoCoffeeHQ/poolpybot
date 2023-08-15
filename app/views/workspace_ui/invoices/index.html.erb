@@ -7,9 +7,15 @@
       <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center space-x-4">
-      <button type="button" class="block rounded-md bg-gray-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800" onclick="alert('🚧👷🏻‍♀️ We\'re working on it!')">
-        Upload Invoice PDF
-      </button>
+      <%= form_tag bulk_create_workspace_invoices_path, data: { controller: 'direct-upload-button', action: 'direct-uploads:start->direct-upload-button#startUploading', 'direct-upload-button-in-progress-label-value' => 'Uploading' } do |form| %>
+        <%= label_tag :pdf_documents, class: 'block rounded-md bg-gray-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 cursor-pointer' do %>
+          <div class="flex items-center space-x-2">
+            <i data-direct-upload-button-target="icon" class="ri-upload-cloud-2-line text-md"></i>
+            <span data-direct-upload-button-target="text">Upload Invoice PDF</span>
+          </div>
+          <%= file_field_tag 'pdf_documents[]', id: :pdf_documents, multiple: true, direct_upload: true, class: 'hidden' %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 

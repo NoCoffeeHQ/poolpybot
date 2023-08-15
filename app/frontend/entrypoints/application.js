@@ -20,9 +20,9 @@ Turbo.start()
 
 import '../controllers'
 
-//
-// import ActiveStorage from '@rails/activestorage'
-// ActiveStorage.start()
+// Storage
+import * as ActiveStorage from '@rails/activestorage'
+ActiveStorage.start()
 //
 // // Import all channels.
 // const channels = import.meta.globEager('./**/*_channel.js')

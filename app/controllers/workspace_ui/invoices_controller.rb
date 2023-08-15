@@ -8,7 +8,7 @@ module WorkspaceUI
       )
     end
 
-    def create
+    def bulk_create
       raise 'TODO'
     end
   end
