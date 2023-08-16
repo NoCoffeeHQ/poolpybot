@@ -9,7 +9,8 @@ module WorkspaceUI
     end
 
     def bulk_create
-      raise 'TODO'
+      flash[:fail] = 'TODO'
+      redirect_to workspace_invoices_path
     end
   end
 end
