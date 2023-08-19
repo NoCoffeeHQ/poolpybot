@@ -12,7 +12,8 @@ class Invoice < ApplicationRecord
   belongs_to :company
   belongs_to :user
   belongs_to :invoice_supplier, optional: true
-  belongs_to :duplicate_of, class_name: 'Invoice', optional: true
+  belongs_to :duplicate_of, class_name: 'Invoice', foreign_key: :duplicate_of_id, optional: true
+  has_many :duplicated_invoices, class_name: 'Invoice', inverse_of: :duplicate_of, foreign_key: :duplicate_of_id
 
   ## validations ##
   validates :external_id, uniqueness: { scope: :company_id }, if: -> { processed? }
@@ -51,7 +52,7 @@ class Invoice < ApplicationRecord
 
   ## class methods ##
 
-  def self.foo_filter(month: nil, status: nil, supplier_id: nil)
+  def self.search(month: nil, status: nil, supplier_id: nil)
     query = all.where.not(error: :duplicated)
 
     query = query.by_month(month.is_a?(String) ? Date.parse("#{month}-01") : month) if month.present?

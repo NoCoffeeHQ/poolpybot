@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module UIKit
-  module Notification
+  module Alert
     class AlertComponent < ViewComponent::Base
       attr_reader :flash
 

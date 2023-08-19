@@ -1,3 +1,9 @@
+PATH
+  remote: ../../../OSS/service_orchestrator
+  specs:
+    service_orchestrator (0.1.0)
+      activesupport
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -302,8 +308,6 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    service_orchestrator (0.1.0)
-      activesupport
     sidekiq (7.1.2)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -385,7 +389,7 @@ DEPENDENCIES
   rubocop-rails_config
   rubocop-rspec
   ruby-openai
-  service_orchestrator (~> 0.1.0)
+  service_orchestrator (~> 0.1.0)!
   sidekiq (~> 7.1)
   sorcery (~> 0.16.5)
   sprockets-rails

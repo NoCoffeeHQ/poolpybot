@@ -17,6 +17,10 @@ RSpec.describe InvoiceCreatorServices::PdfService do
 
   subject { instance.call(user: user, pdf: pdf) }
 
+  it 'has a name' do
+    expect(instance.send(:service_name)).to eq :pdf_invoice_creator
+  end
+
   describe 'Given our AI was able to extract the information out of the PDF' do
     let(:parser_response) do
       {
@@ -49,6 +53,24 @@ RSpec.describe InvoiceCreatorServices::PdfService do
         expect(subject.failed?).to eq true
         expect(subject.duplicated_error?).to eq true
         expect(subject.duplicate_of).not_to be nil
+      end
+    end
+
+    describe 'Given we want to process the PDF asynchronously', type: :job do
+      include ActiveJob::TestHelper
+
+      let(:pdf_blob) { ActiveStorage::Blob.create_and_upload!(**pdf) }
+
+      subject { instance.call_later(user_id: user.id, pdf_signed_id: pdf_blob.signed_id) }
+
+      before do
+        allow_any_instance_of(ApplicationServiceProcessorJob).to receive(:application_container).and_return(container)
+      end
+
+      it 'creates the invoice in DB' do
+        expect do
+          perform_enqueued_jobs { subject }
+        end.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(1)
       end
     end
   end
