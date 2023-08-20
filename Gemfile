@@ -84,3 +84,5 @@ gem 'translate_enum', '~> 0.2.0'
 
 # Use AWS SDK to upload files
 gem 'aws-sdk-s3'
+
+gem 'honeybadger', '~> 5.2'

@@ -130,6 +130,7 @@ GEM
     globalid (1.1.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
+    honeybadger (5.2.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -376,6 +377,7 @@ DEPENDENCIES
   dotenv-rails
   email_validator
   factory_bot_rails
+  honeybadger (~> 5.2)
   image_processing (~> 1.2)
   pg (~> 1.1)
   puma (~> 6.0)
