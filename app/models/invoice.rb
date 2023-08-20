@@ -12,8 +12,9 @@ class Invoice < ApplicationRecord
   belongs_to :company
   belongs_to :user
   belongs_to :invoice_supplier, optional: true
-  belongs_to :duplicate_of, class_name: 'Invoice', foreign_key: :duplicate_of_id, optional: true
-  has_many :duplicated_invoices, class_name: 'Invoice', inverse_of: :duplicate_of, foreign_key: :duplicate_of_id
+  belongs_to :duplicate_of, class_name: 'Invoice', optional: true
+  has_many :duplicated_invoices, class_name: 'Invoice', inverse_of: :duplicate_of, foreign_key: :duplicate_of_id,
+                                 dependent: :destroy
 
   ## validations ##
   validates :external_id, uniqueness: { scope: :company_id }, if: -> { processed? }

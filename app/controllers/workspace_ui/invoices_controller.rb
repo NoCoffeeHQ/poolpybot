@@ -4,11 +4,11 @@ module WorkspaceUI
   class InvoicesController < BaseController
     def index
       @invoices = current_company.invoices
-      .includes(:invoice_supplier)
-      .with_attached_pdf_document
-      .search(
-        **params.permit(:month, :status, :supplier_id).to_h.symbolize_keys
-      )
+                                 .includes(:invoice_supplier)
+                                 .with_attached_pdf_document
+                                 .search(
+                                   **params.permit(:month, :status, :supplier_id).to_h.symbolize_keys
+                                 )
     end
 
     def bulk_create

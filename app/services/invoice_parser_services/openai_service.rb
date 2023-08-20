@@ -41,23 +41,25 @@ module InvoiceParserServices
       JSON.parse(response['choices'].map { |c| c['text'] }.join("\n")).with_indifferent_access
     end
 
+    # rubocop:disable Metrics/MethodLength
     def build_prompt(text, company_name)
       <<~PROMPT
-As the owner of the "#{company_name}" company, I receive invoices by email from various suppliers and vendors. From the mail body, please generate a JSON object with only the following attributes:
-- company_name: Name of the company without the email address. The name can't be "#{company_name}" or similar to "#{company_name}".
-- identifier: The identifier of the invoice. If you don't find it, use the command number.
-- date: The date of the invoice date, in the "yyyy/mm/dd" date format.
-- total_amount: The total amount of the invoice as a float number, without the currency and in English format.
-- tax_rate: The VTA rate as a float number, null if not found.
-- currency: The currency in the ISO 4217 format.
+        As the owner of the "#{company_name}" company, I receive invoices by email from various suppliers and vendors. From the mail body, please generate a JSON object with only the following attributes:
+        - company_name: Name of the company without the email address. The name can't be "#{company_name}" or similar to "#{company_name}".
+        - identifier: The identifier of the invoice. If you don't find it, use the command number.
+        - date: The date of the invoice date, in the "yyyy/mm/dd" date format.
+        - total_amount: The total amount of the invoice as a float number, without the currency and in English format.
+        - tax_rate: The VTA rate as a float number, null if not found.
+        - currency: The currency in the ISO 4217 format.
 
-The mail body: """
-#{text}
-"""
-The JSON object:
+        The mail body: """
+        #{text}
+        """
+        The JSON object:
       PROMPT
-      .strip
+        .strip
     end
+    # rubocop:enable Metrics/MethodLength
 
     def build_legacy_prompt(text, company_name)
       <<~PROMPT

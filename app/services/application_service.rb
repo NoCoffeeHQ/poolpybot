@@ -20,12 +20,11 @@ class ApplicationService < ServiceOrchestrator::Service
   #   pp [@service_name, application_container.dependencies]
   #   # WARNING: it won't work well if 2 different dependencies have the same class.
   #   @service_name ||= application_container.dependencies.select do |_, service|
-  #     # rubocop:disable Style/ClassEqualityComparison
+  #
   #     pp [service.class.name, self.class.name]
 
   #     service.class.name == self.class.name
-  #     # rubocop:enable Style/ClassEqualityComparison
-  #   end.first&.first # select returns an array of arrays [key, value]
+  #       #   end.first&.first # select returns an array of arrays [key, value]
   # end
 
   # def application_container
