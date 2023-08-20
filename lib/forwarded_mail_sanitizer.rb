@@ -20,9 +20,7 @@ class ForwardedMailSanitizer
 
   def remove_apple_header(html)
     html_doc = Nokogiri::HTML(html)
-    # pp html_doc.css('blockquote[type="cite"] > :nth-child(-n+6)')
     html_doc.css('blockquote[type="cite"] > :nth-child(-n+6)').each(&:remove)
-    # puts "-----"
     html_doc.to_html
   end
 

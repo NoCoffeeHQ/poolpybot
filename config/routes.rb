@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   scope '/workspace', module: 'workspace_ui', as: :workspace do
     root to: 'home#index'
-    resources :invoices, only: %i[index create]
+    resources :invoices, only: %i[index] do
+      post :bulk_create, on: :collection
+    end
   end
 
   # Very secure URLs to get the invoice HTML or PDF document

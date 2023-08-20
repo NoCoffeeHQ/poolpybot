@@ -20,6 +20,11 @@ module InvoiceCreatorServices
       e.invoice
     end
 
+    def call_from_job(user_id:, pdf_signed_id:)
+      logger.debug "🚨 #{user_id} / #{pdf_signed_id}"
+      call(user: User.find(user_id), pdf: pdf_signed_id)
+    end
+
     private
 
     def extract_text(invoice)

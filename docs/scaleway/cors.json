@@ -1,0 +1,21 @@
+{
+  "CORSRules": [
+    {
+      "AllowedHeaders": ["*"],
+      "AllowedMethods": ["PUT"],
+      "AllowedOrigins": [
+        "http://localhost:5100", 
+        "https://def1-2a01-cb19-8a61-e000-b598-f01-c3ec-2956.ngrok-free.app", 
+        "https://poolpybot.fr",
+        "https://www.poolpybot.fr"
+      ],
+      "ExposeHeaders": [
+        "Origin",
+        "Content-Type",
+        "Content-MD5",
+        "Content-Disposition"
+      ],
+      "MaxAgeSeconds": 3600
+    }
+  ]
+}

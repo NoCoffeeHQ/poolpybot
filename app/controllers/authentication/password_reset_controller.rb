@@ -2,7 +2,7 @@
 
 module Authentication
   class PasswordResetController < Authentication::BaseController
-    before_action :fetch_user, only: [:edit, :update]
+    before_action :fetch_user, only: %i[edit update]
 
     def new
       @user = User.new
@@ -16,6 +16,10 @@ module Authentication
       # Tell the user instructions have been sent whether or not email was found.
       # This is to not leak information to attackers about which emails exist in the system.
       redirect_to new_sign_in_path, notice: t('.notice.success')
+    end
+
+    def edit
+      # please Rubocop
     end
 
     # This action fires when the user has sent the reset password form.

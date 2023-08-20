@@ -8,7 +8,8 @@ module InvoiceCreatorServices
       supplier = company.invoice_suppliers.similar_to(invoice_info[:company_name]).first
 
       if supplier
-        supplier.update(emails: (supplier.emails << email).uniq)
+        supplier.update(emails: (supplier.emails << email).compact.uniq)
+        supplier
       else
         company.invoice_suppliers.create(name: invoice_info[:company_name], emails: [email])
       end

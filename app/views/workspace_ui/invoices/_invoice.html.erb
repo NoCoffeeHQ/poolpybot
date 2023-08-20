@@ -12,14 +12,16 @@
     <%= number_to_currency(invoice.total_amount, unit: invoice.currency_symbol) %>
   </td>
   <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-    <%= number_to_currency(invoice.tax_amount, unit: invoice.currency_symbol) %>
-    <span class="text-sm text-gray-500"><%= invoice.tax_rate %>%</span> 
+    <% if invoice.tax_rate&.positive? %>
+      <%= number_to_currency(invoice.tax_amount, unit: invoice.currency_symbol) %>
+      <span class="text-sm text-gray-500"><%= invoice.tax_rate %>%</span>
+    <% else %>-<% end %>
   </td>
   <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
     <%= ui_kit :badge, label: invoice.translated_status, type: { 'processed' => :success, 'failed' => :error }[invoice.status] %>
   </td>
   <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-    <%= link_to url_for(invoice.pdf_document) do %>
+    <%= link_to url_for(invoice.pdf_document), target: 'blank' do %>
       <i class="ri-file-pdf-2-line text-2xl"></i>
     <% end if invoice.pdf_document.attached? %>
   </td>
