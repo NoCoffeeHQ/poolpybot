@@ -22,7 +22,7 @@ namespace :brevo do
       events: ['inboundEmailProcessed'],
       url: "#{ARGV[0]}/rails/action_mailbox/brevo/inbound_emails/#{action_mailbox_password}",
       domain: ENV['INBOUND_REPLY_EMAIL_DOMAIN'],
-      description: 'local-webhook'
+      description: "webhook-#{Rails.env}"
     )
     begin
       result = api_instance.create_webhook(webhook)

@@ -59,6 +59,14 @@ Generate new component for the UIKIt. Example:
 bin/rails generate component UIKit::FormInput form attribute --sidecar
 ```
 
+### Installation in production
+
+Get the URL and create Brevo weebhook.
+
+```bash
+rails brevo:create_local_webhook https://www.poolpybot.fr
+```
+
 ### Deployment
 
 TODO
