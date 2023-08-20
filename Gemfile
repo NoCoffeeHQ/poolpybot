@@ -75,8 +75,8 @@ end
 
 # TO BE ADDED TO THE SaaS Rails template
 gem 'email_validator'
-# gem 'service_orchestrator', '~> 0.1.0'
-gem 'service_orchestrator', '~> 0.1.0', path: '~/Documents/NoCoffee/OSS/service_orchestrator'
+# gem 'service_orchestrator', '~> 0.2.0', path: '~/Documents/NoCoffee/OSS/service_orchestrator'
+gem 'service_orchestrator', '~> 0.2.0'
 
 gem 'sidekiq', '~> 7.1'
 
