@@ -32,8 +32,8 @@
         <div class="mt-2 text-sm text-gray-500">
           <p><%= t('.choice_2.description') %></p>
         </div>
-        <div class="mt-5">
-          <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" onclick="alert('🚧👷🏻‍♀️ We\'re working on it!')"><%= t('.choice_2.button_link') %></button>
+        <div class="mt-5 flex items-center justify-start">
+          <%= ui_kit :direct_upload_button, label: t('.choice_2.button_link'), url: bulk_create_workspace_invoices_path, accept: 'application/pdf', multiple: true %>
         </div>
       </div>
     </div>

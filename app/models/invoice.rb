@@ -2,7 +2,7 @@
 
 class Invoice < ApplicationRecord
   ## concerns ##
-  include TranslateEnum
+  include ::TranslateEnum
 
   ## enums ##
   enum :status, %i[created processing processed failed]

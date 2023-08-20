@@ -52,6 +52,10 @@ en:
         copy: "Copy to Clipboard"
         copied: "Copied to Clipboard"
 
+    direct_upload_button:
+      direct_upload_button_component:
+        uploading_label: 'Uploading...'
+
   workspace_ui:
     home:
       index:
@@ -70,6 +74,7 @@ en:
       index:
         title: "Invoices"
         description: "List of all the invoices Poolpybot received so far."
+        upload_pdf_button: "Upload Invoice PDF"
         table:
           no_items: "No invoices"
           columns:
@@ -84,6 +89,11 @@ en:
         filter:
           all_suppliers: "Any supplier"
           any_status: "Any status"
+      bulk_create:
+        notice:
+          success: 
+            one: "Poolpybot is processing the PDF document."
+            other: "Poolpybot is processing the %{count} PDF documents."
 
   helpers:
     label:
