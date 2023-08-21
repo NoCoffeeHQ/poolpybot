@@ -86,3 +86,5 @@ gem 'translate_enum', '~> 0.2.0'
 gem 'aws-sdk-s3'
 
 gem 'honeybadger', '~> 5.2'
+
+gem "activestorage-validator", "~> 0.4.0"

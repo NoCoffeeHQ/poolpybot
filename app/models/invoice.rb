@@ -18,6 +18,7 @@ class Invoice < ApplicationRecord
 
   ## validations ##
   validates :external_id, uniqueness: { scope: :company_id }, if: -> { processed? }
+  validates :pdf_document, blob: { content_type: ['application/pdf'], size_range: 1..(2.megabytes) }
 
   ## attachments ##
   has_one_attached :pdf_document
