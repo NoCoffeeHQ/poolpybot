@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     end
     resource :settings, controller: 'settings', only: %i[edit]
     resource :my_profile, controller: 'my_profile', only: %i[update]
+    resource :company, controller: 'company', only: %i[update]
   end
 
   # Very secure URLs to get the invoice HTML or PDF document

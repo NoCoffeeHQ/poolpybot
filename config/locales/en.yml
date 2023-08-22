@@ -106,14 +106,24 @@ en:
       edit:
         title: "Settings"
         description: "Modify the information about your profile, add team members, ...etc."
+
     my_profile:
       form:
         title: "My profile"
         description: "Information about yourself. If you want to change your password, sign out and follow the 'Forgot my password' link."
-        submit_button: "Save"
+        submit_button: "Save your profile changes"
       update:
         flash:
           success: "Your profile has been updated."
+
+    company:
+      form:
+        title: "My company"
+        description: "The information about your company are important to Poolpybot to avoid mistakes when parsing your invoices."
+        submit_button: "Save your company changes"
+      update:
+        flash:
+          success: "Your company information have been updated."
 
   helpers:
     label:
