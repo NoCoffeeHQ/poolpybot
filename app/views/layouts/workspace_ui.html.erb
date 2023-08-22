@@ -46,6 +46,9 @@
         </main>
       </div>
     </div>
-    <%= ui_kit :notification, flash: flash %>
+    
+    <turbo-frame id="notification_frame">
+      <%= ui_kit :notification, flash: flash %>
+    </turbo-frame>
   </body>
 </html>

@@ -5,12 +5,16 @@ class User < ApplicationRecord
   belongs_to :company
   has_many :invoices, dependent: :destroy
 
+  ## attachments ##
+  has_one_attached :avatar
+
   ## validations ##
   validates :username, presence: true
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, length: { minimum: 6 }, if: :enable_password_validation?
   validates :password_confirmation, presence: true, if: :enable_password_validation?
   validates :password, confirmation: true, if: :enable_password_validation?
+  validates :avatar, blob: { content_type: :image, size_range: 1..(1.megabytes) }
 
   ## callbacks ##
   before_destroy :cant_delete_if_invoices

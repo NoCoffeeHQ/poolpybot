@@ -1,0 +1,26 @@
+<%= form_with model: current_user, url: workspace_my_profile_path, method: :put do |form| %>
+  <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+    <div>
+      <h2 class="text-base font-semibold leading-7 text-gray-900"><%= t('.title') %></h2>
+      <p class="mt-1 text-sm leading-6 text-gray-600"><%= t('.description') %></p>
+    </div>
+
+    <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
+      <div class="sm:col-span-4">
+        <%= ui_kit :text_field, form: form, attribute: :username %>
+      </div>
+
+      <div class="sm:col-span-4">
+        <%= ui_kit :email_field, form: form, attribute: :email %>
+      </div>
+
+      <div class="col-span-full">
+        <%= ui_kit :image_field, form: form, attribute: :avatar %>
+      </div>
+
+      <div class="col-span-full flex justify-end">
+        <%= ui_kit :primary_button, type: :submit, label: t('.submit_button') %>
+      </div>
+    </div>
+  </div>
+<% end %>

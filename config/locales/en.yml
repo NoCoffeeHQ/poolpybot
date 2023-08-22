@@ -36,10 +36,11 @@ en:
 
   layouts:
     workspace_ui:
-      header:
+      profile_dropdown:
         logo_tagline: "Your accounting assistant"
         invoices_link: "Invoices"
         instructions_link: "Instructions"
+        settings_link: "Settings"
         sign_out: "Sign out"
 
   app_kit:
@@ -55,6 +56,12 @@ en:
     direct_upload_button:
       direct_upload_button_component:
         uploading_label: 'Uploading...'
+
+    image_field:
+      image_field_component:
+        change_button: 'Change image'
+        browse_button: 'Browse file'
+        limit: "Image size up to %{size}"
 
   workspace_ui:
     home:
@@ -94,6 +101,19 @@ en:
           success: 
             one: "Poolpybot is processing the PDF document."
             other: "Poolpybot is processing the %{count} PDF documents."
+
+    settings:
+      edit:
+        title: "Settings"
+        description: "Modify the information about your profile, add team members, ...etc."
+    my_profile:
+      form:
+        title: "My profile"
+        description: "Information about yourself. If you want to change your password, sign out and follow the 'Forgot my password' link."
+        submit_button: "Save"
+      update:
+        flash:
+          success: "Your profile has been updated."
 
   helpers:
     label:
