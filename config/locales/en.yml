@@ -34,6 +34,11 @@ en:
     formats:
       invoice: "%Y-%m"
 
+  forms:
+    user_invitation:
+      placeholders:
+        email: "Enter the email address of a person of your company."
+
   layouts:
     workspace_ui:
       profile_dropdown:
@@ -105,7 +110,7 @@ en:
     settings:
       edit:
         title: "Settings"
-        description: "Modify the information about your profile, add team members, ...etc."
+        description: "Modify the information about your profile and your company."
 
     my_profile:
       form:
@@ -119,11 +124,17 @@ en:
     company:
       form:
         title: "My company"
-        description: "The information about your company are important to Poolpybot to avoid mistakes when parsing your invoices."
+        description: "The information about your company are important to Poolpybot to avoid mistakes when parsing your invoices.<br/>Let invite other people of your company to collect invoices."
         submit_button: "Save your company changes"
       update:
         flash:
           success: "Your company information have been updated."
+      team:
+        label: "Members"
+
+    user_invitations:
+      form:
+        submit_button: "Send invitation"
 
   helpers:
     label:
@@ -186,6 +197,20 @@ en:
  
         Have a great day!
 
+    send_invitation:
+      subject: "You've been invited to join Poolpybot!"
+      title: "Hello,"
+      html_body: |
+        <p>You've been receiving this email because <strong>Ernest from <u>Acme Corp</u></strong> has invited you to join Poolpybot to collect invoices of your company.</p>
+        <p>To accept this invitation, just follow this link: %{url}.</p>
+        <p>Have a great day!</p>
+      body: |
+        You've been receiving this email because Ernest from Acme Corp has invited you to join Poolpybot to collect invoices of your company.
+
+        To accept this invitation, just follow this link: %{url}.
+
+        Have a great day!
+
   activerecord:
     attributes:
       invoice:
@@ -194,3 +219,8 @@ en:
           processing: "In progress"
           processed: "Processed"
           failed: "Error"
+    errors:
+      models:
+        user_invitation:
+          already_a_workmate: "is already in the company"
+          already_active_elsewhere: "has already collected invoices for another company"

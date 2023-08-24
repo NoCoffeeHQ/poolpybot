@@ -1,0 +1,9 @@
+<%= form_with model: @user_invitation, url: workspace_user_invitations_path do |form| %>
+  <div class="flex items-start space-x-4">
+    <div class="flex-1">
+      <%= ui_kit :email_field, form: form, attribute: :email, with_label: false %>
+    </div>
+
+    <%= ui_kit :primary_button, label: t('.submit_button'), type: :submit %>
+  </div>
+<% end %>

@@ -3,7 +3,7 @@
 module WorkspaceUI
   class SettingsController < BaseController
     def edit
-      # please Rubocop
+      @user_invitation = UserInvitation.new
     end
   end
 end

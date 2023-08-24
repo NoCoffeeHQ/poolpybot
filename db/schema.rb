@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_142352) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_22_155434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -91,6 +91,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_142352) do
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
+  create_table "user_invitations", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "user_id"
+    t.uuid "token", default: -> { "gen_random_uuid()" }, null: false
+    t.datetime "expired_at", null: false
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "email"], name: "index_company_user_invitation_uniqueness", unique: true
+    t.index ["company_id"], name: "index_user_invitations_on_company_id"
+    t.index ["token"], name: "index_user_invitations_on_token", unique: true
+    t.index ["user_id"], name: "index_user_invitations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -117,4 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_142352) do
   add_foreign_key "invoices", "invoice_suppliers"
   add_foreign_key "invoices", "invoices", column: "duplicate_of_id"
   add_foreign_key "invoices", "users"
+  add_foreign_key "user_invitations", "companies"
+  add_foreign_key "user_invitations", "users"
 end

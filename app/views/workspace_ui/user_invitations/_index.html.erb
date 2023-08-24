@@ -1,0 +1,15 @@
+<% if current_company.user_invitations.count > 0 %>
+  <h4><%= t('.title' ) %></h4>
+
+  <div class="flex space-x-4 mt-2">
+    <%= current_company.user_invitations.each do |invitation| %>
+      <span><%= invitation.email %> (sent at <%= invitation.created_at %>)</span>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <turbo-frame id="new_user_invitation_frame">
+    <%= render 'workspace_ui/user_invitations/form' %>
+  </turbo-frame>
+</div>

@@ -6,14 +6,15 @@ module UIKit
       renders_one :label
       renders_one :label_hint
 
-      attr_reader :form, :attribute, :locale, :html_data
+      attr_reader :form, :attribute, :locale, :html_data, :with_label
 
-      def initialize(form:, attribute:, locale: nil, html_data: nil)
+      def initialize(form:, attribute:, locale: nil, html_data: nil, with_label: true)
         super
         @form = form
         @attribute = attribute
         @locale = locale
         @html_data = html_data || {}
+        @with_label = with_label
       end
 
       def locale_label
@@ -30,6 +31,10 @@ module UIKit
 
       def errors
         form.object.errors[attribute].join(', ')
+      end
+
+      def errors?
+        !form.object.errors.empty?
       end
 
       def placeholder

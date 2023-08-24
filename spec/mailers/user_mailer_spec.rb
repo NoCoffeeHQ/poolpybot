@@ -17,4 +17,20 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to match('Hello, Ernest')
     end
   end
+
+  describe 'send_invitation_email' do 
+    let(:user) { create(:user) }
+    let(:invitation) { create(:user_invitation).reload }
+    let(:mail) { UserMailer.send_invitation(invitation, user, true) }
+
+    it 'renders the headers' do
+      expect(mail.subject).to eq('You\'ve been invited to join Poolpybot!')
+      expect(mail.to).to eq(['john@doe.net'])
+      expect(mail.from).to eq(['from@example.com'])
+    end
+
+    it 'renders the body' do
+      expect(mail.body.encoded).to match('Ernest from Acme Corp has invited you to join Poolpybot to collect invoices of your company.')
+    end
+  end
 end
