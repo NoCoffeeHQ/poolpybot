@@ -6,15 +6,16 @@ module UIKit
       renders_one :label
       renders_one :label_hint
 
-      attr_reader :form, :attribute, :locale, :html_data, :with_label
+      attr_reader :form, :attribute, :locale, :html_data, :with_label, :readonly
 
-      def initialize(form:, attribute:, locale: nil, html_data: nil, with_label: true)
+      def initialize(form:, attribute:, locale: nil, html_data: nil, with_label: true, readonly: false)
         super
         @form = form
         @attribute = attribute
         @locale = locale
         @html_data = html_data || {}
         @with_label = with_label
+        @readonly = readonly
       end
 
       def locale_label
@@ -35,6 +36,10 @@ module UIKit
 
       def errors?
         !form.object.errors.empty?
+      end
+
+      def readonly?
+        readonly
       end
 
       def placeholder

@@ -7,6 +7,9 @@ class UserInvitation < ApplicationRecord
   validates :email, email: true, presence: true, uniqueness: { scope: :company_id }
   validate :cant_create_if_already_a_workmate
   validate :cant_create_if_guest_has_invoices
+
+  ## scopes ##
+  scope :by_token, ->(token) { where(UserInvitation[:token].eq(token).and(UserInvitation[:expired_at].gteq(Time.zone.now))) }
   
   ## class methods ##
 
@@ -21,7 +24,7 @@ class UserInvitation < ApplicationRecord
     invitation = create(company: invited_by.company, email: email, expired_at: 1.day.from_now)
     
     if invitation.errors.blank?
-      UserMailer.send_invitation(invitation.reload, invited_by, User.exists?(email: email))
+      UserMailer.send_invitation(invitation.reload, invited_by, User.exists?(email: email)).deliver_later
     end
     
     invitation

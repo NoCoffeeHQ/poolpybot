@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resource :settings, controller: 'settings', only: %i[edit]
     resource :my_profile, controller: 'my_profile', only: %i[update]
     resource :company, controller: 'company', only: %i[update]
-    resources :user_invitations, only: %i[create]
+    resources :user_invitations, only: %i[create destroy]
     resources :user_invitation_confirmations, only: %i[edit update]
   end
 

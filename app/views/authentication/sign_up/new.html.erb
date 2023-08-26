@@ -12,6 +12,8 @@
 <div class="mt-10">
   <div>
     <%= form_with url: sign_up_path, class: 'space-y-6' do |form| %>
+      <%= hidden_field_tag :token, params[:token] %>
+
       <%= render 'form', company: @company, user: @user %>
 
       <div>

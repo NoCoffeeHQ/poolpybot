@@ -19,7 +19,7 @@ RSpec.describe UserInvitation, type: :model do
         expect(subject.token).not_to be nil
       end
       it 'sends the invitation by mail' do
-        expect(UserMailer).to receive(:send_invitation)
+        expect(UserMailer).to receive(:send_invitation).and_call_original
         subject
       end
     end

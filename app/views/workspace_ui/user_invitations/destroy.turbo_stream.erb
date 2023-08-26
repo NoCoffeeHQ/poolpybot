@@ -9,9 +9,3 @@
     <%= ui_kit :notification, flash: flash %>
   </turbo-frame>
 <% end %>
-
-<%= turbo_stream.replace 'new_user_invitation_frame' do %>
-  <turbo-frame id="new_user_invitation_frame">
-    <%= render 'workspace_ui/user_invitations/form' %>
-  </turbo-frame>
-<% end %>

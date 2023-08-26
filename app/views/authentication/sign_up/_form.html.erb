@@ -1,5 +1,5 @@
 <%= fields_for :company, company do |company_form| %>
-  <%= ui_kit :text_field, form: company_form, attribute: :name %>
+  <%= ui_kit :text_field, form: company_form, attribute: :name, readonly: @invitation.present? %>
 <% end %>
 
 <%= fields_for :user, user do |user_form| %>

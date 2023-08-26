@@ -1,10 +1,8 @@
 <% if current_company.user_invitations.count > 0 %>
-  <h4><%= t('.title' ) %></h4>
+  <div class="flex items-center space-x-4">
+    <h4 class="text-sm font-medium leading-6 text-gray-900"><%= t('.title' ) %></h4>
 
-  <div class="flex space-x-4 mt-2">
-    <%= current_company.user_invitations.each do |invitation| %>
-      <span><%= invitation.email %> (sent at <%= invitation.created_at %>)</span>
-    <% end %>
+    <%= render current_company.user_invitations %>
   </div>
 <% end %>
 

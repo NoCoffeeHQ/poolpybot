@@ -21,7 +21,7 @@ class UserMailer < ApplicationMailer
     if user_exists
       edit_workspace_user_invitation_confirmation_url(token)
     else
-      new_sign_up_path(token: token)
+      new_sign_up_url(token: token)
     end
   end
 end

@@ -135,6 +135,14 @@ en:
     user_invitations:
       form:
         submit_button: "Send invitation"
+      index:
+        title: "Pending invitations:"
+      create:
+        flash:
+          success: "Your invitation has been sent with success."
+      destroy:
+        flash:
+          success: "The invitation has been deleted."
 
   helpers:
     label:
@@ -152,8 +160,9 @@ en:
         sign_in_link: "Sign in here"
         submit_button: "Sign up"
       create:
-        notice:
+        flash:
           success: "Your account was successfully created."
+          
     sign_in:
       new:
         title: "Sign in to your account"
