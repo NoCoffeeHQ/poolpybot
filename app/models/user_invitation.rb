@@ -1,7 +1,7 @@
 class UserInvitation < ApplicationRecord
   ## associations ##
   belongs_to :company
-  belongs_to :user, optional: true
+  belongs_to :invited_by, class_name: 'User', foreign_key: 'user_id'
 
   ## validations ##
   validates :email, email: true, presence: true, uniqueness: { scope: :company_id }
@@ -10,6 +10,15 @@ class UserInvitation < ApplicationRecord
 
   ## scopes ##
   scope :by_token, ->(token) { where(UserInvitation[:token].eq(token).and(UserInvitation[:expired_at].gteq(Time.zone.now))) }
+  scope :by_email, ->(email) { joins(:invited_by, :company).where(email: email) }
+
+  ## methods ##
+
+  def accept!(user)
+    user.company = company
+    user.save!
+    destroy
+  end
   
   ## class methods ##
 
@@ -17,20 +26,19 @@ class UserInvitation < ApplicationRecord
     # use cases:
     # the email doesn't belong to an existing user: -> Redirect to the sign up page + invitation token
     # the email belongs to an existing user:
-    # x if the user has invoices -> display an error message
-    # x if the user is already part of the company -> display an error message
-    # - if the user has no invoices, send the invitation + display a notification EVERYTIME
-
-    invitation = create(company: invited_by.company, email: email, expired_at: 1.day.from_now)
+    # - if the user has invoices -> display an error message
+    # - if the user is already part of the company -> display an error message
+    # - if the user has no invoices, send the invitation + display a notification in the settings page
+    invitation = create(company: invited_by.company, invited_by: invited_by, email: email, expired_at: 1.day.from_now)
     
     if invitation.errors.blank?
-      UserMailer.send_invitation(invitation.reload, invited_by, User.exists?(email: email)).deliver_later
+      UserMailer.send_invitation(invitation.reload, User.exists?(email: email)).deliver_later
     end
     
     invitation
   end
 
-  ## methods ##
+  ## private methods ##
 
   private 
   
@@ -59,7 +67,7 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :bigint           not null
-#  user_id    :bigint
+#  user_id    :bigint           not null
 #
 # Indexes
 #

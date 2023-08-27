@@ -39,6 +39,10 @@ class User < ApplicationRecord
     !!@changing_password
   end
 
+  def current_invitation
+    @current_invitation ||= UserInvitation.by_email(email).first
+  end
+
   private
 
   def cant_delete_if_invoices

@@ -19,9 +19,8 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe 'send_invitation_email' do 
-    let(:user) { create(:user) }
     let(:invitation) { create(:user_invitation).reload }
-    let(:mail) { UserMailer.send_invitation(invitation, user, true) }
+    let(:mail) { UserMailer.send_invitation(invitation, true) }
 
     it 'renders the headers' do
       expect(mail.subject).to eq('You\'ve been invited to join Poolpybot!')

@@ -5,7 +5,7 @@ module UIKit
     class PrimaryButtonComponent < ViewComponent::Base
       attr_reader :type, :label
 
-      def initialize(type:, label:, full_width: false)
+      def initialize(type:, label: nil, full_width: false)
         super
         @type = type
         @label = label

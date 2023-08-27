@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  confirm: "Are you sure?"
+
   date:
     formats:
       invoice: "%Y-%m"
@@ -143,6 +145,19 @@ en:
       destroy:
         flash:
           success: "The invitation has been deleted."
+      confirmation:
+        title: "You've been invited by <b>%{username}</b> to join <b>%{company}</b>."
+        or: "or"
+        accept_button: "Accept"
+        refuse_button: "Refuse"
+
+    user_invitation_confirmation:
+      create:
+        flash:
+          success: "Welcome to %{company}!"
+      destroy:
+        flash:
+          success: "You've declined the invitation."
 
   helpers:
     label:

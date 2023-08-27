@@ -7,7 +7,7 @@ RSpec.describe UserInvitation, type: :model do
 
   describe '.invite' do
     let(:email) { 'jane@doe.net' }
-    let!(:user) { create(:user) }
+    let!(:user) { create(:user, :john_doe) }
 
     subject { described_class.invite(email: email, invited_by: user) }
 
@@ -75,7 +75,7 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :bigint           not null
-#  user_id    :bigint
+#  user_id    :bigint           not null
 #
 # Indexes
 #

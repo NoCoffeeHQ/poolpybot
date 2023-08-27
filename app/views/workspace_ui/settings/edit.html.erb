@@ -8,6 +8,8 @@
     </div>
   </div>
 
+  <%= render 'workspace_ui/user_invitations/confirmation', invitation: current_user.current_invitation if current_user.current_invitation %>
+
   <div class="mt-12 space-y-8 divide-y divide-gray-900/10">
     <div>
       <turbo-frame id="my_profile_frame">

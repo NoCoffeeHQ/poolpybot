@@ -93,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_155434) do
 
   create_table "user_invitations", force: :cascade do |t|
     t.bigint "company_id", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.uuid "token", default: -> { "gen_random_uuid()" }, null: false
     t.datetime "expired_at", null: false
     t.string "email"

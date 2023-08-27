@@ -9,7 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :bigint           not null
-#  user_id    :bigint
+#  user_id    :bigint           not null
 #
 # Indexes
 #
@@ -26,7 +26,7 @@
 FactoryBot.define do
   factory :user_invitation do
     company { Company.first || create(:company) }
-    user { nil }
+    invited_by { create(:user) }
     expired_at { 1.day.from_now }
     email { 'john@doe.net' }
     token { 'arandomtoken' }

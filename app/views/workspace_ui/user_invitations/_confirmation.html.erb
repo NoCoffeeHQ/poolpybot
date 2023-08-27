@@ -1,0 +1,13 @@
+<div class="my-8 bg-orange-200 px-8 py-4 flex items-center justify-between">
+  <div class="text-orange-800">
+    <%= t('.title', username: invitation.invited_by.username, company: invitation.company.name).html_safe %>
+  </div>
+
+  <div class="flex items-center space-x-2">
+    <%= button_to t('.accept_button'), workspace_user_invitation_confirmation_path, class: 'text-sm text-orange-700 hover:text-orange-800 px-4 py-1 border border-orange-800 rounded', method: :post %>
+
+    <span class="text-orange-800 text-sm"><%= t('.or') %></span>
+
+    <%= button_to t('.refuse_button'), workspace_user_invitation_confirmation_path, class: 'text-orange-700 hover:text-orange-800 hover:underline', form: { data: { turbo_confirm: t('confirm') } }, method: :delete %>
+  </div>
+</div>

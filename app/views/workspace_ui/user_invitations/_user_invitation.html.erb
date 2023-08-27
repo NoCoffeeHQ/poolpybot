@@ -1,6 +1,6 @@
 <%= ui_kit :badge do %>
   <span><%= user_invitation.email %></span>
-  <%= button_to workspace_user_invitation_path(user_invitation), form: { class: 'ml-1', data: { turbo_confirm: "Are you sure?" } }, method: :delete do %>
+  <%= button_to workspace_user_invitation_path(user_invitation), form: { class: 'ml-1', data: { turbo_confirm: t('confirm') } }, method: :delete do %>
     <i class="ri-close-fill text-lg"></i>
   <% end %>
 <% end %>

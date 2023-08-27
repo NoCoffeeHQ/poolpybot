@@ -8,7 +8,7 @@ RSpec.describe OnboardingService do
 
   describe '#call' do
     let(:company) { build(:company) }
-    let(:user) { build(:user, company: nil) }
+    let(:user) { build(:user, :john_doe, company: nil) }
     let(:invitation) { nil }
 
     subject { instance.call(company: company, user: user, invitation: invitation) }

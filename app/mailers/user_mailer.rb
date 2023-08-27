@@ -7,9 +7,9 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: t('.subject')
   end
 
-  def send_invitation(invitation, invited_by, user_exists)
+  def send_invitation(invitation, user_exists)
     @invitation = invitation
-    @invited_by = invited_by
+    @invited_by = invitation.invited_by
     @url = invitation_url(invitation, user_exists)
     mail to: invitation.email, subject: t('.subject')
   end
@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
   def invitation_url(invitation, user_exists)
     token = invitation.token
     if user_exists
-      edit_workspace_user_invitation_confirmation_url(token)
+      edit_workspace_settings_url
     else
       new_sign_up_url(token: token)
     end
