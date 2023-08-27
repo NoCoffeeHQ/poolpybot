@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class UserInvitation < ApplicationRecord
   ## associations ##
   belongs_to :company
-  belongs_to :invited_by, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :invited_by, class_name: 'User', foreign_key: 'user_id', inverse_of: :user_invitations
 
   ## validations ##
   validates :email, email: true, presence: true, uniqueness: { scope: :company_id }
@@ -9,7 +11,9 @@ class UserInvitation < ApplicationRecord
   validate :cant_create_if_guest_has_invoices
 
   ## scopes ##
-  scope :by_token, ->(token) { where(UserInvitation[:token].eq(token).and(UserInvitation[:expired_at].gteq(Time.zone.now))) }
+  scope :by_token, lambda { |token|
+                     where(UserInvitation[:token].eq(token).and(UserInvitation[:expired_at].gteq(Time.zone.now)))
+                   }
   scope :by_email, ->(email) { joins(:invited_by, :company).where(email: email) }
 
   ## methods ##
@@ -19,7 +23,7 @@ class UserInvitation < ApplicationRecord
     user.save!
     destroy
   end
-  
+
   ## class methods ##
 
   def self.invite(email:, invited_by:)
@@ -30,29 +34,27 @@ class UserInvitation < ApplicationRecord
     # - if the user is already part of the company -> display an error message
     # - if the user has no invoices, send the invitation + display a notification in the settings page
     invitation = create(company: invited_by.company, invited_by: invited_by, email: email, expired_at: 1.day.from_now)
-    
-    if invitation.errors.blank?
-      UserMailer.send_invitation(invitation.reload, User.exists?(email: email)).deliver_later
-    end
-    
+
+    UserMailer.send_invitation(invitation.reload, User.exists?(email: email)).deliver_later if invitation.errors.blank?
+
     invitation
   end
 
   ## private methods ##
 
-  private 
-  
+  private
+
   def cant_create_if_already_a_workmate
-    if company.users.exists?(email: email)
-      errors.add(:email, :already_a_workmate)
-    end
+    return unless company.users.exists?(email: email)
+
+    errors.add(:email, :already_a_workmate)
   end
 
   def cant_create_if_guest_has_invoices
     guest = User.where(email: email).where.not(company_id: company.id).first
-    if guest && guest.invoices.count > 0
-      errors.add(:email, :already_active_elsewhere)
-    end
+    return unless guest && guest.invoices.count.positive?
+
+    errors.add(:email, :already_active_elsewhere)
   end
 end
 

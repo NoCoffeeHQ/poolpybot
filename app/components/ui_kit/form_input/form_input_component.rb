@@ -8,6 +8,7 @@ module UIKit
 
       attr_reader :form, :attribute, :locale, :html_data, :with_label, :readonly
 
+      # rubocop:disable Metrics/ParameterLists
       def initialize(form:, attribute:, locale: nil, html_data: nil, with_label: true, readonly: false)
         super
         @form = form
@@ -17,6 +18,7 @@ module UIKit
         @with_label = with_label
         @readonly = readonly
       end
+      # rubocop:enable Metrics/ParameterLists
 
       def locale_label
         I18n.t(locale, scope: 'locales')

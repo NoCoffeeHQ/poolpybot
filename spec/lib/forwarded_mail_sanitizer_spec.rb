@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe ForwardedMailSanitizer do
-
   subject { ForwardedMailSanitizer.call(html: html) }
 
   describe 'Given the mail was forwarded from Gmail' do

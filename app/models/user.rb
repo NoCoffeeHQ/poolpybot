@@ -4,6 +4,7 @@ class User < ApplicationRecord
   ## associations ##
   belongs_to :company
   has_many :invoices, dependent: :destroy
+  has_many :user_invitations, dependent: :destroy
 
   ## attachments ##
   has_one_attached :avatar

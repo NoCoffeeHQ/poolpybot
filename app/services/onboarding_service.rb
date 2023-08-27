@@ -13,13 +13,13 @@ class OnboardingService < ApplicationService
 
   def unsafe_call(company, user, invitation)
     user.valid? # call all the validations (for the HTML form)
-    
+
     company.save! unless invitation
-     
+
     user.company = invitation ? invitation.company : company
     user.save!
 
-    invitation.destroy if invitation
+    invitation&.destroy
 
     true
   end

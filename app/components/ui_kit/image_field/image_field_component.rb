@@ -15,9 +15,7 @@ module UIKit
         @direct_upload = direct_upload
       end
 
-      def attached?
-        attachment.attached?
-      end
+      delegate :attached?, to: :attachment
 
       def attached_and_persisted?
         attachment.attached? && attachment.persisted?

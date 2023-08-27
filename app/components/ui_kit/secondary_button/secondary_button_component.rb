@@ -8,6 +8,7 @@ module UIKit
       attr_reader :label, :url, :action, :size
 
       def initialize(label:, url: '#', action: nil, size: :md)
+        super
         @label = label
         @url = url
         @action = action
@@ -21,7 +22,6 @@ module UIKit
         else 'py-2 px-3 text-sm'
         end
       end
-
     end
   end
 end

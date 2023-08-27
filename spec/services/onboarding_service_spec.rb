@@ -29,7 +29,7 @@ RSpec.describe OnboardingService do
       end
     end
 
-    describe 'Given the user signs up from an invitation' do 
+    describe 'Given the user signs up from an invitation' do
       let!(:invitation) { create(:user_invitation) }
 
       it 'only persists the user in DB' do

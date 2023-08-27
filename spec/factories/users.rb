@@ -37,7 +37,7 @@ FactoryBot.define do
       uuid { 'a5c656df-c501-4d2c-bf8f-7259c8111991' }
     end
 
-    trait :john_doe do 
+    trait :john_doe do
       username { 'John' }
       email { 'john@acme.org' }
     end

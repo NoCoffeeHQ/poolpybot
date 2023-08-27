@@ -18,7 +18,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe 'send_invitation_email' do 
+  describe 'send_invitation_email' do
     let(:invitation) { create(:user_invitation).reload }
     let(:mail) { UserMailer.send_invitation(invitation, true) }
 
@@ -29,7 +29,9 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it 'renders the body' do
-      expect(mail.body.encoded).to match('Ernest from Acme Corp has invited you to join Poolpybot to collect invoices of your company.')
+      expect(mail.body.encoded).to match(
+        'Ernest from Acme Corp has invited you to join Poolpybot to collect invoices of your company.'
+      )
     end
   end
 end
