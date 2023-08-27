@@ -19,31 +19,9 @@
 
         <!-- Profile dropdown -->
         <div class="relative ml-3">
-          <%= ui_kit :dropdown, orientation: :right do |c| %>
-            <% c.with_label do %>
-              <%= image_tag 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80', class: 'inline-block h-6 w-6 rounded-full' %>
-              <span class="font-semibold text-sm ml-2 mr-1"><%= current_user.username %></span>
-            <% end %>
-
-            <div class="px-4 py-2 space-y-1" role="none">
-              <p class="text-gray-400 text-sm">
-                Signed in as 
-              </p>
-              <p class="text-black text-sm font-semibold">
-                <%= current_user.email %>
-              </p>
-            </div>
-
-            <div role="none" class="">
-              <%= link_to t('.instructions_link'), workspace_root_path(no_redirection: 1), class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
-
-              <%= link_to t('.invoices_link'), current_invoices_path, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
-            </div>
-
-            <div role="none">
-              <%= button_to t('.sign_out'), :sign_out, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900', data: { turbo_method: :post } %>
-            </div>
-          <% end %>
+          <turbo-frame id="my_profile_dropdown_frame">
+            <%= render 'layouts/workspace_ui/profile_dropdown' %>
+          </turbo-frame>
         </div>
       </div>
     </div>

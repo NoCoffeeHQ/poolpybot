@@ -30,16 +30,24 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  confirm: "Are you sure?"
+
   date:
     formats:
       invoice: "%Y-%m"
 
+  forms:
+    user_invitation:
+      placeholders:
+        email: "Enter the email address of a person of your company."
+
   layouts:
     workspace_ui:
-      header:
+      profile_dropdown:
         logo_tagline: "Your accounting assistant"
         invoices_link: "Invoices"
         instructions_link: "Instructions"
+        settings_link: "Settings"
         sign_out: "Sign out"
 
   app_kit:
@@ -55,6 +63,12 @@ en:
     direct_upload_button:
       direct_upload_button_component:
         uploading_label: 'Uploading...'
+
+    image_field:
+      image_field_component:
+        change_button: 'Change image'
+        browse_button: 'Browse file'
+        limit: "Image size up to %{size}"
 
   workspace_ui:
     home:
@@ -95,6 +109,56 @@ en:
             one: "Poolpybot is processing the PDF document."
             other: "Poolpybot is processing the %{count} PDF documents."
 
+    settings:
+      edit:
+        title: "Settings"
+        description: "Modify the information about your profile and your company."
+
+    my_profile:
+      form:
+        title: "My profile"
+        description: "Information about yourself. If you want to change your password, sign out and follow the 'Forgot my password' link."
+        submit_button: "Save your profile changes"
+      update:
+        flash:
+          success: "Your profile has been updated."
+
+    company:
+      form:
+        title: "My company"
+        description: "The information about your company are important to Poolpybot to avoid mistakes when parsing your invoices.<br/>Let invite other people of your company to collect invoices."
+        submit_button: "Save your company changes"
+      update:
+        flash:
+          success: "Your company information have been updated."
+      team:
+        label: "Members"
+
+    user_invitations:
+      form:
+        submit_button: "Send invitation"
+      index:
+        title: "Pending invitations:"
+      create:
+        flash:
+          success: "Your invitation has been sent with success."
+      destroy:
+        flash:
+          success: "The invitation has been deleted."
+      confirmation:
+        title: "You've been invited by <b>%{username}</b> to join <b>%{company}</b>."
+        or: "or"
+        accept_button: "Accept"
+        refuse_button: "Refuse"
+
+    user_invitation_confirmation:
+      create:
+        flash:
+          success: "Welcome to %{company}!"
+      destroy:
+        flash:
+          success: "You've declined the invitation."
+
   helpers:
     label:
       company:
@@ -111,8 +175,9 @@ en:
         sign_in_link: "Sign in here"
         submit_button: "Sign up"
       create:
-        notice:
+        flash:
           success: "Your account was successfully created."
+          
     sign_in:
       new:
         title: "Sign in to your account"
@@ -156,6 +221,20 @@ en:
  
         Have a great day!
 
+    send_invitation:
+      subject: "You've been invited to join Poolpybot!"
+      title: "Hello,"
+      html_body: |
+        <p>You've been receiving this email because <strong>Ernest from <u>Acme Corp</u></strong> has invited you to join Poolpybot to collect invoices of your company.</p>
+        <p>To accept this invitation, just follow this link: %{url}.</p>
+        <p>Have a great day!</p>
+      body: |
+        You've been receiving this email because Ernest from Acme Corp has invited you to join Poolpybot to collect invoices of your company.
+
+        To accept this invitation, just follow this link: %{url}.
+
+        Have a great day!
+
   activerecord:
     attributes:
       invoice:
@@ -164,3 +243,8 @@ en:
           processing: "In progress"
           processed: "Processed"
           failed: "Error"
+    errors:
+      models:
+        user_invitation:
+          already_a_workmate: "is already in the company"
+          already_active_elsewhere: "has already collected invoices for another company"

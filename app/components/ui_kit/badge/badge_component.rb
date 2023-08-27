@@ -5,7 +5,7 @@ module UIKit
     class BadgeComponent < ViewComponent::Base
       attr_reader :label, :type
 
-      def initialize(label:, type: nil)
+      def initialize(label: nil, type: nil)
         super
         @label = label
         @type = type&.to_sym || :notice

@@ -1,0 +1,27 @@
+<%= ui_kit :dropdown, orientation: :right do |c| %>
+  <% c.with_label do %>
+    <%= image_tag current_user.avatar&.attached? ? current_user.avatar : 'marie_curie.jpg', class: 'inline-block h-6 w-6 rounded-full', alt: current_user.username %>
+    <span class="font-semibold text-sm ml-2 mr-1"><%= current_user.username %></span>
+  <% end %>
+
+  <div class="px-4 py-2 space-y-1" role="none">
+    <p class="text-gray-400 text-sm">
+      Signed in as 
+    </p>
+    <p class="text-black text-sm font-semibold">
+      <%= current_user.email %>
+    </p>
+  </div>
+
+  <div role="none" class="">
+    <%= link_to t('.instructions_link'), workspace_root_path(no_redirection: 1), data: { turbo_frame: '_top' }, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
+
+    <%= link_to t('.invoices_link'), current_invoices_path, data: { turbo_frame: '_top' }, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
+
+    <%= link_to t('.settings_link'), edit_workspace_settings_path, data: { turbo_frame: '_top' }, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900' %>
+  </div>
+
+  <div role="none">
+    <%= button_to t('.sign_out'), :sign_out, class: 'text-left w-full text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100 hover:text-gray-900', data: { turbo_frame: '_top', turbo_method: :post } %>
+  </div>
+<% end %>

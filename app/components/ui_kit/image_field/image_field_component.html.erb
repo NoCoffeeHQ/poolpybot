@@ -1,0 +1,28 @@
+<%= render ::UIKit::FormInput::FormInputComponent.new(form: form, attribute: attribute) do |c| %>
+  <% c.with_label do %><%= label %><% end if label? %>
+  
+  <div data-controller="image-field">
+    <%= image_tag attached_and_persisted? ? attachment : '', class: "#{'hidden' unless attached_and_persisted?} mb-2 block w-16 mx-auto rounded-lg bg-gray-100 object-cover lg:h-auto", data: { image_field_target: 'image' } %>
+    
+    <div class="<%= 'hidden' unless attached_and_persisted? %> text-center mt-4" data-image-field-target="uploader">
+      <%= render ::UIKit::SecondaryButton::SecondaryButtonComponent.new(label: t('.change_button'), size: :xs, action: 'click->image-field#openDialog') %>
+    </div>
+
+    <div class="<%= 'hidden' if attached_and_persisted? %> flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6" data-image-field-target="emptyUploader">
+      <div class="space-x-4 flex items-center">
+        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div class="text-sm space-y-1">
+          <label for="<%= c.form_for %>" class="relative block cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500 text-gray-600">
+            <span><%= t('.browse_button') %></span>
+            <%= form.file_field attribute, accept: 'image/png,image/gif,image/jpeg', direct_upload: direct_upload, class: 'sr-only', data: { action: 'change->image-field#change', image_field_target: 'input' } %>
+          </label>
+          <% if max_size %>
+            <p class="text-xs text-gray-500"><%= t('.limit', size: number_to_human_size(max_size)) %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

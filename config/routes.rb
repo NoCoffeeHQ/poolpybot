@@ -24,6 +24,11 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index] do
       post :bulk_create, on: :collection
     end
+    resource :settings, controller: 'settings', only: %i[edit]
+    resource :my_profile, controller: 'my_profile', only: %i[update]
+    resource :company, controller: 'company', only: %i[update]
+    resources :user_invitations, only: %i[create destroy]
+    resource :user_invitation_confirmation, controller: 'user_invitation_confirmation', only: %i[create destroy]
   end
 
   # Very secure URLs to get the invoice HTML or PDF document

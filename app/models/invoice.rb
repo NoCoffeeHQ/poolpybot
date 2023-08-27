@@ -16,13 +16,13 @@ class Invoice < ApplicationRecord
   has_many :duplicated_invoices, class_name: 'Invoice', inverse_of: :duplicate_of, foreign_key: :duplicate_of_id,
                                  dependent: :destroy
 
-  ## validations ##
-  validates :external_id, uniqueness: { scope: :company_id }, if: -> { processed? }
-  validates :pdf_document, blob: { content_type: ['application/pdf'], size_range: 1..(2.megabytes) }
-
   ## attachments ##
   has_one_attached :pdf_document
   has_one_attached :html_document
+
+  ## validations ##
+  validates :external_id, uniqueness: { scope: :company_id }, if: -> { processed? }
+  validates :pdf_document, blob: { content_type: ['application/pdf'], size_range: 1..(2.megabytes) }
 
   ## scopes ##
   scope :by_status, ->(status) { where(status: status.presence || :processed) }

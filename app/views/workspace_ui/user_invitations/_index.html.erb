@@ -1,0 +1,13 @@
+<% if current_company.user_invitations.count > 0 %>
+  <div class="flex items-center space-x-4">
+    <h4 class="text-sm font-medium leading-6 text-gray-900"><%= t('.title' ) %></h4>
+
+    <%= render current_company.user_invitations %>
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <turbo-frame id="new_user_invitation_frame">
+    <%= render 'workspace_ui/user_invitations/form' %>
+  </turbo-frame>
+</div>

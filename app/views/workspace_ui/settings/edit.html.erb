@@ -1,0 +1,26 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h2 class="text-2xl font-semibold leading-6 text-gray-900">
+        <%= t('.title') %>
+      </h2>
+      <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
+    </div>
+  </div>
+
+  <%= render 'workspace_ui/user_invitations/confirmation', invitation: current_user.current_invitation if current_user.current_invitation %>
+
+  <div class="mt-12 space-y-8 divide-y divide-gray-900/10">
+    <div>
+      <turbo-frame id="my_profile_frame">
+        <%= render 'workspace_ui/my_profile/form' %>
+      </turbo-frame>
+    </div>
+
+    <div class="py-8">
+      <turbo-frame id="company_frame">
+        <%= render 'workspace_ui/company/form' %>
+      </turbo-frame>
+    </div>
+  </div>
+</div>

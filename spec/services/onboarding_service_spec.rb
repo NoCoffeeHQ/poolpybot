@@ -8,9 +8,10 @@ RSpec.describe OnboardingService do
 
   describe '#call' do
     let(:company) { build(:company) }
-    let(:user) { build(:user, company: nil) }
+    let(:user) { build(:user, :john_doe, company: nil) }
+    let(:invitation) { nil }
 
-    subject { instance.call(company: company, user: user) }
+    subject { instance.call(company: company, user: user, invitation: invitation) }
 
     it { is_expected.to eq true }
 
@@ -25,6 +26,18 @@ RSpec.describe OnboardingService do
 
       it 'doesn\'t persist the company and the user' do
         expect { subject }.to change(Company, :count).by(0).and change(User, :count).by(0)
+      end
+    end
+
+    describe 'Given the user signs up from an invitation' do
+      let!(:invitation) { create(:user_invitation) }
+
+      it 'only persists the user in DB' do
+        expect { subject }.to change(Company, :count).by(0).and change(User, :count).by(1)
+      end
+
+      it 'deletes the invitation' do
+        expect { subject }.to change(UserInvitation, :count).by(-1)
       end
     end
   end

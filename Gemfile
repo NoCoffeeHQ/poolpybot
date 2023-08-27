@@ -87,4 +87,4 @@ gem 'aws-sdk-s3'
 
 gem 'honeybadger', '~> 5.2'
 
-gem "activestorage-validator", "~> 0.4.0"
+gem 'activestorage-validator', '~> 0.4.0'

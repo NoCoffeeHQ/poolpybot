@@ -1,0 +1,17 @@
+<%= turbo_stream.replace 'my_profile_dropdown_frame' do %>
+  <turbo-frame id="my_profile_dropdown_frame">
+    <%= render 'layouts/workspace_ui/profile_dropdown' %>
+  </turbo-frame>
+<% end %>
+
+<%= turbo_stream.replace 'company_frame' do %>
+  <turbo-frame id="company_frame">
+    <%= render 'workspace_ui/company/form' %>
+  </turbo-frame>
+<% end %>
+
+<%= turbo_stream.replace 'notification_frame' do %>
+  <turbo-frame id="notification_frame">
+    <%= ui_kit :notification, flash: flash %>
+  </turbo-frame>
+<% end %>
