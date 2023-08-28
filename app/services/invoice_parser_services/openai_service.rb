@@ -8,22 +8,21 @@ module InvoiceParserServices
 
     def call(text:, company_name:)
       build_json(
-        openai_client.completions(
-          parameters: build_parameters(text, company_name)
+        openai_client.complete(
+          messages: build_messages(text, company_name)
         )
       )
     end
 
     private
 
-    def build_parameters(text, company_name)
-      {
-        model: 'text-davinci-003',
-        prompt: build_prompt(text, company_name),
-        temperature: 0.0,
-        max_tokens: 150,
-        stop: '\n'
-      }
+    def build_messages(text, company_name)
+      [
+        { role: 'system', content: 'You are a bot collecting invoice information.' },
+        { "role": 'user', "content": build_instructions(company_name) },
+        { "role": 'user', "content": 'Here is my email body' },
+        { "role": 'user', "content": text.strip }
+      ]
     end
 
     def build_json(response)
@@ -38,11 +37,13 @@ module InvoiceParserServices
     end
 
     def core_build_json(response)
-      JSON.parse(response['choices'].map { |c| c['text'] }.join("\n")).with_indifferent_access
+      JSON.parse(
+        response['choices'].first.dig('message', 'content')
+      ).with_indifferent_access
+      # JSON.parse(response['choices'].map { |c| c.dig('message', 'content') }.join("\n")).with_indifferent_access
     end
 
-    # rubocop:disable Metrics/MethodLength
-    def build_prompt(text, company_name)
+    def build_instructions(company_name)
       <<~PROMPT
         As the owner of the "#{company_name}" company, I receive invoices by email from various suppliers and vendors. From the mail body, please generate a JSON object with only the following attributes:
         - company_name: Name of the company without the email address. The name can't be "#{company_name}" or similar to "#{company_name}".
@@ -51,32 +52,8 @@ module InvoiceParserServices
         - total_amount: The total amount of the invoice as a float number, without the currency and in English format.
         - tax_rate: The VTA rate as a float number, null if not found.
         - currency: The currency in the ISO 4217 format.
-
-        The mail body: """
-        #{text}
-        """
-        The JSON object:
       PROMPT
         .strip
-    end
-    # rubocop:enable Metrics/MethodLength
-
-    def build_legacy_prompt(text, company_name)
-      <<~PROMPT
-        I receive invoices by email from various companies. Please extract the following information from the provided email surrounded by backticks:
-
-        ```
-        #{text}
-        ```
-
-         From the provided email, you will extract ONLY the following information and present it in a VALID JSON format WITHOUT any backticks:
-        - Company Name (without the email address and it can't be "#{company_name}" since it's my company. Name the attribute as "company_name")
-        - Invoice Identifier (if you don't find it, use the command number. name the attribute as "identifier")
-        - Invoice Date (in the date "yyyy/mm/dd" format and name the attribute as "date")
-        - Total Amount of the Invoice (without the currency and in English format, it's a float number. Name the attribute as "total_amount")
-        - TVA rate (if you don't find it, put null. name the attribute as "tax_rate", it's a float number)
-        - Currency (not the ASCII symbol but the ISO 4217 code instead. Name the attribute as "currency")
-      PROMPT
     end
   end
 end

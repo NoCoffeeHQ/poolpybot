@@ -75,7 +75,7 @@ RSpec.describe InvoiceParserServices::OpenaiService do
       skip 'No need to spend money on that test' if ENV['RSPEC_DISABLE_OPENAI_CALLS'] == '1'
       is_expected.to eq({
         company_name: 'Apple',
-        identifier: 'MN3ZTKZ59B',
+        identifier: '1-7702428465',
         date: '2023/06/26',
         total_amount: 12.99,
         tax_rate: 2.1,
@@ -84,9 +84,67 @@ RSpec.describe InvoiceParserServices::OpenaiService do
     end
   end
 
+  describe 'Given the invoice is from an Heroku invoice' do
+    let(:text) do
+      <<~EMAIL
+                Hello,
+
+        Your Heroku invoice for July 2023 is now available. We will charge your credit card $50.17 within the next two business days.
+
+        You can review all charges for your account (nocoffee) on your invoice.
+
+        For a detailed breakdown, log into your Heroku account and visit: https://dashboard.heroku.com/orgs/nocoffee/invoices/2023/07
+
+        Need support? Submit a ticket at https://help.heroku.com/
+
+        Thanks for choosing Heroku,
+        The Heroku Billing Team
+
+
+        Account:
+        nocoffee
+
+        Billed to:
+        Estelle Lafforgue
+        7 allée Albert Camus
+        Blagnac Haute-Garonne, 31700
+        FR
+        NoCoffee SARL
+
+        Billing period:
+        July 01, 2023 - August 01, 2023
+
+        Invoice #:
+        84913487
+
+
+        Charges
+        Amount
+        Application dynos $ 50.11
+        Add-on services $ 0.06
+        Subtotal: $ 50.17
+        Total:
+
+        $ 50.17
+      EMAIL
+    end
+
+    it 'extracts the correct information' do
+      skip 'No need to spend money on that test' if ENV['RSPEC_DISABLE_OPENAI_CALLS'] == '1'
+      is_expected.to eq({
+        company_name: 'Heroku',
+        identifier: '84913487',
+        date: '2023/07/01',
+        total_amount: 50.17,
+        tax_rate: nil,
+        currency: 'USD'
+      }.with_indifferent_access)
+    end
+  end
+
   describe 'Given Openai hallucinated and doesn\'t return the expected JSON structure' do
-    let(:response) { { choices: [{ text: '{"company":"Apple"}' }] } }
-    let(:client) { instance_double('OpenaiClient', completions: response) }
+    let(:response) { { choices: [{ message: { content: '{"company":"Apple"}' } }] } }
+    let(:client) { instance_double('OpenaiClient', complete: response) }
     let(:text) { 'Lorem ipsum...' }
 
     it 'returns false' do

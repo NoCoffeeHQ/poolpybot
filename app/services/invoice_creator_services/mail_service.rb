@@ -12,7 +12,7 @@ module InvoiceCreatorServices
       if (pdf_document = find_pdf_attachment(mail))
         create_invoice_from_pdf(user, pdf_document)
       else
-        create_invoice_from_mail(user, mail)
+        create_invoice_from_mail_body(user, mail)
       end
     end
 
@@ -22,7 +22,7 @@ module InvoiceCreatorServices
       User.find_by(uuid: mail.to.first.split('@').first)
     end
 
-    def create_invoice_from_mail(user, mail)
+    def create_invoice_from_mail_body(user, mail)
       # call the AI to get the information about the invoice we need
       invoice_info = invoice_parser.call(text: mail.text_part.body, company_name: user.company.name)
 
