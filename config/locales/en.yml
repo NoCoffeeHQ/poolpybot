@@ -81,13 +81,13 @@ en:
           description: "Once you start forwarding your invoices to the following email, Poolpybot will process those emails and collect the right information.<br/> 
           At some point, Poolpybot will be able to give you the forwarding rules for your Mail client."
         choice_2:
-          title: "Upload the PDF document of an invoice"
-          description: "bla bla"
+          title: "...or upload the PDF document of an invoice (or many)"
+          description: "In some situation, you want to upload PDFs from your computer."
           button_link: "Upload PDF"
     invoices:
       index:
         title: "Invoices"
-        description: "List of all the invoices Poolpybot received so far."
+        description: "List of all the invoices Poolpybot collected so far."
         upload_pdf_button: "Upload Invoice PDF"
         table:
           no_items: "No invoices"
