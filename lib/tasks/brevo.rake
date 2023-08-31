@@ -10,6 +10,15 @@ namespace :brevo do
     end
   end
 
+  desc 'List the last Brevo inbound email events'
+  task list_inbound_email_events: :environment do
+    action_mailbox_password = Rails.application.credentials.action_mailbox.ingress_password
+    api_instance = BrevoRuby::InboundParsingApi.new
+    api_instance.get_inbound_email_events.events[0..10].each do |event|
+      pp api_instance.get_inbound_email_events_by_uuid(event.uuid)
+    end
+  end
+
   desc 'Create a local Brevo webhook (require the Ngrok URL in first argument)'
   task create_local_webhook: :environment do
     # rubocop:disable Style/BlockDelimiters

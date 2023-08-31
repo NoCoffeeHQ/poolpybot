@@ -42,9 +42,8 @@ RSpec.describe InvoiceCreatorServices::MailService do
 
       it 'creates the invoice in DB' do
         expect { subject }.to change(Invoice, :count).by(1)
-                                                     .and change(InvoiceSupplier, :count).by(1)
-                                                                                         .and change(InvoiceEmail,
-                                                                                                     :count).by(1)
+        .and(change(InvoiceSupplier, :count).by(1))
+        .and(change(InvoiceEmail, :count).by(1))
       end
 
       it 'returns a processed invoice' do
@@ -81,9 +80,8 @@ RSpec.describe InvoiceCreatorServices::MailService do
 
       it 'creates an invoice in DB' do
         expect { subject }.to change(Invoice, :count).by(1)
-                                                     .and change(InvoiceSupplier, :count).by(0)
-                                                                                         .and change(InvoiceEmail,
-                                                                                                     :count).by(1)
+        .and(change(InvoiceSupplier, :count).by(0))
+        .and(change(InvoiceEmail, :count).by(1))
       end
 
       it 'tracks the most important information of the email' do

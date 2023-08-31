@@ -19,9 +19,9 @@ module InvoiceParserServices
     def build_messages(text, company_name)
       [
         { role: 'system', content: 'You are a bot collecting invoice information.' },
-        { "role": 'user', "content": build_instructions(company_name) },
-        { "role": 'user', "content": 'Here is my email body' },
-        { "role": 'user', "content": text.strip }
+        { role: 'user', content: build_instructions(company_name) },
+        { role: 'user', content: 'Here is my email body' },
+        { role: 'user', content: text.to_s.strip }
       ]
     end
 

@@ -13,7 +13,7 @@ module ForwardedMail
 
     def initialize(mail:)
       @mail = mail
-      @raw_body = extract_original_body(mail.body.encoded)
+      @raw_body = extract_original_body(mail.text_part.body.encoded)
       @html_body = mail.html_part.body.to_s
     end
 
@@ -21,7 +21,7 @@ module ForwardedMail
       {
         subject: parse_subject,
         from: parse_from,
-        text_body: raw_body,
+        text_body: parse_original_text_body,
         html_body: parse_original_html_body
       }
     end
@@ -87,15 +87,12 @@ module ForwardedMail
         .gsub(FOUR_SPACE_REGEXP, '') # Remove "    " at the beginning of lines
     end
 
-    def loop_match(regexps, text)
-      regexps.each do |regexp|
-        matches = text.match(regexp)
-
-        # pp [regexp, text.size, matches&.size]
-
-        return matches if matches && matches.size > 1
-      end
-      nil
+    def parse_original_text_body
+      loop_gsub(
+        SEPARATOR_REGEXPS + ORIGINAL_SUBJECT_REGEXPS + ORIGINAL_FROM_REGEXPS + 
+        ORIGINAL_TO_REGEXPS + ORIGINAL_DATE_REGEXPS + ORIGINAL_CC_REGEXPS + ORIGINAL_REPLY_TO_REGEXPS, 
+        raw_body
+      ).strip
     end
 
     def parse_original_html_body
@@ -125,6 +122,21 @@ module ForwardedMail
       html_doc = Nokogiri::HTML(html)
       yield html_doc
       html_doc.to_html
+    end
+
+    def loop_gsub(regexps, text, replacement = '')
+      regexps.reduce(text) { |memo, regexp| memo.gsub(regexp, replacement) }
+    end
+
+    def loop_match(regexps, text)
+      regexps.each do |regexp|
+        matches = text.match(regexp)
+
+        # pp [regexp, text.size, matches&.size]
+
+        return matches if matches && matches.size > 1
+      end
+      nil
     end
   end
 end
