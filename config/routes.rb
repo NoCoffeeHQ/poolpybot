@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   scope '/workspace', module: 'workspace_ui', as: :workspace do
     root to: 'home#index'
-    resources :invoices, only: %i[index] do
+    resources :invoices, only: %i[index destroy] do
       post :bulk_create, on: :collection
     end
     resource :settings, controller: 'settings', only: %i[edit]

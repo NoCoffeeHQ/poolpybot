@@ -104,10 +104,13 @@ en:
           all_suppliers: "Any supplier"
           any_status: "Any status"
       bulk_create:
-        notice:
+        flash:
           success: 
             one: "Poolpybot is processing the PDF document."
             other: "Poolpybot is processing the %{count} PDF documents."
+      destroy:
+        flash:
+          success: "Your invoice has been deleted."
 
     settings:
       edit:
