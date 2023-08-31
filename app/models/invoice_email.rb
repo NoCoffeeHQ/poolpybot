@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class InvoiceEmail < ApplicationRecord
   ## associations ##
   belongs_to :invoice
-  
+
   ## validations ##
   validates :subject, :from, :forwarded_at, presence: true
 end

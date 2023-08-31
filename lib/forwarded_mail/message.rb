@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module ForwardedMail
   class Message < SimpleDelegator
-
     attr_reader :original_subject, :original_from, :original_html_body
 
     def initialize(mail)
