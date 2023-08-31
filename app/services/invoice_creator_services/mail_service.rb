@@ -9,10 +9,8 @@ module InvoiceCreatorServices
 
       return unless user
 
-      if (pdf_document = find_pdf_attachment(mail))
-        create_invoice_from_pdf(user, pdf_document)
-      else
-        create_invoice_from_mail_body(user, mail)
+      create_invoice(user, mail).tap do |invoice|
+        create_invoice_email(invoice, mail) unless invoice.invoice_email
       end
     end
 
@@ -20,6 +18,14 @@ module InvoiceCreatorServices
 
     def find_user(mail)
       User.find_by(uuid: mail.to.first.split('@').first)
+    end
+
+    def create_invoice(user, mail)
+      if (pdf_document = find_pdf_attachment(mail))
+        create_invoice_from_pdf(user, pdf_document)
+      else
+        create_invoice_from_mail_body(user, mail)
+      end
     end
 
     def create_invoice_from_mail_body(user, mail)
@@ -33,17 +39,13 @@ module InvoiceCreatorServices
       existing_invoice = user.company.invoices.find_by(external_id: invoice_info[:identifier])
       return existing_invoice if existing_invoice
 
-      create_invoice(user, mail, invoice_info).tap do |invoice|
+      create_invoice_and_supplier(user, mail, invoice_info).tap do |invoice|
         attach_documents(invoice, mail)
       end
     end
 
-    def create_invoice(user, mail, invoice_info)
-      # in order to know which email addresses are important for our customer's invoicing
-      # and so to make smart mailbox filters, we need to extract those emails from the Forwarded mail.
-      email = mail.text_part.body.to_s[/^From: .*<(.*?)>\s*$/, 1]
-
-      supplier = find_or_create_invoice_supplier(user.company, invoice_info, email)
+    def create_invoice_and_supplier(user, mail, invoice_info)
+      supplier = find_or_create_invoice_supplier(user.company, invoice_info, mail.from_address)
 
       supplier.invoices.create(invoice_attributes(user, invoice_info))
     end
@@ -62,6 +64,15 @@ module InvoiceCreatorServices
         external_id: mail.message_id,
         status: :failed,
         error: error
+      )
+    end
+
+    def create_invoice_email(invoice, mail)
+      invoice.create_invoice_email(
+        subject: mail.original_subject || mail.subject.to_s,
+        from: mail.from_address,
+        name: mail.from_name,
+        forwarded_at: mail.date
       )
     end
 
@@ -89,7 +100,7 @@ module InvoiceCreatorServices
 
     def persist_html_document(invoice, mail)
       invoice.html_document.attach(
-        io: StringIO.new(ForwardedMailSanitizer.call(html: mail.html_part.body.to_s)),
+        io: StringIO.new(mail.original_html_body),
         filename: 'invoice.html', content_type: 'text/html', identify: false
       )
       invoice.save

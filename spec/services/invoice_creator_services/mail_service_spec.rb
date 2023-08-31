@@ -41,7 +41,9 @@ RSpec.describe InvoiceCreatorServices::MailService do
       let(:pdf_io) { StringIO.new('randombytes') }
 
       it 'creates the invoice in DB' do
-        expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(1)
+        expect { subject }.to change(Invoice, :count).by(1)
+          .and change(InvoiceSupplier, :count).by(1)
+          .and change(InvoiceEmail, :count).by(1)
       end
 
       it 'returns a processed invoice' do
@@ -55,6 +57,12 @@ RSpec.describe InvoiceCreatorServices::MailService do
 
       it 'generates a PDF out of the HTML part' do
         expect(subject.pdf_document.attached?).to eq true
+      end
+
+      it 'tracks the most important information of the email' do
+        expect(subject.invoice_email.subject).to eq 'Votre facture Apple'
+        expect(subject.invoice_email.name).to eq 'Apple'
+        expect(subject.invoice_email.from).to eq 'no_reply@email.apple.com'
       end
 
       describe 'Given we try to process twice the same mail' do
@@ -71,7 +79,15 @@ RSpec.describe InvoiceCreatorServices::MailService do
       let(:parser_response) { nil }
 
       it 'creates an invoice in DB' do
-        expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(0)
+        expect { subject }.to change(Invoice, :count).by(1)
+          .and change(InvoiceSupplier, :count).by(0)
+          .and change(InvoiceEmail, :count).by(1)
+      end
+
+      it 'tracks the most important information of the email' do
+        expect(subject.invoice_email.subject).to eq 'Votre facture Apple'
+        expect(subject.invoice_email.name).to eq 'Apple'
+        expect(subject.invoice_email.from).to eq 'no_reply@email.apple.com'
       end
 
       it 'returns a failed invoice' do

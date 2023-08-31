@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_22_155434) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_132816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -57,6 +57,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_155434) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "invoice_emails", force: :cascade do |t|
+    t.bigint "invoice_id", null: false
+    t.string "subject"
+    t.string "from"
+    t.string "name"
+    t.datetime "forwarded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_invoice_emails_on_invoice_id"
   end
 
   create_table "invoice_suppliers", force: :cascade do |t|
@@ -126,6 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_22_155434) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "invoice_emails", "invoices"
   add_foreign_key "invoice_suppliers", "companies"
   add_foreign_key "invoices", "companies"
   add_foreign_key "invoices", "invoice_suppliers"

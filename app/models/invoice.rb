@@ -15,6 +15,7 @@ class Invoice < ApplicationRecord
   belongs_to :duplicate_of, class_name: 'Invoice', optional: true
   has_many :duplicated_invoices, class_name: 'Invoice', inverse_of: :duplicate_of, foreign_key: :duplicate_of_id,
                                  dependent: :destroy
+  has_one :invoice_email
 
   ## attachments ##
   has_one_attached :pdf_document

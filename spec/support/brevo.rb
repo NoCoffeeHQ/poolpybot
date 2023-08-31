@@ -11,7 +11,9 @@ module BrevoApiHelper
 
   def brevo_mails(email_type)
     brevo_items(email_type).map do |item|
-      Mail.from_brevo(item)
+      ForwardedMail.new(
+        Mail.from_brevo(item)
+      )
     end
   end
 end

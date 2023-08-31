@@ -4,7 +4,9 @@ class InvoicesMailbox < ApplicationMailbox
   before_processing :decode_brevo_attachments
 
   def process
-    application_container.mail_invoice_creator.call(mail: mail)
+    application_container.mail_invoice_creator.call(
+      mail: ForwardedMail.new(mail)
+    )
   end
 
   private
