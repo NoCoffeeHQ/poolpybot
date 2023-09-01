@@ -14,6 +14,8 @@ class InvoiceSupplier < ApplicationRecord
                          .order(InvoiceSupplier[:name].similar_to(n).desc)
                      }
 
+  scope :by_email, ->(email) { where('? = ANY(emails)', email) }
+
   ## methods ##
 
   def display_name

@@ -6,22 +6,15 @@ RSpec.describe InvoiceParserServices::OpenaiService do
   let(:container) { ApplicationContainer.new }
   let(:client) { container.openai_client }
   let(:instance) { described_class.new(openai_client: client) }
+  let(:context) { {} }
 
-  subject { instance.call(text: text, company_name: 'NoCoffee') }
+  subject { instance.call(text: text, company_name: 'NoCoffee', context: context) }
 
   describe 'Given the invoice is from an Apple email' do
+    let(:context) { { email_subject: 'Votre facture Apple' } }
     let(:text) do
       <<~EMAIL
-        Begin forwarded message:
-
-        From: Apple <no_reply@email.apple.com>
-        Subject: Votre facture Apple
-        Date: June 26, 2023 at 2:05:25 PM GMT+2
-        To: didier.lafforgue@icloud.com
-
-
-
-          Facture
+        Facture
 
         IDENTIFIANT APPLE
         didier.lafforgue@icloud.com <mailto:didier.lafforgue@icloud.com>  FACTURÉ À
@@ -87,7 +80,7 @@ RSpec.describe InvoiceParserServices::OpenaiService do
   describe 'Given the invoice is from an Heroku invoice' do
     let(:text) do
       <<~EMAIL
-                Hello,
+        Hello,
 
         Your Heroku invoice for July 2023 is now available. We will charge your credit card $50.17 within the next two business days.
 

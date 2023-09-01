@@ -13,7 +13,7 @@ module ForwardedMail
 
     def initialize(mail:)
       @mail = mail
-      @raw_body = extract_original_body(mail.text_part.body.encoded)
+      @raw_body = extract_original_body(mail.text_part.body.decoded.to_s.force_encoding('UTF-8'))
       @html_body = mail.html_part.body.to_s
     end
 
@@ -59,7 +59,7 @@ module ForwardedMail
           mailbox_matches[2]
         )
       else
-        matches[2]
+        prepare_mailbox(nil, matches[2])
       end
     end
 
@@ -74,8 +74,8 @@ module ForwardedMail
     def prepare_mailbox(name, address)
       {
         # Some clients fill the name with the address ("bessie.berry@acme.com <bessie.berry@acme.com>")
-        name: name != address ? name.strip : nil,
-        address: address
+        name: name != address ? name&.strip : nil,
+        address: address.strip
       }
     end
 

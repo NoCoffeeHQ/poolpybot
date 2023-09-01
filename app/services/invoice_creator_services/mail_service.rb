@@ -30,7 +30,7 @@ module InvoiceCreatorServices
 
     def create_invoice_from_mail_body(user, mail)
       # call the AI to get the information about the invoice we need
-      invoice_info = invoice_parser.call(text: mail.text_body, company_name: user.company.name)
+      invoice_info = parse_invoice_information(user, mail)
 
       # ok, the AI wasn't able to parse correctly the invoice, no big deal, just let us know!
       return create_failed_invoice(user, mail, :parse_with_ai) unless invoice_info
@@ -73,6 +73,16 @@ module InvoiceCreatorServices
         from: mail.from_address,
         name: mail.from_name,
         forwarded_at: mail.date
+      )
+    end
+
+    def parse_invoice_information(user, mail)
+      invoice_parser.call(
+        text: mail.text_body, 
+        company_name: user.company.name,
+        context: {
+          email_subject: mail.original_subject || mail.subject.to_s
+        }
       )
     end
 

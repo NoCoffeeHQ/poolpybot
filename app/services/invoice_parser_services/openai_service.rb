@@ -6,23 +6,25 @@ module InvoiceParserServices
 
     JSON_KEYS = %w[company_name identifier date total_amount tax_rate currency].sort.freeze
 
-    def call(text:, company_name:)
+    def call(text:, company_name:, context: {})
       build_json(
         openai_client.complete(
-          messages: build_messages(text, company_name)
+          messages: build_messages(text, company_name, context)
         )
       )
     end
 
     private
 
-    def build_messages(text, company_name)
+    def build_messages(text, company_name, context)
       [
         { role: 'system', content: 'You are a bot collecting invoice information.' },
         { role: 'user', content: build_instructions(company_name) },
-        { role: 'user', content: 'Here is my email body' },
-        { role: 'user', content: text.to_s.strip }
-      ]
+        context[:email_subject] ? { role: 'user', content: 'Here is the email subject' } : nil,
+        context[:email_subject] ? { role: 'user', content: context[:email_subject] } : nil,
+        { role: 'user', content: 'Here is the email body' },
+        { role: 'user', content: text.to_s.split("\n").map(&:strip).join("\n") }
+      ].compact
     end
 
     def build_json(response)
@@ -40,7 +42,6 @@ module InvoiceParserServices
       JSON.parse(
         response['choices'].first.dig('message', 'content')
       ).with_indifferent_access
-      # JSON.parse(response['choices'].map { |c| c.dig('message', 'content') }.join("\n")).with_indifferent_access
     end
 
     def build_instructions(company_name)

@@ -26,6 +26,16 @@ RSpec.describe InvoiceSupplier, type: :model do
       it { is_expected.to eq nil }
     end
   end
+
+  describe '.by_email' do
+    before do
+      create(:invoice_supplier, name: 'Github', emails: ['invoice@github.com'])
+    end
+
+    subject { described_class.by_email('invoice@github.com').first&.name }
+
+    it { is_expected.to eq 'Github' }
+  end
 end
 
 # == Schema Information

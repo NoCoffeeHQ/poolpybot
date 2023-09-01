@@ -5,7 +5,9 @@ module InvoiceCreatorServices
     private
 
     def find_or_create_invoice_supplier(company, invoice_info, email = nil)
-      supplier = company.invoice_suppliers.similar_to(invoice_info[:company_name]).first
+      supplier = company.invoice_suppliers.by_email(email).first if email
+
+      supplier ||= company.invoice_suppliers.similar_to(invoice_info[:company_name]).first
 
       if supplier
         supplier.update(emails: (supplier.emails << email).compact.uniq)

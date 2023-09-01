@@ -17,7 +17,7 @@ namespace :brevo do
     api_instance.get_inbound_email_events.events[0..3].each_with_index do |event, index|
       detailed_event = api_instance.get_inbound_email_events_by_uuid(event.uuid)
       logs = detailed_event.logs.map { |log| "#{log.type} (#{log.date})" }
-      puts "--- EVENT ##{index + 1} ---"
+      puts "--- EVENT ##{index + 1} (#{event.uuid}) ---"
       puts "Subject: #{detailed_event.subject}"
       puts "To: #{detailed_event.recipient}"
       puts "Received at: #{detailed_event.received_at}"
