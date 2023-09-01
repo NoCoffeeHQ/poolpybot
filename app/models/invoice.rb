@@ -81,7 +81,7 @@ class Invoice < ApplicationRecord
       .concat(Invoice[:date].extract('month'))
       .concat(Arel.sql("'-1'"))
       .as('date')
-    ).distinct.collect(&:date).sort.reverse
+    ).distinct.collect(&:date).compact.sort.reverse
   end
 end
 
