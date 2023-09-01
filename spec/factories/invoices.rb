@@ -37,8 +37,8 @@
 FactoryBot.define do
   factory :invoice do
     company { nil }
-    user { create(:user) }
-    invoice_supplier { create(:invoice_supplier) }
+    user { User.first || create(:user) }
+    invoice_supplier { InvoiceSupplier.first || create(:invoice_supplier) }
 
     external_id { 'mail-provider-uuid@doe.net' }
     status { :created }
@@ -51,6 +51,10 @@ FactoryBot.define do
     trait :with_tax_rate do
       total_amount { 0.99 }
       tax_rate { 20.0 }
+    end
+
+    trait :random_external_id do
+      external_id { ('a'..'z').to_a.shuffle.join }
     end
 
     after(:build) do |invoice|

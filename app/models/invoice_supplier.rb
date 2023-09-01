@@ -13,8 +13,9 @@ class InvoiceSupplier < ApplicationRecord
                        where(InvoiceSupplier[:name].similar_to(n).gteq(0.6))
                          .order(InvoiceSupplier[:name].similar_to(n).desc)
                      }
-
   scope :by_email, ->(email) { where('? = ANY(emails)', email) }
+  scope :with_invoices, -> { where(InvoiceSupplier[:invoices_count].gt(0)) }
+  scope :ordered, -> { order(name: :asc) }
 
   ## methods ##
 
@@ -27,13 +28,14 @@ end
 #
 # Table name: invoice_suppliers
 #
-#  id           :bigint           not null, primary key
-#  display_name :string
-#  emails       :string           default([]), is an Array
-#  name         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  company_id   :bigint           not null
+#  id             :bigint           not null, primary key
+#  display_name   :string
+#  emails         :string           default([]), is an Array
+#  invoices_count :integer
+#  name           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  company_id     :bigint           not null
 #
 # Indexes
 #

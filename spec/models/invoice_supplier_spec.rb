@@ -7,6 +7,16 @@ RSpec.describe InvoiceSupplier, type: :model do
     expect { create(:invoice_supplier) }.to change(InvoiceSupplier, :count).by(1)
   end
 
+  describe '#invoices_count' do
+    let(:instance) { create(:invoice_supplier) }
+
+    before { create(:invoice, invoice_supplier: instance) }
+
+    it 'increments the number of invoices' do
+      expect(instance.reload.invoices_count).to eq 1
+    end
+  end
+
   describe '.similar_to' do
     let(:query) { 'github' }
 
@@ -42,13 +52,14 @@ end
 #
 # Table name: invoice_suppliers
 #
-#  id           :bigint           not null, primary key
-#  display_name :string
-#  emails       :string           default([]), is an Array
-#  name         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  company_id   :bigint           not null
+#  id             :bigint           not null, primary key
+#  display_name   :string
+#  emails         :string           default([]), is an Array
+#  invoices_count :integer
+#  name           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  company_id     :bigint           not null
 #
 # Indexes
 #

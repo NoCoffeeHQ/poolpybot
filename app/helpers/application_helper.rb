@@ -17,4 +17,13 @@ module ApplicationHelper
 
   # Notification
   def notification; end
+
+  def grouped_months_for_select(grouped_months, selected)
+    grouped_options_for_select(
+      (grouped_months || [Date.today.year, [Date.today]]).inject([]) do |groups, (year, months)|
+        groups.push([year, months.map { |date| [l(date, format: :month), date.strftime('%Y-%m')] }])
+      end,
+      selected
+    )
+  end
 end

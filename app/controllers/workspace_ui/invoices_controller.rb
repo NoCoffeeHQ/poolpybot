@@ -5,9 +5,7 @@ module WorkspaceUI
     helper_method :search_params
 
     def index
-      @invoices = current_company.invoices
-                                 .includes(:invoice_supplier)
-                                 .with_attached_pdf_document
+      @invoices = current_company.invoices.optimized
                                  .search(
                                    **search_params.to_h.symbolize_keys
                                  )

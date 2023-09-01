@@ -11,7 +11,7 @@ class Invoice < ApplicationRecord
   ## associations ##
   belongs_to :company
   belongs_to :user
-  belongs_to :invoice_supplier, optional: true
+  belongs_to :invoice_supplier, optional: true, counter_cache: true
   belongs_to :duplicate_of, class_name: 'Invoice', optional: true
   has_many :duplicated_invoices, class_name: 'Invoice', inverse_of: :duplicate_of, foreign_key: :duplicate_of_id,
                                  dependent: :destroy
@@ -26,6 +26,7 @@ class Invoice < ApplicationRecord
   validates :pdf_document, blob: { content_type: ['application/pdf'], size_range: 1..(2.megabytes) }
 
   ## scopes ##
+  scope :optimized, -> { includes(:invoice_supplier).joins(:invoice_supplier).with_attached_pdf_document }
   scope :by_status, ->(status) { where(status: status.presence || :processed) }
   scope :by_month, ->(date) { where(Invoice[:date].between(date.beginning_of_month..date.end_of_month)) }
   scope :by_supplier, ->(id) { id.present? ? where(invoice_supplier_id: id) : all }
@@ -63,6 +64,25 @@ class Invoice < ApplicationRecord
     query = query.by_supplier(supplier_id) if supplier_id.present?
 
     query.order(Invoice[:date].desc)
+  end
+
+  def self.grouped_months
+    distinct_months.reduce([]) do |groups, date|
+      group = groups.find { |year, _| year == date.year } || [date.year, []]
+      groups.push(group) if group.last.blank?
+      group.last.push(date)
+      groups
+    end
+  end
+
+  def self.distinct_months
+    select(
+      Invoice[:date].extract('year')
+      .concat(Arel.sql("'-'"))
+      .concat(Invoice[:date].extract('month'))
+      .concat(Arel.sql("'-1'"))
+      .as('date')
+    ).distinct.collect(&:date).sort.reverse
   end
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_132816) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_01_145145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -77,6 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_132816) do
     t.datetime "updated_at", null: false
     t.string "emails", default: [], array: true
     t.string "display_name"
+    t.integer "invoices_count"
     t.index ["company_id"], name: "index_invoice_suppliers_on_company_id"
     t.index ["name"], name: "index_invoice_suppliers_on_name_gin", opclass: :gin_trgm_ops, using: :gin
   end
