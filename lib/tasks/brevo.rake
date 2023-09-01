@@ -12,7 +12,7 @@ namespace :brevo do
 
   desc 'List the last Brevo inbound email events'
   task list_inbound_email_events: :environment do
-    action_mailbox_password = Rails.application.credentials.action_mailbox.ingress_password
+    Rails.application.credentials.action_mailbox.ingress_password
     api_instance = BrevoRuby::InboundParsingApi.new
     api_instance.get_inbound_email_events.events[0..3].each_with_index do |event, index|
       detailed_event = api_instance.get_inbound_email_events_by_uuid(event.uuid)
@@ -21,7 +21,7 @@ namespace :brevo do
       puts "Subject: #{detailed_event.subject}"
       puts "To: #{detailed_event.recipient}"
       puts "Received at: #{detailed_event.received_at}"
-      puts "Attachments?: #{detailed_event.attachments.size > 0}"
+      puts "Attachments?: #{detailed_event.attachments.size.positive?}"
       puts "Logs: #{logs.join(' -> ')}"
       puts
     end
@@ -56,6 +56,7 @@ namespace :brevo do
     result = api_instance.get_webhooks(type: 'inbound')
     result.webhooks.each do |webhook|
       next if webhook[:domain] != ENV['INBOUND_REPLY_EMAIL_DOMAIN']
+
       api_instance.delete_webhook(webhook[:id])
       puts "Webhook ##{webhook[:id]} (#{webhook[:domain]}) deleted ✅"
     end

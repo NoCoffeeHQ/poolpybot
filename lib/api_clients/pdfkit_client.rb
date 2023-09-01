@@ -5,7 +5,7 @@ module ApiClients
     include SimpleRestClient
 
     BASE_URL = 'https://pdfkit.poolpybot.fr/api'
-    
+
     attr_reader :api_key
 
     def initialize(api_key:)

@@ -14,18 +14,20 @@ RSpec.describe Invoice, type: :model do
 
   describe '.grouped_months' do
     before do
-      [Date.parse('2023-08-23'), Date.parse('2023-08-22'), 
-        Date.parse('2023-07-15'), Date.parse('2022-09-16')].each do |date|
+      [Date.parse('2023-08-23'), Date.parse('2023-08-22'),
+       Date.parse('2023-07-15'), Date.parse('2022-09-16')].each do |date|
         create(:invoice, :random_external_id, date: date)
       end
     end
 
     subject { described_class.grouped_months }
 
-    it { is_expected.to eq([
-      [2023, [Date.parse('2023-08-01'), Date.parse('2023-07-01')]],
-      [2022, [Date.parse('2022-09-01')]]
-    ]) }
+    it {
+      is_expected.to eq([
+                          [2023, [Date.parse('2023-08-01'), Date.parse('2023-07-01')]],
+                          [2022, [Date.parse('2022-09-01')]]
+                        ])
+    }
   end
 end
 

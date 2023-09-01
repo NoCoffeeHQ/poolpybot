@@ -78,7 +78,7 @@ module InvoiceCreatorServices
 
     def parse_invoice_information(user, mail)
       invoice_parser.call(
-        text: mail.text_body, 
+        text: mail.text_body,
         company_name: user.company.name,
         context: {
           email_subject: mail.original_subject || mail.subject.to_s

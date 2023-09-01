@@ -2,6 +2,4 @@
 
 require 'sidekiq/web'
 
-if Sidekiq.server?
-  require 'aws-sdk-s3'
-end
+require 'aws-sdk-s3' if Sidekiq.server?

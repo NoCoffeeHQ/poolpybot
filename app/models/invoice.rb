@@ -67,11 +67,10 @@ class Invoice < ApplicationRecord
   end
 
   def self.grouped_months
-    distinct_months.reduce([]) do |groups, date|
+    distinct_months.each_with_object([]) do |date, groups|
       group = groups.find { |year, _| year == date.year } || [date.year, []]
       groups.push(group) if group.last.blank?
       group.last.push(date)
-      groups
     end
   end
 
