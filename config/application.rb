@@ -36,7 +36,7 @@ module Poolpybot
     # Access any class or module in /lib from anywhere in the application
     config.autoload_paths << Rails.root.join('lib')
 
-    config.i18n.available_locales = %i(en fr)
+    config.i18n.available_locales = %i[en fr]
 
     config.i18n.default_locale = :en
 

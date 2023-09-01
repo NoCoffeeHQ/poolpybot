@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def locales_choices
-    %i(en fr).map do |locale|
+    %i[en fr].map do |locale|
       [t("locales.#{locale}"), locale]
     end
   end

@@ -6,7 +6,7 @@ module WorkspaceUI
       if current_user.update(user_params)
         respond_to do |format|
           format.html { redirect_to edit_workspace_settings_path, notice: t('.flash.success') }
-          format.turbo_stream { apply_flash_message(t('.flash.success', locale: current_user.locale)) } 
+          format.turbo_stream { apply_flash_message(t('.flash.success', locale: current_user.locale)) }
         end
       else
         render :edit, status: :unprocessable_entity
