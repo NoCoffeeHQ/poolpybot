@@ -14,4 +14,4 @@
   <turbo-frame id="notification_frame">
     <%= ui_kit :notification, flash: flash %>
   </turbo-frame>
-<% end %>
+<% end unless current_user.locale_previously_changed? %>

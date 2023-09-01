@@ -32,6 +32,10 @@
 en:
   confirm: "Are you sure?"
 
+  locales:
+    fr: 'French'
+    en: 'English'
+
   date:
     formats:
       invoice: "%Y-%m"
@@ -46,6 +50,7 @@ en:
     workspace_ui:
       profile_dropdown:
         logo_tagline: "Your accounting assistant"
+        signed_as: "Signed in as"
         invoices_link: "Invoices"
         instructions_link: "Instructions"
         settings_link: "Settings"
@@ -80,10 +85,10 @@ en:
         choice_1:
           title: "Forward your emails to Poolpybot"
           description: "Once you start forwarding your invoices to the following email, Poolpybot will process those emails and collect the right information.<br/> 
-          At some point, Poolpybot will be able to give you the forwarding rules for your Mail client."
+          At some point, Poolpybot will be able to provide you with forwarding rules specific to your email client."
         choice_2:
           title: "...or upload the PDF document of an invoice (or many)"
-          description: "In some situation, you want to upload PDFs from your computer."
+          description: "In some situations, you might want to upload PDF documents from your computer."
           button_link: "Upload PDF"
     invoices:
       index:
@@ -105,6 +110,8 @@ en:
           all_suppliers: "Any supplier"
           any_status: "Any status"
           any_month: "Any month"
+      invoice:
+        delete_button: "Delete"
       bulk_create:
         flash:
           success: 
@@ -131,11 +138,11 @@ en:
     company:
       form:
         title: "My company"
-        description: "The information about your company are important to Poolpybot to avoid mistakes when parsing your invoices.<br/>Let invite other people of your company to collect invoices."
+        description: "The information about your company is important to Poolpybot to avoid mistakes when parsing your invoices.<br/>Invite other members of your company to collect invoices."
         submit_button: "Save your company changes"
       update:
         flash:
-          success: "Your company information have been updated."
+          success: "Your company information has been updated."
       team:
         label: "Members"
 
@@ -248,6 +255,8 @@ en:
           processing: "In progress"
           processed: "Processed"
           failed: "Error"
+      user:
+        locale: "Language"
     errors:
       models:
         user_invitation:

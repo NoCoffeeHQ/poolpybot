@@ -1,4 +1,4 @@
-<%= form_with model: current_user, url: workspace_my_profile_path, method: :put do |form| %>
+<%= form_with model: current_user, url: workspace_my_profile_path, method: :put, data: { controller: 'force-reload', 'force-reload-do-it-value' => current_user.locale_previously_changed? } do |form| %>
   <div class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
     <div>
       <h2 class="text-base font-semibold leading-7 text-gray-900"><%= t('.title') %></h2>
@@ -12,6 +12,10 @@
 
       <div class="col-span-3">
         <%= ui_kit :email_field, form: form, attribute: :email %>
+      </div>
+
+      <div class="col-span-full">
+        <%= ui_kit :radio_buttons, form: form, attribute: :locale, choices: locales_choices %>
       </div>
 
       <div class="col-span-3">

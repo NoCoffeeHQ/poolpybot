@@ -8,6 +8,7 @@
 #  access_count_to_reset_password_page :integer          default(0)
 #  crypted_password                    :string
 #  email                               :string           not null
+#  locale                              :string           default("en")
 #  reset_password_email_sent_at        :datetime
 #  reset_password_token                :string
 #  reset_password_token_expires_at     :datetime

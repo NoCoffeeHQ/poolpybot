@@ -33,7 +33,7 @@
       <% end %>
 
       <div class="px-4 py-4" role="none">
-        <%= button_to t('.delete'), workspace_invoice_path(invoice, search_params), class: 'rounded bg-red-50 px-2 py-1 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100', form: { data: { turbo_confirm: t('confirm') } }, method: :delete %>
+        <%= button_to t('.delete_button'), workspace_invoice_path(invoice, search_params), class: 'rounded bg-red-50 px-2 py-1 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100', form: { data: { turbo_confirm: t('confirm') } }, method: :delete %>
       </div>
     <% end %>
   </td>

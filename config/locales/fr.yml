@@ -1,0 +1,236 @@
+fr:
+  confirm: "Êtes-vous sûr ?"
+
+  locales:
+    fr: 'Français'
+    en: 'Anglais'
+
+  date:
+    formats:
+      invoice: "%Y-%m"
+      month: "%B %Y"
+
+  forms:
+    user_invitation:
+      placeholders:
+        email: "Entrez l'adresse e-mail d'une personne de votre entreprise."
+
+  layouts:
+    workspace_ui:
+      profile_dropdown:
+        logo_tagline: "Votre assistant comptable"
+        invoices_link: "Factures"
+        signed_as: "Connecté(e)"
+        instructions_link: "Instructions"
+        settings_link: "Paramètres"
+        sign_out: "Déconnexion"
+
+  app_kit:
+    logo:
+      logo_component:
+        tagline: "Votre assistant comptable"
+  ui_kit:
+    copy_to_clipboard:
+      copy_to_clipboard_component:
+        copy: "Copier dans le presse-papier"
+        copied: "Copié dans le presse-papier"
+
+    direct_upload_button:
+      direct_upload_button_component:
+        uploading_label: 'Téléchargement...'
+
+    image_field:
+      image_field_component:
+        change_button: "Changer l'image"
+        browse_button: 'Parcourir le fichier'
+        limit: "Taille d'image jusqu'à %{size}"
+
+  workspace_ui:
+    home:
+      index:
+        main_title: "Bienvenue <span class=\"font-extrabold\">%{name}</span> 👋"
+        title: "Démarrage"
+        description: "Ne vous inquiétez pas, nous allons vous aider à envoyer vos premières factures à Poolpybot. Choisissez l'une des 2 méthodes :"
+        choice_1:
+          title: "Transférez vos e-mails à Poolpybot"
+          description: "Lorsque vous commencez à transférer vos factures à l'e-mail suivant, Poolpybot traitera ces e-mails et collectera les bonnes informations.<br/> À un moment donné, Poolpybot pourra vous fournir des règles de transfert spécifiques à votre client e-mail."
+        choice_2:
+          title: "...ou téléchargez le document PDF d'une facture (ou plusieurs)"
+          description: "Dans certaines situations, vous pourriez vouloir télécharger des documents PDF depuis votre ordinateur."
+          button_link: "Télécharger le PDF"
+    invoices:
+      index:
+        title: "Factures"
+        description: "Liste de toutes les factures collectées par Poolpybot jusqu'à présent."
+        upload_pdf_button: "Télécharger le PDF de la facture"
+        table:
+          no_items: "Aucune facture"
+          columns:
+            vendor: "Fournisseur"
+            invoice_id: "ID de la facture"
+            date: "Date"
+            total_amount: "Montant total"
+            tax_amount: "Montant de la taxe"
+            status: "Statut"
+            pdf_document: "PDF"
+            actions: "Actions"
+        filter:
+          all_suppliers: "Tous les fournisseurs"
+          any_status: "Tout statut"
+          any_month: "Tout mois"
+      invoice:
+        delete_button: "Supprimer"
+      bulk_create:
+        flash:
+          success: 
+            one: "Poolpybot traite le document PDF."
+            other: "Poolpybot traite les %{count} documents PDF."
+      destroy:
+        flash:
+          success: "Votre facture a été supprimée."
+
+    settings:
+      edit:
+        title: "Paramètres"
+        description: "Modifiez les informations concernant votre profil et votre entreprise."
+
+    my_profile:
+      form:
+        title: "Mon profil"
+        description: "Informations à votre sujet. Si vous souhaitez changer votre mot de passe, déconnectez-vous et suivez le lien 'J'ai oublié mon mot de passe'."
+        submit_button: "Enregistrer les modifications de votre profil"
+      update:
+        flash:
+          success: "Votre profil a été mis à jour."
+
+    company:
+      form:
+        title: "Mon entreprise"
+        description: "Les informations concernant votre entreprise sont importantes pour Poolpybot afin d'éviter des erreurs lors de l'analyse de vos factures.<br/>Invitez d'autres membres de votre entreprise à collecter des factures."
+        submit_button: "Enregistrer les modifications de votre entreprise"
+      update:
+        flash:
+          success: "Les informations de votre entreprise ont été mises à jour."
+      team:
+        label: "Membres"
+
+    user_invitations:
+      form:
+        submit_button: "Envoyer une invitation"
+      index:
+        title: "Invitations en attente :"
+      create:
+        flash:
+          success: "Votre invitation a été envoyée avec succès."
+      destroy:
+        flash:
+          success: "L'invitation a été supprimée."
+      confirmation:
+        title: "Vous avez été invité par <b>%{username}</b> à rejoindre <b>%{company}</b>."
+        or: "ou"
+        accept_button: "Accepter"
+        refuse_button: "Refuser"
+
+    user_invitation_confirmation:
+      create:
+        flash:
+          success: "Bienvenue chez %{company}!"
+      destroy:
+        flash:
+          success: "Vous avez refusé l'invitation."
+
+  helpers:
+    label:
+      company:
+        name: "Nom de l'entreprise"
+
+  notice:
+    not_authenticated: "Veuillez d'abord vous connecter"
+      
+  authentication:
+    sign_up:
+      new:
+        title: "Créer un compte"
+        existing_account: "Vous avez déjà un compte ? %{link}."
+        sign_in_link: "Connectez-vous ici"
+        submit_button: "S'inscrire"
+      create:
+        flash:
+          success: "Votre compte a été créé avec succès."
+          
+    sign_in:
+      new:
+        title: "Connectez-vous à votre compte"
+        no_account: "Vous n'avez pas encore de compte ? %{link}."
+        sign_up_link: "Inscrivez-vous ici"
+        submit_button: "Se connecter"
+      create:
+        notice:
+          success: "Connexion réussie."
+          fail: "Échec de la connexion."
+      form:
+        forgot_password_link: "Vous ne vous souvenez pas de votre mot de passe ?"
+    password_reset:
+      new:
+        title: "Réinitialisez votre mot de passe"
+        no_account: "Vous n'avez pas encore de compte ? %{link}."
+        sign_up_link: "Inscrivez-vous ici"
+        submit_button: "Envoyer les instructions"
+      edit:
+        title: "Définir un nouveau mot de passe"
+        existing_account: "Vous avez déjà un compte ? %{link}."
+        sign_in_link: "Connectez-vous ici"
+        submit_button: "Réinitialisez votre mot de passe"
+      create:
+        notice:
+          success: "Les instructions ont été envoyées avec succès."
+          fail: "La réinitialisation du mot de passe a échoué."
+      update:
+        notice:
+          success: "Votre mot de passe a été réinitialisé avec succès."
+          fail: "Échec de la réinitialisation du mot de passe."
+
+  user_mailer:
+    reset_password_email:
+      subject: "Réinitialisez votre mot de passe"
+      title: "Bonjour, %{username}"
+      html_body: "<p>Vous avez demandé à réinitialiser votre mot de passe.</p><p> Pour choisir un nouveau mot de passe, suivez simplement ce lien : %{url}.</p><p>Passez une excellente journée !</p>"
+      body: |
+        Vous avez demandé à réinitialiser votre mot de passe.
+ 
+        Pour choisir un nouveau mot de passe, suivez simplement ce lien : %{url}.
+ 
+        Passez une excellente journée !
+
+    send_invitation:
+      subject: "Vous avez été invité à rejoindre Poolpybot !"
+      title: "Bonjour,"
+      html_body: |
+        <p>Vous recevez cet e-mail car <strong>Ernest de <u>Acme Corp</u></strong> vous a invité à rejoindre Poolpybot pour collecter les factures de votre entreprise.</p>
+        <p>Pour accepter cette invitation, suivez simplement ce lien : %{url}.</p>
+        <p>Passez une excellente journée !</p>
+      body: |
+        Vous recevez cet e-mail car Ernest de Acme Corp vous a invité à rejoindre Poolpybot pour collecter les factures de votre entreprise.
+
+        Pour accepter cette invitation, suivez simplement ce lien : %{url}.
+
+        Passez une excellente journée !
+
+  activerecord:
+    attributes:
+      invoice:
+        status_list:
+          created: "Créé"
+          processing: "En cours"
+          processed: "Traitée"
+          failed: "Erreur"
+      user:
+        username: "Nom d'utilisateur"
+        email: "E-mail"
+        locale: "Langue"
+    errors:
+      models:
+        user_invitation:
+          already_a_workmate: "fait déjà partie de l'entreprise"
+          already_active_elsewhere: "a déjà collecté des factures pour une autre entreprise"
+
