@@ -4,6 +4,7 @@ class InvoiceSupplier < ApplicationRecord
   ## associations ##
   belongs_to :company
   has_many :invoices, dependent: :destroy
+  has_many :sorted_invoices, -> { order(date: :desc) }, class_name: 'Invoice'
 
   ## validations ##
   validates :name, presence: true
@@ -17,10 +18,29 @@ class InvoiceSupplier < ApplicationRecord
   scope :with_invoices, -> { where(InvoiceSupplier[:invoices_count].gt(0)) }
   scope :ordered, -> { order(name: :asc) }
 
+  ## callbacks ##
+  before_destroy :cant_delete_if_invoices
+
+  ## virtual attributes ##
+  attribute :real_name
+
   ## methods ##
 
-  def display_name
-    super.presence || name
+  def last_invoice
+    @last_invoice ||= sorted_invoices.first
+  end
+
+  ## class methods ##
+
+  def self.ordered
+    column = Arel::Nodes::NamedFunction.new('coalesce', [t[:display_name], t[:name]]).as('real_name')
+    select(t[Arel.star], column).order(:real_name)
+  end
+
+  ## private methods ##
+
+  def cant_delete_if_invoices
+    throw :abort if invoices.count.positive?
   end
 end
 

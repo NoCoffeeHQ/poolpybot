@@ -1,0 +1,30 @@
+<tr>
+  <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
+    <% if invoice_supplier.display_name.present? %>
+      <p><%= invoice_supplier.display_name %></p>
+      <p class="text-xs text-gray-500"><%= invoice_supplier.name %></p>
+    <% else %>
+      <%= invoice_supplier.name %>
+    <% end %>
+  </td>
+  <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500 font-mono">
+    <%= invoice_supplier.emails.size > 0 ? invoice_supplier.emails.join(', ') : '-' %>
+  </td>
+  <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+    <%= invoice_supplier.last_invoice ? l(invoice_supplier.last_invoice.date, format: :long) : '-' %>
+  </td>
+  <td class="py-2 px-2 flex items-center space-x-2">
+    <%= ui_kit :secondary_button, label: t('.edit_button'), url: edit_workspace_invoice_supplier_path(invoice_supplier), size: :xs %>
+
+    <%= ui_kit :dropdown, arrow: false, orientation: :right,
+      label_class: 'rounded-full text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-400 w-4 h-4 text-center' do |c| %>
+      <% c.with_label do %>
+        <i class="ri-more-2-fill"></i>
+      <% end %>
+
+      <div class="px-4 py-4" role="none">
+        <%= button_to t('.delete_button'), workspace_invoice_supplier_path(invoice_supplier), class: 'rounded bg-red-50 px-2 py-1 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100', form: { data: { turbo_confirm: t('confirm') } }, method: :delete %>
+      </div>
+    <% end unless invoice_supplier.last_invoice %>
+  </td>
+</tr>

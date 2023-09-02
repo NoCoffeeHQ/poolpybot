@@ -1,5 +1,6 @@
 fr:
   confirm: "Êtes-vous sûr ?"
+  or_word: "ou"
 
   locales:
     fr: 'Français'
@@ -14,12 +15,18 @@ fr:
     user_invitation:
       placeholders:
         email: "Entrez l'adresse e-mail d'une personne de votre entreprise."
+    invoice_supplier:
+      hints:
+        name: "C'est le nom que nous avons collecté à partir de vos e-mails ou documents PDF. Il ne peut pas être modifié."
+        display_name: "C'est le nom que nous utiliserons pour afficher les informations d'une facture."
+
 
   layouts:
     workspace_ui:
       profile_dropdown:
         logo_tagline: "Votre assistant comptable"
         invoices_link: "Factures"
+        invoice_suppliers_link: "Fournisseurs"
         signed_as: "Connecté(e)"
         instructions_link: "Instructions"
         settings_link: "Paramètres"
@@ -58,6 +65,7 @@ fr:
           title: "...ou téléchargez le document PDF d'une facture (ou plusieurs)"
           description: "Dans certaines situations, vous pourriez vouloir télécharger des documents PDF depuis votre ordinateur."
           button_link: "Télécharger le PDF"
+
     invoices:
       index:
         title: "Factures"
@@ -88,6 +96,32 @@ fr:
       destroy:
         flash:
           success: "Votre facture a été supprimée."
+
+    invoice_suppliers:
+      index:
+        title: "Fournisseurs"
+        description: "Liste de vos fournisseurs que nous avons créés à partir des e-mails et des documents PDF que nous avons collectés pour vous."
+        table:
+          no_items: "Aucun fournisseur"
+          columns:
+            name: "Nom"
+            emails: "E-mails"
+            last_invoice: "Dernière facture collectée le"
+            actions: "Actions"
+      invoice_supplier:
+        edit_button: "Éditer"
+        delete_button: "Supprimer"
+      edit:
+        title: "Modifier le fournisseur"
+        description: "Modifiez les informations concernant le fournisseur."
+        submit_button: "Sauvegarder les modifications"
+        back_link: "Retour"
+      update:
+        flash:
+          success: "Le fournisseur a été mis à jour."
+      destroy:
+        flash:
+          success: "Le fournisseur a été supprimé."
 
     settings:
       edit:

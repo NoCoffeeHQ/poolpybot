@@ -31,6 +31,7 @@
 
 en:
   confirm: "Are you sure?"
+  or_word: "or"
 
   locales:
     fr: 'French'
@@ -45,6 +46,10 @@ en:
     user_invitation:
       placeholders:
         email: "Enter the email address of a person of your company."
+    invoice_supplier:
+      hints:
+        name: "This is the name we collected from your emails or PDF documents. It can't be changed."
+        display_name: "This is the name we'll use when displaying the information of an invoice."
 
   layouts:
     workspace_ui:
@@ -52,6 +57,7 @@ en:
         logo_tagline: "Your accounting assistant"
         signed_as: "Signed in as"
         invoices_link: "Invoices"
+        invoice_suppliers_link: "Vendors"
         instructions_link: "Instructions"
         settings_link: "Settings"
         sign_out: "Sign out"
@@ -90,6 +96,7 @@ en:
           title: "...or upload the PDF document of an invoice (or many)"
           description: "In some situations, you might want to upload PDF documents from your computer."
           button_link: "Upload PDF"
+
     invoices:
       index:
         title: "Invoices"
@@ -120,6 +127,32 @@ en:
       destroy:
         flash:
           success: "Your invoice has been deleted."
+
+    invoice_suppliers:
+      index:
+        title: "Suppliers"
+        description: "List of your suppliers we created from the emails and PDF documents we collected for you."
+        table:
+          no_items: "No suppliers"
+          columns:
+            name: "Name"
+            emails: "Emails"
+            last_invoice: "Last collected invoice at"
+            actions: "Actions"
+      invoice_supplier:
+        edit_button: "Edit"
+        delete_button: "Delete"
+      edit:
+        title: "Edit supplier"
+        description: "Modify the information about the supplier."
+        submit_button: "Save the changes"
+        back_link: "Back"
+      update:
+        flash:
+          success: "The supplier has been updated."
+      destroy:
+        flash:
+          success: "The supplier has been deleted."
 
     settings:
       edit:

@@ -1,0 +1,31 @@
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h2 class="text-2xl font-semibold leading-6 text-gray-900">
+        <%= t('.title') %>
+      </h2>
+      <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
+    </div>
+  </div>
+
+  <div class="mt-12 space-y-8 divide-y divide-gray-900/10">
+    <%= form_with model: @supplier, url: workspace_invoice_supplier_path(@supplier), method: :put do |form| %>
+      <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <%= ui_kit :text_field, form: form, attribute: :name, readonly: true %>
+        </div>
+
+        <div class="sm:col-span-3">
+          <%= ui_kit :text_field, form: form, attribute: :display_name %>
+        </div>
+      
+        <div class="col-span-full flex justify-end">
+          <div class="space-x-6">
+            <%= link_to t('.back_link'), workspace_invoice_suppliers_path, class: 'text-sm font-semibold leading-6 text-gray-900' %>            
+            <%= ui_kit :primary_button, type: :submit, label: t('.submit_button') %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
