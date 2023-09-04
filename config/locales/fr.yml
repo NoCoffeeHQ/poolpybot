@@ -70,7 +70,8 @@ fr:
       index:
         title: "Factures"
         description: "Liste de toutes les factures collectées par Poolpybot jusqu'à présent."
-        upload_pdf_button: "Télécharger le PDF de la facture"
+        upload_pdf_button: "Téléverser le PDF de la facture"
+        export_pdfs_button: "Télécharger"
         table:
           no_items: "Aucune facture"
           columns:
@@ -122,6 +123,11 @@ fr:
       destroy:
         flash:
           success: "Le fournisseur a été supprimé."
+
+    invoices_exports:
+      create:
+        flash:
+          success: "Vous recevrez dans quelques minutes un email avec vos factures."
 
     settings:
       edit:
@@ -247,6 +253,17 @@ fr:
         Vous recevez cet e-mail car Ernest de Acme Corp vous a invité à rejoindre Poolpybot pour collecter les factures de votre entreprise.
 
         Pour accepter cette invitation, suivez simplement ce lien : %{url}.
+
+        Passez une excellente journée !
+
+    invoices_export:
+      subject: "Vos factures collectées par Poolpybot"
+      title: "Bonjour, %{username}"
+      html_body: |
+        <p>Vous avez demandé l'export des factures pour le %{date}. Vous les trouverez en pièce jointe dans cet e-mail.</p>
+        <p>Passez une excellente journée !</p>
+      body: |
+        Vous avez demandé l'export des factures pour le %{date}. Vous les trouverez en pièce jointe dans cet e-mail.
 
         Passez une excellente journée !
 

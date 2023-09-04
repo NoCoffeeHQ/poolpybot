@@ -12,8 +12,15 @@
   </div>
 
   <div class="mt-8 space-y-4">
-    <div class="flex justify-end">
+    <div class="flex justify-end space-x-4">
       <%= render 'workspace_ui/invoices/index/filter' %>
+
+      <%= ui_kit :primary_button, type: 'button', url: workspace_invoices_exports_path(search_params) do %>
+        <span class="flex items-center space-x-2">
+          <i class="ri-download-cloud-2-line"></i>
+          <span><%= t('.export_pdfs_button') %></span>
+        </span>
+      <% end unless search_params[:month].blank? %>
     </div>
 
     <%= render 'workspace_ui/invoices/index/table' %>

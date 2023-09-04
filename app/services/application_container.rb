@@ -16,6 +16,7 @@ class ApplicationContainer < ServiceOrchestrator::Container
   register :mail_invoice_creator, 'InvoiceCreatorServices::MailService'
   register :pdf_invoice_creator, 'InvoiceCreatorServices::PdfService'
   register :pdf_retry_invoice_creator, 'InvoiceCreatorServices::PdfRetryService'
+  register :email_invoices_exporter, 'InvoicesExportServices::EmailService'
 
   private
 

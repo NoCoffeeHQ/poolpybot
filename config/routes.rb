@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post :bulk_create, on: :collection
     end
     resources :invoice_suppliers, only: %i[index edit update destroy]
+    resources :invoices_exports, only: [:create]
     resource :settings, controller: 'settings', only: %i[edit]
     resource :my_profile, controller: 'my_profile', only: %i[update]
     resource :company, controller: 'company', only: %i[update]

@@ -19,9 +19,7 @@ module WorkspaceUI
         )
       end
 
-      flash[:notice] = t('.flash.success', count: params[:files].count)
-
-      redirect_to workspace_invoices_path
+      redirect_to workspace_invoices_path, notice: t('.flash.success', count: params[:files].count)
     end
 
     def destroy

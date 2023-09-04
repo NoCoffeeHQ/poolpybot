@@ -53,6 +53,22 @@ FactoryBot.define do
       tax_rate { 20.0 }
     end
 
+    trait :processed do
+      status { :processed }
+      date { Date.today }
+      total_amount { 42.0 }
+    end
+
+    trait :apple_pdf do
+      external_id { 'apple-fake-uuid' }
+      pdf_document { Rack::Test::UploadedFile.new('spec/fixtures/files/invoices/apple.pdf', 'application/pdf') }
+    end
+
+    trait :aws_pdf do
+      external_id { 'aws-fake-uuid' }
+      pdf_document { Rack::Test::UploadedFile.new('spec/fixtures/files/invoices/aws.pdf', 'application/pdf') }
+    end
+
     trait :random_external_id do
       external_id { ('a'..'z').to_a.shuffle.join }
     end

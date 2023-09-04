@@ -34,4 +34,21 @@ RSpec.describe UserMailer, type: :mailer do
       )
     end
   end
+
+  describe 'invoices_export' do 
+    let(:user) { create(:user) }
+    let(:date) { Date.today }
+    let(:zipfile) { File.open(Rails.root.join("spec/fixtures/files/invoices/apple.pdf").to_s) }
+    let(:mail) { UserMailer.invoices_export(user, date, zipfile) }
+
+    it 'renders the headers' do
+      expect(mail.subject).to eq('Your invoices collected by Poolpybot')
+      expect(mail.to).to eq(['ernest@acme.org'])
+      expect(mail.from).to eq(['from@example.com'])
+    end
+
+    it 'renders the body' do
+      expect(mail.body.encoded).to match('Hello, Ernest')
+    end
+  end
 end

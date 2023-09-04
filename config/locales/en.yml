@@ -102,6 +102,7 @@ en:
         title: "Invoices"
         description: "List of all the invoices Poolpybot collected so far."
         upload_pdf_button: "Upload Invoice PDF"
+        export_pdfs_button: "Download"
         table:
           no_items: "No invoices"
           columns:
@@ -153,6 +154,11 @@ en:
       destroy:
         flash:
           success: "The supplier has been deleted."
+
+    invoices_exports:
+      create:
+        flash:
+          success: "You will receive an email with your invoices in a few minutes."
 
     settings:
       edit:
@@ -277,6 +283,17 @@ en:
         You've been receiving this email because Ernest from Acme Corp has invited you to join Poolpybot to collect invoices of your company.
 
         To accept this invitation, just follow this link: %{url}.
+
+        Have a great day!
+
+    invoices_export:
+      subject: "Your invoices collected by Poolpybot"
+      title: "Hello, %{username}"
+      html_body: |
+        <p>You have requested the export of the invoices for %{date}. Please find them attached in that email.</p>
+        <p>Have a great day!</p>
+      body: |
+        You have requested the export of the invoices for %{date}. Please find them attached in that email.
 
         Have a great day!
 

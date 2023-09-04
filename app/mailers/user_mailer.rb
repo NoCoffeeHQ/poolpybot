@@ -4,7 +4,9 @@ class UserMailer < ApplicationMailer
   def reset_password_email(user)
     @user = User.find(user.id)
     @url = edit_authentication_password_reset_url(token: @user.reset_password_token)
-    mail to: user.email, subject: t('.subject')
+    I18n.with_locale(@user.locale) do
+      mail to: user.email, subject: t('.subject')
+    end
   end
 
   def send_invitation(invitation, user_exists)
@@ -12,6 +14,15 @@ class UserMailer < ApplicationMailer
     @invited_by = invitation.invited_by
     @url = invitation_url(invitation, user_exists)
     mail to: invitation.email, subject: t('.subject')
+  end
+
+  def invoices_export(user, date, zipfile)
+    @user = user
+    @date = I18n.l(date, format: :month)
+    attachments["poolpybot-invoices-#{date.year}-#{date.month}.zip"] = File.read(zipfile.path)
+    I18n.with_locale(@user.locale) do
+      mail to: user.email, subject: t('.subject')
+    end
   end
 
   private

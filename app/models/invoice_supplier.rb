@@ -30,6 +30,10 @@ class InvoiceSupplier < ApplicationRecord
     @last_invoice ||= sorted_invoices.first
   end
 
+  def normalized_name
+    (display_name.presence || name).parameterize
+  end
+
   ## class methods ##
 
   def self.ordered
