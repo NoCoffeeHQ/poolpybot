@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# TODO: to be replace by the Maglev site
+# TODO: to be replaced by the Maglev site
 
 class HomeController < ApplicationController
   def index; end

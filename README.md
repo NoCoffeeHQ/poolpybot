@@ -14,6 +14,7 @@ sudo /bin/sh -c 'echo "::1 www.poolpybot.local" >> /etc/hosts'
 
 Install gems and JS packages:
 ```bash
+gem install mailcatcher
 bundle install
 yarn install
 ```

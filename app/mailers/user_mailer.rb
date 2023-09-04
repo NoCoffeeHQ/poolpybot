@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
   def invoices_export(user, date, zipfile)
     @user = user
     @date = I18n.l(date, format: :month)
-    attachments["poolpybot-invoices-#{date.year}-#{date.month}.zip"] = File.read(zipfile.path)
+    attachments["poolpybot-invoices-#{date.strftime('%Y-%m')}.zip"] = File.read(zipfile.path)
     I18n.with_locale(@user.locale) do
       mail to: user.email, subject: t('.subject')
     end

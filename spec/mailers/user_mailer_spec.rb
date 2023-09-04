@@ -37,7 +37,7 @@ RSpec.describe UserMailer, type: :mailer do
 
   describe 'invoices_export' do 
     let(:user) { create(:user) }
-    let(:date) { Date.today }
+    let(:date) { Date.parse('2023-09-16') }
     let(:zipfile) { File.open(Rails.root.join("spec/fixtures/files/invoices/apple.pdf").to_s) }
     let(:mail) { UserMailer.invoices_export(user, date, zipfile) }
 
@@ -49,6 +49,7 @@ RSpec.describe UserMailer, type: :mailer do
 
     it 'renders the body' do
       expect(mail.body.encoded).to match('Hello, Ernest')
+      expect(mail.body.encoded).to match('You have requested the export of the invoices for September 2023')
     end
   end
 end

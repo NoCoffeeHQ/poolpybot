@@ -25,6 +25,7 @@ module InvoicesExportServices
 
     def create_zipfile(user, date)
       open_zipfile do |zipfile|
+        # Improvement: use the Concurrent gem to download files in parallel.
         invoices_for(user, date).find_each do |invoice|
           add_pdf_to_zipfile(invoice, zipfile)
         end
@@ -46,7 +47,9 @@ module InvoicesExportServices
     end
 
     def invoice_filename(invoice)
-      "#{invoice.date.year}-#{invoice.date.month}-#{invoice.invoice_supplier.normalized_name}.pdf"
+      name = invoice.invoice_supplier.normalized_name
+      date = invoice.date.strftime('%Y-%m')
+      "invoices-#{date}/#{name}-#{date}.pdf"
     end
 
     def invoice_pdf_document_content(invoice)

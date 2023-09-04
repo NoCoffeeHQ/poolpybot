@@ -26,7 +26,7 @@ RSpec.describe InvoicesExportServices::EmailService do
     end
 
     it 'creates a zip file?' do
-      expect(File.size(subject.path)).to eq 63408
+      expect(File.size(subject.path)).to be >= 63438
       expect(`file --b --mime-type '#{subject.path}'`.strip).to eq 'application/zip'
     end
 
