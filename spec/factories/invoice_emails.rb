@@ -23,7 +23,7 @@
 #
 FactoryBot.define do
   factory :invoice_email do
-    invoice { create(:invoice) }
+    invoice { Invoice.last || create(:invoice) }
     name { 'Acme' }
     subject { 'Your invoice' }
     from { 'accouting@acme.org' }

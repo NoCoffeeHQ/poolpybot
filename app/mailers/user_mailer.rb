@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     @user = User.find(user.id)
     @url = edit_authentication_password_reset_url(token: @user.reset_password_token)
     I18n.with_locale(@user.locale) do
-      mail to: user.email, subject: t('.subject')
+      mail to: @user.email, subject: t('.subject')
     end
   end
 
@@ -21,7 +21,16 @@ class UserMailer < ApplicationMailer
     @date = I18n.l(date, format: :month)
     attachments["poolpybot-invoices-#{date.strftime('%Y-%m')}.zip"] = File.read(zipfile.path)
     I18n.with_locale(@user.locale) do
-      mail to: user.email, subject: t('.subject')
+      mail to: @user.email, subject: t('.subject')
+    end
+  end
+
+  def notify(notification)
+    @user = notification.user
+    @event = notification.event
+    @data = notification.full_data
+    I18n.with_locale(@user.locale) do
+      mail to: @user.email, subject: t(".#{notification.event}.subject")
     end
   end
 

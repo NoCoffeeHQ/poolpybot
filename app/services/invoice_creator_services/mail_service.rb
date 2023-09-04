@@ -11,6 +11,8 @@ module InvoiceCreatorServices
 
       create_invoice(user, mail).tap do |invoice|
         create_invoice_email(invoice, mail) unless invoice.invoice_email
+
+        notify(user, mail, invoice.none_error?)
       end
     end
 
@@ -127,7 +129,15 @@ module InvoiceCreatorServices
                                  io: StringIO.new(pdf_attachment.decoded),
                                  filename: pdf_attachment.filename,
                                  content_type: pdf_attachment.content_type
-                               })
+                               }, disable_notification: true)
+    end
+
+    def notify(user, mail, success)
+      event = success ? :email_processed : :email_not_processed
+      Notification.trigger(user: user, event: event, data: { 
+        subject: mail.original_subject || mail.subject.to_s,
+        from: mail.from.to_s
+      })
     end
   end
 end

@@ -297,6 +297,42 @@ en:
 
         Have a great day!
 
+    notify:
+      email_processed:
+        subject: "A new invoice has been collected by Poolpybot!"
+        title: "Hello, %{username}"
+        html_body: |
+          <p>Poolpybot has just processed with success the invoice found in the following email:</p>
+          <br/>
+          <p><b>Subject:</b> %{subject}</p>
+          <p><b>From:</b> %{from}</p>
+          <br/>
+          <p>To see all your invoices, please click on this <a href="%{url}">link</a>.</p>
+          <p>Have a great day!</p>
+        body: |
+          Poolpybot has just processed with success the invoice found in the following email:
+
+          Subject: %{subject}
+          From: %{from}
+
+          To see all your invoices, please click on the following link: %{url}.
+
+          Have a great day!
+
+      uploaded_pdf_processed:
+        subject: "A new invoice has been collected by Poolpybot!"
+        title: "Hello, %{username}"
+        html_body: |
+          <p>Poolpybot has just processed with success the following PDF invoice: %{filename}</p>
+          <p>To see all your invoices, please click on this <a href="%{url}">link</a>.</p>
+          <p>Have a great day!</p>
+        body: |
+          Poolpybot has just processed with success the following PDF invoice: %{filename}
+
+          To see all your invoices, please click on the following link: %{url}.
+
+          Have a great day!
+
   activerecord:
     attributes:
       invoice:

@@ -19,6 +19,10 @@ RSpec.describe OnboardingService do
       expect { subject }.to change(Company, :count).by(1).and change(User, :count).by(1)
     end
 
+    it 'creates 2 notifications' do
+      expect { subject }.to change(Notification, :count).by(2)
+    end
+
     describe 'Given the company is not valid' do
       let(:company) { build(:company, name: nil) }
 
@@ -34,6 +38,10 @@ RSpec.describe OnboardingService do
 
       it 'only persists the user in DB' do
         expect { subject }.to change(Company, :count).by(0).and change(User, :count).by(1)
+      end
+
+      it 'creates 1 notification' do
+        expect { subject }.to change(Notification, :count).by(1)
       end
 
       it 'deletes the invitation' do
