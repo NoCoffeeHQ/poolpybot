@@ -55,7 +55,7 @@ FactoryBot.define do
 
     trait :processed do
       status { :processed }
-      date { Date.today }
+      date { Time.zone.today }
       total_amount { 42.0 }
     end
 

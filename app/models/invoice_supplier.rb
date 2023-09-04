@@ -4,7 +4,9 @@ class InvoiceSupplier < ApplicationRecord
   ## associations ##
   belongs_to :company
   has_many :invoices, dependent: :destroy
+  # rubocop:disable Rails/HasManyOrHasOneDependent, Rails/InverseOf
   has_many :sorted_invoices, -> { order(date: :desc) }, class_name: 'Invoice'
+  # rubocop:enable Rails/HasManyOrHasOneDependent, Rails/InverseOf
 
   ## validations ##
   validates :name, presence: true

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'zip'
 
 module InvoicesExportServices
@@ -34,15 +36,13 @@ module InvoicesExportServices
 
     def add_pdf_to_zipfile(invoice, zipfile)
       zipfile.get_output_stream(invoice_filename(invoice)) do |output_entry_stream|
-        output_entry_stream.write(invoice_pdf_document_content(invoice)) 
+        output_entry_stream.write(invoice_pdf_document_content(invoice))
       end
     end
 
-    def open_zipfile
+    def open_zipfile(&block)
       Tempfile.new.tap do |tempfile|
-        Zip::File.open(tempfile.path, create: true) do |zipfile|
-          yield(zipfile)
-        end
+        Zip::File.open(tempfile.path, create: true, &block)
       end
     end
 

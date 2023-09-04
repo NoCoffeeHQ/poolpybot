@@ -35,10 +35,10 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe 'invoices_export' do 
+  describe 'invoices_export' do
     let(:user) { create(:user) }
     let(:date) { Date.parse('2023-09-16') }
-    let(:zipfile) { File.open(Rails.root.join("spec/fixtures/files/invoices/apple.pdf").to_s) }
+    let(:zipfile) { File.open(Rails.root.join('spec/fixtures/files/invoices/apple.pdf').to_s) }
     let(:mail) { UserMailer.invoices_export(user, date, zipfile) }
 
     it 'renders the headers' do

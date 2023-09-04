@@ -2,7 +2,6 @@
 
 module WorkspaceUI
   class InvoicesExportsController < BaseController
-
     def create
       date = Date.parse("#{search_params[:month]}-01")
       services.email_invoices_exporter.call_later(user_id: current_user.id, date: date)
@@ -15,6 +14,5 @@ module WorkspaceUI
     def search_params
       params.permit(:month, :status, :supplier_id)
     end
-
   end
 end

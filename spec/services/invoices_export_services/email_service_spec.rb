@@ -5,16 +5,15 @@ require 'rails_helper'
 RSpec.describe InvoicesExportServices::EmailService do
   let(:instance) { described_class.new({}) }
   let!(:user) { create(:user) }
-  let(:date) { Date.today }
+  let(:date) { Time.zone.today }
 
   subject { instance.call(user: user, date: date) }
 
   describe 'Given there are no invoices for the month' do
-
     it 'doesn\'t send an email' do
-      expect do 
+      expect do
         subject
-      end.not_to change { ActionMailer::Base.deliveries.size }
+      end.not_to(change { ActionMailer::Base.deliveries.size })
     end
   end
 
@@ -26,7 +25,7 @@ RSpec.describe InvoicesExportServices::EmailService do
     end
 
     it 'creates a zip file?' do
-      expect(File.size(subject.path)).to be >= 63438
+      expect(File.size(subject.path)).to be >= 63_438
       expect(`file --b --mime-type '#{subject.path}'`.strip).to eq 'application/zip'
     end
 
