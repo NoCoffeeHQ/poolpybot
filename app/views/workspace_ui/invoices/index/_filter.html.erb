@@ -1,7 +1,7 @@
 <%= form_tag workspace_invoices_path, method: :get, class: 'flex items-center space-x-4', data: { controller: 'auto-submit' } do %>
   <%= select_tag :status, options_for_select([[Invoice.translated_status(:processed), 'processed'], [Invoice.translated_status(:failed), 'failed']], params[:status]), include_blank: t('.any_status'), class: 'block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-600 sm:text-sm sm:leading-6 shrink-0' %>
 
-  <%= select_tag :supplier_id, options_from_collection_for_select(current_company.invoice_suppliers.with_invoices.ordered, :id, :display_name, params[:supplier_id]), include_blank: t('.all_suppliers'), class: 'block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-600 sm:text-sm sm:leading-6 shrink-0' %>
+  <%= select_tag :supplier_id, options_from_collection_for_select(current_company.invoice_suppliers.with_invoices.ordered, :id, :real_name, params[:supplier_id]), include_blank: t('.all_suppliers'), class: 'block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-600 sm:text-sm sm:leading-6 shrink-0' %>
   
   <%= select_tag :month, grouped_months_for_select(current_company.invoices.grouped_months, params[:month]), include_blank: t('.any_month'), class: 'block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-gray-600 sm:text-sm sm:leading-6 shrink-0' %>
 <% end %>
