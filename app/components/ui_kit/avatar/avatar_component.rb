@@ -5,7 +5,7 @@ module UIKit
     class AvatarComponent < ViewComponent::Base
       attr_reader :attachment, :name, :email
 
-      def initialize(attachment:, name:, email:)
+      def initialize(attachment:, name: nil, email: nil)
         super
         @attachment = attachment
         @name = name

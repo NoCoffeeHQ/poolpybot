@@ -89,3 +89,5 @@ gem 'honeybadger', '~> 5.2'
 gem 'activestorage-validator', '~> 0.4.0'
 
 gem 'rubyzip', '~> 2.3.2'
+
+gem 'pagy', '~> 6.0' # omit patch digit

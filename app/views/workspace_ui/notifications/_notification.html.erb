@@ -1,0 +1,19 @@
+<li>
+  <div class="relative pb-8">
+    <% unless notification_iteration.last? %>
+      <span class="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+    <% end %>
+    <div class="relative flex items-start space-x-3">
+      <%= ui_kit :avatar, attachment: notification.user.avatar %>
+      <div class="min-w-0 flex-1">
+        <div>
+          <div class="text-sm">
+            <span class="font-medium text-gray-700"><%= notification.user.username %></span>
+            <span class="text-gray-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
+          </div>
+          <p class="mt-0.5 text-xs text-gray-500"><%= time_ago_in_words(notification.created_at) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

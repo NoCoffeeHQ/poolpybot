@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-# frozen_string_literal: true
-
 module UIKit
   module SecondaryButton
     class SecondaryButtonComponent < ViewComponent::Base
       attr_reader :label, :url, :action, :size
 
-      def initialize(label:, url: '#', action: nil, size: :md)
+      def initialize(label: nil, url: '#', action: nil, size: :md)
         super
         @label = label
         @url = url

@@ -1,0 +1,3 @@
+<h1><%= t(".#{@event}.title", username: @user.username) %></h1>
+
+<%= t(".#{@event}.html_body", **@data.merge(url: workspace_invoices_url)).html_safe %>

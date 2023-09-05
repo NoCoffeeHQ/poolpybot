@@ -3,9 +3,11 @@
     <div>
       <%= image_tag attachment&.attached? ? attachment : 'marie_curie.jpg', class: 'inline-block h-9 w-9 rounded-full', alt: name %>
     </div>
-    <div class="ml-3">
-      <p class="text-sm font-medium text-gray-700"><%= name %></p>
-      <p class="text-xs font-medium text-gray-500"><%= email %></p>
-    </div>
+    <% if name.present? || email.present? %>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-gray-700"><%= name %></p>
+        <p class="text-xs font-medium text-gray-500"><%= email %></p>
+      </div>
+    <% end %>
   </div>
 </div>

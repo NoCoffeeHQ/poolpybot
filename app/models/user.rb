@@ -64,6 +64,7 @@ end
 #  crypted_password                    :string
 #  email                               :string           not null
 #  locale                              :string           default("en")
+#  notifications_read_at               :datetime
 #  reset_password_email_sent_at        :datetime
 #  reset_password_token                :string
 #  reset_password_token_expires_at     :datetime

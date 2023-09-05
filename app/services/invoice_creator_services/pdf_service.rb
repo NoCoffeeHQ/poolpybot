@@ -5,7 +5,22 @@ module InvoiceCreatorServices
     dependencies :invoice_parser, :pdf_to_text
 
     # PDF is an attachable object (see ActiveStorage)
-    def call(user:, pdf:)
+    def call(user:, pdf:, disable_notification: false)
+      create_invoice(user, pdf).tap do |invoice|
+        notify(user, invoice, true) unless disable_notification
+      end
+    rescue InvoiceCreatorServices::FailInvoiceError => e
+      notify(user, e.invoice, false) unless disable_notification
+      e.invoice
+    end
+
+    def call_from_job(user_id:, pdf_signed_id:)
+      call(user: User.find(user_id), pdf: pdf_signed_id)
+    end
+
+    private
+
+    def create_invoice(user, pdf)
       invoice = create_basic_invoice(user, pdf)
 
       # extract the text from the PDF
@@ -16,16 +31,9 @@ module InvoiceCreatorServices
 
       # set the supplier, change the status and set the invoice information to the invoice
       complete_invoice(invoice, invoice_info)
-    rescue InvoiceCreatorServices::FailInvoiceError => e
-      e.invoice
-    end
 
-    def call_from_job(user_id:, pdf_signed_id:)
-      logger.debug "🚨 #{user_id} / #{pdf_signed_id}"
-      call(user: User.find(user_id), pdf: pdf_signed_id)
+      invoice
     end
-
-    private
 
     def extract_text(invoice)
       pdf_to_text.call(url: invoice_document_url(invoice, :pdf)).tap do |text|
@@ -63,6 +71,13 @@ module InvoiceCreatorServices
 
     def create_basic_invoice(user, pdf)
       user.invoices.create(company: user.company, status: :created, pdf_document: pdf)
+    end
+
+    def notify(user, invoice, _success)
+      event = invoice.none_error? ? :uploaded_pdf_processed : :uploaded_pdf_not_processed
+      Notification.trigger(user: user, event: event, data: {
+                             filename: invoice.pdf_document.filename
+                           })
     end
   end
 end

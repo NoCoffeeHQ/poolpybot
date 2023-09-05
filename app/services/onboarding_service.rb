@@ -19,8 +19,15 @@ class OnboardingService < ApplicationService
     user.company = invitation ? invitation.company : company
     user.save!
 
+    notify(user, invitation.present?)
+
     invitation&.destroy
 
     true
+  end
+
+  def notify(user, has_invitation)
+    Notification.trigger(user: user, event: :company_created) unless has_invitation
+    Notification.trigger(user: user, event: :user_joined)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_01_152020) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_05_071510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -103,6 +103,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_152020) do
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "event", default: 0
+    t.jsonb "data", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_notifications_on_company_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "user_invitations", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "user_id", null: false
@@ -131,6 +142,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_152020) do
     t.datetime "reset_password_email_sent_at"
     t.integer "access_count_to_reset_password_page", default: 0
     t.string "locale", default: "en"
+    t.datetime "notifications_read_at"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
@@ -145,6 +157,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_01_152020) do
   add_foreign_key "invoices", "invoice_suppliers"
   add_foreign_key "invoices", "invoices", column: "duplicate_of_id"
   add_foreign_key "invoices", "users"
+  add_foreign_key "notifications", "companies"
+  add_foreign_key "notifications", "users"
   add_foreign_key "user_invitations", "companies"
   add_foreign_key "user_invitations", "users"
 end

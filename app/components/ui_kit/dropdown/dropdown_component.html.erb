@@ -1,4 +1,8 @@
-<div data-controller="dropdown" class="relative shrink-0">
+<div 
+  data-controller="dropdown" 
+  <% if url %>data-dropdown-url-value="<%= url %>"<% end %>
+  class="relative shrink-0"
+>
   <button type="button" class="flex items-center cursor-pointer select-none <%= @label_class %>" data-action="click->dropdown#toggle">
     <%= label %>
     <% if arrow? %><i class="ri-arrow-down-s-line ml-auto"></i><% end %>

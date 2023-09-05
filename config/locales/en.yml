@@ -97,6 +97,18 @@ en:
           description: "In some situations, you might want to upload PDF documents from your computer."
           button_link: "Upload PDF"
 
+    notifications:
+      index:
+        title: 'Recent activities'
+      notification:
+        company_created: "created a workspace for the %{company} company 🔥"
+        user_joined: "joined Poolpybot 👋" 
+        invitation_sent: "sent an invitation to %{email} 👏"
+        email_processed: "forwarded \"%{subject}\" 💪"
+        email_not_processed: "forwarded \"%{subject}\" 🚨"
+        uploaded_pdf_processed: "uploaded \"%{filename}\"  💪"
+        uploaded_pdf_not_processed: "uploaded \"%{filename}\" 🚨"
+
     invoices:
       index:
         title: "Invoices"
@@ -296,6 +308,42 @@ en:
         You have requested the export of the invoices for %{date}. Please find them attached in that email.
 
         Have a great day!
+
+    notify:
+      email_processed:
+        subject: "A new invoice has been collected by Poolpybot!"
+        title: "Hello, %{username}"
+        html_body: |
+          <p>Poolpybot has just processed with success the invoice found in the following email:</p>
+          <br/>
+          <p><b>Subject:</b> %{subject}</p>
+          <p><b>From:</b> %{from}</p>
+          <br/>
+          <p>To see all your invoices, please click on this <a href="%{url}">link</a>.</p>
+          <p>Have a great day!</p>
+        body: |
+          Poolpybot has just processed with success the invoice found in the following email:
+
+          Subject: %{subject}
+          From: %{from}
+
+          To see all your invoices, please click on the following link: %{url}.
+
+          Have a great day!
+
+      uploaded_pdf_processed:
+        subject: "A new invoice has been collected by Poolpybot!"
+        title: "Hello, %{username}"
+        html_body: |
+          <p>Poolpybot has just processed with success the following PDF invoice: %{filename}</p>
+          <p>To see all your invoices, please click on this <a href="%{url}">link</a>.</p>
+          <p>Have a great day!</p>
+        body: |
+          Poolpybot has just processed with success the following PDF invoice: %{filename}
+
+          To see all your invoices, please click on the following link: %{url}.
+
+          Have a great day!
 
   activerecord:
     attributes:

@@ -35,7 +35,10 @@ class UserInvitation < ApplicationRecord
     # - if the user has no invoices, send the invitation + display a notification in the settings page
     invitation = create(company: invited_by.company, invited_by: invited_by, email: email, expired_at: 1.day.from_now)
 
-    UserMailer.send_invitation(invitation.reload, User.exists?(email: email)).deliver_later if invitation.errors.blank?
+    if invitation.errors.blank?
+      UserMailer.send_invitation(invitation.reload, User.exists?(email: email)).deliver_later
+      Notification.trigger(user: invited_by, event: :invitation_sent, data: { email: email })
+    end
 
     invitation
   end

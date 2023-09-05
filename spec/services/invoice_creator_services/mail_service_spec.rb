@@ -44,6 +44,10 @@ RSpec.describe InvoiceCreatorServices::MailService do
         expect { subject }.to change(Invoice, :count).by(1)
                                                      .and(change(InvoiceSupplier, :count).by(1))
                                                      .and(change(InvoiceEmail, :count).by(1))
+                                                     .and(change(Notification, :count).by(1))
+      end
+
+      it 'sends a notification email' do
       end
 
       it 'returns a processed invoice' do
@@ -82,6 +86,7 @@ RSpec.describe InvoiceCreatorServices::MailService do
         expect { subject }.to change(Invoice, :count).by(1)
                                                      .and(change(InvoiceSupplier, :count).by(0))
                                                      .and(change(InvoiceEmail, :count).by(1))
+                                                     .and(change(Notification, :count).by(1))
       end
 
       it 'tracks the most important information of the email' do

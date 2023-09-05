@@ -52,4 +52,21 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to match('You have requested the export of the invoices for September 2023')
     end
   end
+
+  describe 'notify' do
+    let(:notification) { create(:notification, :email_processed) }
+    let(:mail) { UserMailer.notify(notification) }
+
+    it 'renders the headers' do
+      expect(mail.subject).to eq('A new invoice has been collected by Poolpybot!')
+      expect(mail.to).to eq(['ernest@acme.org'])
+      expect(mail.from).to eq(['from@example.com'])
+    end
+
+    it 'renders the body' do
+      expect(mail.body.encoded).to match('Hello, Ernest')
+      expect(mail.body.encoded).to match('From: accouting@acme.org')
+      expect(mail.body.encoded).to match('Subject: Your invoice')
+    end
+  end
 end

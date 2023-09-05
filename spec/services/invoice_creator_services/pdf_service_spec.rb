@@ -30,7 +30,9 @@ RSpec.describe InvoiceCreatorServices::PdfService do
     end
 
     it 'creates the invoice in DB' do
-      expect { subject }.to change(Invoice, :count).by(1).and change(InvoiceSupplier, :count).by(1)
+      expect { subject }.to change(Invoice, :count).by(1)
+                                                   .and change(InvoiceSupplier, :count).by(1)
+                                                   .and(change(Notification, :count).by(1))
     end
 
     it 'returns a processed invoice' do

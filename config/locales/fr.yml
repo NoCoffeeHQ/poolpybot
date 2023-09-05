@@ -66,6 +66,18 @@ fr:
           description: "Dans certaines situations, vous pourriez vouloir télécharger des documents PDF depuis votre ordinateur."
           button_link: "Télécharger le PDF"
 
+    notifications:
+      index:
+        title: 'Activités récentes'
+      notification:
+        company_created: "a créé un compte pour la société %{company} 🔥"
+        user_joined: "a rejoint Poolpybot 👋"
+        invitation_sent: "a envoyé une invitation à %{email} 👏"
+        email_processed: "a transféré l'email \"%{subject}\" 💪"
+        email_not_processed: "a transféré l'email \"%{subject}\" 🚨"
+        uploaded_pdf_processed: "a téléversé \"%{filename}\" 💪"
+        uploaded_pdf_not_processed: "a téléversé \"%{filename}\" 🚨"
+
     invoices:
       index:
         title: "Factures"
@@ -266,6 +278,43 @@ fr:
         Vous avez demandé l'export des factures pour le %{date}. Vous les trouverez en pièce jointe dans cet e-mail.
 
         Passez une excellente journée !
+
+    notify:
+      email_processed:
+        subject: "Une nouvelle facture a été collectée par Poolpybot !"
+        title: "Bonjour, %{username}"
+        html_body: |
+          <p>Poolpybot vient de traiter avec succès la facture trouvée dans l'e-mail suivant :</p>
+          <br/>
+          <p><b>Sujet :</b> %{subject}</p>
+          <p><b>De :</b> %{from}</p>
+          <br/>
+          <p>Pour voir toutes vos factures, veuillez cliquer sur ce <a href="%{url}">lien</a>.</p>
+          <p>Passez une excellente journée !</p>
+        body: |
+          Poolpybot vient de traiter avec succès la facture trouvée dans l'e-mail suivant :
+
+          Sujet : %{subject}
+          De : %{from}
+
+          Pour voir toutes vos factures, veuillez cliquer sur le lien suivant : %{url}.
+
+          Passez une excellente journée !
+
+      uploaded_pdf_processed:
+        subject: "Une nouvelle facture a été collectée par Poolpybot !"
+        title: "Bonjour, %{username}"
+        html_body: |
+          <p>Poolpybot vient de traiter avec succès la facture PDF suivante : %{filename}</p>
+          <p>Pour voir toutes vos factures, veuillez cliquer sur ce <a href="%{url}">lien</a>.</p>
+          <p>Passez une excellente journée !</p>
+        body: |
+          Poolpybot vient de traiter avec succès la facture PDF suivante : %{filename}
+
+          Pour voir toutes vos factures, veuillez cliquer sur le lien suivant : %{url}.
+
+          Passez une excellente journée !
+
 
   activerecord:
     attributes:
