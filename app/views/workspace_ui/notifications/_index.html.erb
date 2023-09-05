@@ -1,0 +1,20 @@
+<div class="w-96 px-4 pt-4 pb-8 space-y-8">
+  <div class="flex items-center justify-between">
+    <h2 class="font-semibold text-md text-gray-900"><%= t('.title') %></h2>
+    <div class="flex items-center space-x-2">
+      <%= button_to workspace_notifications_path, method: :get, params: { page: @pagy.prev }, data: { turbo_stream: '' }, class: 'w-5 h-5 inline-flex items-center justify-center hover:bg-gray-50 disabled:text-gray-300', disabled: !@pagy.prev do %>
+        <i class="ri-arrow-left-s-line"></i>
+      <% end %>
+      
+      <%= button_to workspace_notifications_path, method: :get, params: { page: @pagy.next }, data: { turbo_stream: '' }, class: 'w-5 h-5 inline-flex items-center justify-center hover:bg-gray-50 disabled:text-gray-300', disabled: !@pagy.next do %>
+        <i class="ri-arrow-right-s-line"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flow-root">
+    <ul class="-mb-8">
+      <%= render @notifications %>
+    </ul>
+  </div>
+</div>

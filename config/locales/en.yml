@@ -97,6 +97,18 @@ en:
           description: "In some situations, you might want to upload PDF documents from your computer."
           button_link: "Upload PDF"
 
+    notifications:
+      index:
+        title: 'Recent activities'
+      notification:
+        company_created: "created a workspace for the %{company} company 🔥"
+        user_joined: "joined Poolpybot 👋" 
+        invitation_sent: "sent an invitation to %{email} 👏"
+        email_processed: "forwarded \"%{subject}\" 💪"
+        email_not_processed: "forwarded \"%{subject}\" 🚨"
+        uploaded_pdf_processed: "uploaded \"%{filename}\"  💪"
+        uploaded_pdf_not_processed: "uploaded \"%{filename}\" 🚨"
+
     invoices:
       index:
         title: "Invoices"

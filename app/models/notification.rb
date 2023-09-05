@@ -13,7 +13,8 @@ class Notification < ApplicationRecord
   validates :event, presence: true
 
   ## scopes ##
-  scope :optimized, -> { includes(:company, :user).joins(:company, :user) }
+  scope :optimized, -> { includes(:company, user: [:avatar_attachment]).joins(:company, :user) }
+  scope :ordered, -> { order(created_at: :desc) }
 
   ## methods ##
 
@@ -34,6 +35,13 @@ class Notification < ApplicationRecord
   end
 
   ## class methods ##
+
+  def self.read?(user)
+    return true if user.notifications_read_at.blank?
+    where(
+      Notification[:created_at].gt(user.notifications_read_at)
+    ).exists?
+  end
 
   def self.trigger(user:, event:, data: {})
     Notification.create(

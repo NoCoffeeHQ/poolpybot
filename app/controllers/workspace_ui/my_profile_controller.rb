@@ -2,6 +2,7 @@
 
 module WorkspaceUI
   class MyProfileController < BaseController
+
     def update
       if current_user.update(user_params)
         respond_to do |format|
