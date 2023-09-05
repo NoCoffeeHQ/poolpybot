@@ -13,11 +13,14 @@ module WorkspaceUI
       end
     end
 
-    private 
-    
+    private
+
     def mark_as_read
-      return unless params[:page].blank?
+      return if params[:page].present?
+
+      # rubocop:disable Rails/SkipsModelValidations
       current_user.update_attribute(:notifications_read_at, Time.zone.now)
+      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 end

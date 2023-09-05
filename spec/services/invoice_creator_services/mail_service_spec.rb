@@ -48,7 +48,6 @@ RSpec.describe InvoiceCreatorServices::MailService do
       end
 
       it 'sends a notification email' do
-
       end
 
       it 'returns a processed invoice' do

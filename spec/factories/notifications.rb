@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notifications
@@ -27,7 +29,7 @@ FactoryBot.define do
     event { :company_created }
     data { {} }
 
-    trait :email_processed do 
+    trait :email_processed do
       event { :email_processed }
       data { { subject: 'Your invoice', from: 'accouting@acme.org' } }
     end

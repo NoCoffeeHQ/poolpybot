@@ -73,11 +73,11 @@ module InvoiceCreatorServices
       user.invoices.create(company: user.company, status: :created, pdf_document: pdf)
     end
 
-    def notify(user, invoice, success)
+    def notify(user, invoice, _success)
       event = invoice.none_error? ? :uploaded_pdf_processed : :uploaded_pdf_not_processed
-      Notification.trigger(user: user, event: event, data: { 
-        filename: invoice.pdf_document.filename
-      })
+      Notification.trigger(user: user, event: event, data: {
+                             filename: invoice.pdf_document.filename
+                           })
     end
   end
 end

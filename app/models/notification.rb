@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 class Notification < ApplicationRecord
   ## concerns ##
   include ::TranslateEnum
 
   ## enums ##
-  enum :event, %i[company_created user_joined invitation_sent email_processed email_not_processed uploaded_pdf_processed uploaded_pdf_not_processed]
+  enum :event,
+       %i[company_created user_joined invitation_sent email_processed email_not_processed uploaded_pdf_processed
+          uploaded_pdf_not_processed]
 
   ## associations ##
   belongs_to :company
@@ -21,7 +25,7 @@ class Notification < ApplicationRecord
   def full_data
     (data || {}).merge(
       company: company.name,
-      username: user.username,
+      username: user.username
     ).deep_symbolize_keys
   end
 
@@ -31,13 +35,15 @@ class Notification < ApplicationRecord
 
   def send_email
     return unless send_email?
-    UserMailer.notify(self).deliver_later 
+
+    UserMailer.notify(self).deliver_later
   end
 
   ## class methods ##
 
   def self.read?(user)
     return true if user.notifications_read_at.blank?
+
     where(
       Notification[:created_at].gt(user.notifications_read_at)
     ).exists?
@@ -49,9 +55,7 @@ class Notification < ApplicationRecord
       user: user,
       event: event,
       data: data
-    ).tap do |notification|
-      notification.send_email
-    end
+    ).tap(&:send_email)
   end
 end
 
