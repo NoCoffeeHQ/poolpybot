@@ -53,6 +53,8 @@ en:
 
   layouts:
     workspace_ui:
+      header:
+        upload_button: "Upload invoice"
       profile_dropdown:
         logo_tagline: "Your accounting assistant"
         signed_as: "Signed in as"

@@ -23,6 +23,8 @@ fr:
 
   layouts:
     workspace_ui:
+      header:
+        upload_button: "Téléverser facture"
       profile_dropdown:
         logo_tagline: "Votre assistant comptable"
         invoices_link: "Factures"

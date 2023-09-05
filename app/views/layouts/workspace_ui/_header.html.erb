@@ -9,6 +9,11 @@
         </div>
       </div>
       <div class="sm:ml-6 sm:flex sm:items-center">
+        <!-- upload invoice button -->
+        <div class="flex-shrink-0 mr-4">
+          <%= ui_kit :direct_upload_button, label: t('.upload_button'), url: bulk_create_workspace_invoices_path, accept: 'application/pdf', multiple: true, size: :xs %>
+        </div>
+
         <!-- notifications dropdown -->
         <%= render 'layouts/workspace_ui/notifications_dropdown' %>
 

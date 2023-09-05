@@ -1,5 +1,5 @@
 <%= form_tag url, data: { controller: 'direct-upload-button', action: 'direct-uploads:start->direct-upload-button#startUploading', 'direct-upload-button-in-progress-label-value' => uploading_label } do |form| %>
-  <%= label_tag :uploaded_files, class: 'block rounded-md bg-gray-900 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 cursor-pointer' do %>
+  <%= label_tag :uploaded_files, class: "block rounded-md bg-gray-900 text-center #{size_classes} font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 cursor-pointer" do %>
     <div class="flex items-center space-x-2">
       <i data-direct-upload-button-target="icon" class="ri-upload-cloud-2-line text-md"></i>
       <span data-direct-upload-button-target="text"><%= label %></span>
