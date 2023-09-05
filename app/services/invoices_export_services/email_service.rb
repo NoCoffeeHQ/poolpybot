@@ -49,7 +49,7 @@ module InvoicesExportServices
     def invoice_filename(invoice)
       name = invoice.invoice_supplier.normalized_name
       date = invoice.date.strftime('%Y-%m')
-      "invoices-#{date}/#{name}-#{date}.pdf"
+      "invoices-#{date}/#{name}-#{invoice.external_id}-#{date}.pdf"
     end
 
     def invoice_pdf_document_content(invoice)

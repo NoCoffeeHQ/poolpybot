@@ -7,11 +7,6 @@
       <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center space-x-4">
-    </div>
-  </div>
-
-  <div class="mt-8 space-y-4">
-    <div class="flex justify-end space-x-4">
       <%= render 'workspace_ui/invoices/index/filter' %>
 
       <%= ui_kit :primary_button, type: 'button', url: workspace_invoices_exports_path(search_params) do %>
@@ -21,7 +16,9 @@
         </span>
       <% end unless search_params[:month].blank? %>
     </div>
+  </div>
 
+  <div class="mt-6 space-y-4">
     <%= render 'workspace_ui/invoices/index/table' %>
   </div>
 </div>
