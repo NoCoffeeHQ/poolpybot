@@ -1,0 +1,72 @@
+<div id="apple-pane" class="hidden" data-pane-selector-target="pane">
+  <div class="prose prose-sm max-w-full">
+    <ol>
+      <li>
+        <b>Ouvrez Apple Mail :</b>
+        <ul>
+          <li>Naviguez vers l'application Apple Mail sur votre appareil macOS et ouvrez-la.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Accédez aux Préférences Mail :</b>
+        <ul>
+          <li>Dans la barre de menu en haut de votre écran, cliquez sur "Mail" puis sélectionnez "Préférences" dans le menu déroulant.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Naviguez vers les Règles :</b>
+        <ul>
+          <li>Dans la fenêtre Préférences, cliquez sur l'onglet "Règles" situé à l'extrême droite.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Ajoutez une nouvelle règle concernant le fournisseur "<%= @invoice_emails.first.invoice_supplier.real_name %>" :</b>
+        <ul>
+          <li>Donnez à votre règle un nom descriptif, par exemple, "Transférer les factures à Poolpybot".</li>
+          <li>Définissez les conditions de la règle :
+            <ul>
+              <li>Dans le premier menu déroulant, sélectionnez "De", puis "contient", et entrez <code><%= @invoice_emails.first.from %></code> dans le champ texte.</li>
+              <li>Cliquez sur le bouton "+" pour ajouter une autre condition.</li>
+              <li>
+                Dans le nouveau menu déroulant, sélectionnez "Sujet", puis "contient", et entrez quelques mots consécutifs et génériques de <code><%= @invoice_emails.first.subject %></code> dans le champ.
+                <br/>🚨 Ne saisissez pas l'ID de la facture ou une date car ils sont spécifiques à une seule facture.
+              </li>
+            </ul>
+          </li>
+          <li>Assurez-vous que les deux conditions sont définies sur "toutes", ce qui signifie que les deux conditions doivent être remplies.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Choisissez l'action de transfert :</b>
+        <ul>
+          <li>Pour les actions, sélectionnez "Transférer le message" dans le menu déroulant.</li>
+          <li>Entrez l'adresse e-mail de Poolpybot : <code><%= current_user.simple_reply_email %></code></li>
+        </ul>
+      </li>
+      <li>
+        <b>Enregistrer la règle :</b>
+        <ul>
+            <li>Cliquez sur le bouton "OK" pour sauvegarder et activer la règle.</li>
+            <li>Une invite vous demandera si vous souhaitez appliquer la règle aux messages dans la boîte aux lettres, cliquez sur "Ne pas appliquer" si vous souhaitez que la règle soit active uniquement pour les nouveaux e-mails entrants, ou sur "Appliquer" si vous souhaitez qu'elle soit rétroactive.</li>
+        </ul>
+      </li>
+      <% if @invoice_emails.size > 1 %>
+      <li>
+        <b>Répétez les étapes 4 à 6 pour chaque fournisseur</b>
+        <ul>
+          <% @invoice_emails.each_with_index do |email, index| %>
+          <% next if index == 0 %>
+          <li>
+            <b><%= email.invoice_supplier.name %></b>
+            <br/>
+            <u>De :</u> <code><%= email.from %></code>
+            <br/>
+            <u>Sujet :</u> <code><%= email.subject %></code>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

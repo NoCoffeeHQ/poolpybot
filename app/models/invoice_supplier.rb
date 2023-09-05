@@ -36,6 +36,10 @@ class InvoiceSupplier < ApplicationRecord
     (display_name.presence || name).parameterize
   end
 
+  def real_name
+    attributes[:real_name].presence || display_name.presence || name
+  end
+
   ## class methods ##
 
   def self.ordered

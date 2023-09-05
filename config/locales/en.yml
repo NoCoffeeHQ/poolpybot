@@ -85,19 +85,22 @@ en:
         limit: "Image size up to %{size}"
 
   workspace_ui:
-    home:
+    instructions:
       index:
         main_title: "Welcome <span class=\"font-extrabold\">%{name}</span> 👋"
         title: "Getting started"
         description: "Don't worry, we're going to help you to send your first invoices to Poolpybot. First, pick one of the 2 ways:"
-        choice_1:
-          title: "Forward your emails to Poolpybot"
-          description: "Once you start forwarding your invoices to the following email, Poolpybot will process those emails and collect the right information.<br/> 
-          At some point, Poolpybot will be able to provide you with forwarding rules specific to your email client."
-        choice_2:
-          title: "...or upload the PDF document of an invoice (or many)"
-          description: "In some situations, you might want to upload PDF documents from your computer."
-          button_link: "Upload PDF"
+      forward_address:
+        title: "Forward your emails to Poolpybot"
+        description: "Once you start forwarding your invoices to the following email, Poolpybot will process those emails and collect the right information.<br/> 
+        At some point, Poolpybot will be able to provide you with forwarding rules specific to your email client."
+      first_upload:
+        title: "...or upload the PDF document of an invoice (or many)"
+        description: "In some situations, you might want to upload PDF documents from your computer."
+        button_link: "Upload PDF"
+      mail_filters:
+        title: "Create filters for your mail application"
+        description: "To get the full power of Poolpybot, set up your mail application to forward certain kind of emails to the Poolpybot service."
 
     notifications:
       index:

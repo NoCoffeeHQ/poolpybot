@@ -102,7 +102,7 @@ module ForwardedMail
       when /<div class="gmail_quote">/
         remove_gmail_header(html_body)
       else
-        html
+        html_body
       end
     end
 

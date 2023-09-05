@@ -1,0 +1,74 @@
+<div id="gmail-pane" class="hidden" data-pane-selector-target="pane">
+  <div class="prose prose-sm max-w-full">
+    <ol>
+      <li>
+        <b>Log in to Gmail:</b>
+        <ul>
+          <li>Open your web browser and go to <a href="https://mail.google.com/">Gmail</a>.</li>
+          <li>Enter your Gmail username and password to log in.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Access Settings:</b>
+        <ul>
+          <li>In the top-right corner of the Gmail inbox, click on the gear icon (⚙️) and then choose "See all settings".</li>
+        </ul>
+      </li>
+      <li>
+        <b>Add a Forwarding Address:</b>
+        <ul>
+          <li>In the Settings menu, click on the "Forwarding and POP/IMAP" tab.</li>
+          <li>Click on "Add a forwarding address."</li>
+          <li>Add <code><%= current_user.simple_reply_email %></code> as the email address.</li>
+          <li>Click "Next" and then "Proceed."</li>
+          <li>We will send you the Google verification code to your email address. Check the email, retrieve the verification code, and enter it in Gmail to verify.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Create a Filtering Rule:</b>
+        <ul>
+          <li>Go back to the main Settings page by clicking on the "General" tab.</li>
+          <li>Click on the "Filters and Blocked Addresses" tab.</li>
+          <li>Click on "Create a new filter" at the bottom.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Set Criteria for the Filter regarding the "<%= @invoice_emails.first.invoice_supplier.real_name %>" vendor:</b>
+        <ul>
+          <li>In the <u>"From"</u> field, enter <code><%= @invoice_emails.first.from %></code></li>
+          <li>In the <u>"Subject"</u> field, enter the specific subject line that should trigger the rule. For instance, some consecutive and generic words from <code><%= @invoice_emails.first.subject %></code>.<br/>🚨 Don't enter the invoice id or a date since they're specific to a single invoice.🚨</li>
+          <li>Click on the "Create filter" button (not the search button).</li>
+        </ul>
+      </li>
+      <li>
+        <b>Choose Forwarding Action:</b>
+        <ul>
+          <li>In the next window, check the box that says "Forward it to" and choose the Poolpybot forwarding address from the dropdown.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Save the Filter:</b>
+        <ul>
+          <li>Click on "Create filter" to save and activate the rule.</li>
+        </ul>
+      </li>
+      <% if @invoice_emails.size > 1 %>
+      <li>
+        <b>Repeat steps 4 through 7 for each vendor</b>
+        <ul>
+          <% @invoice_emails.each_with_index do |email, index| %>
+          <% next if index == 0 %>
+          <li>
+            <b><%= email.invoice_supplier.name %></b>
+            <br/>
+            <u>From:</u> <code><%= email.from %></code>
+            <br/>
+            <u>Subject:</u> <code><%= email.subject %></code>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

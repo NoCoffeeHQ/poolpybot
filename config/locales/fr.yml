@@ -55,18 +55,23 @@ fr:
         limit: "Taille d'image jusqu'à %{size}"
 
   workspace_ui:
-    home:
+    instructions:
       index:
         main_title: "Bienvenue <span class=\"font-extrabold\">%{name}</span> 👋"
-        title: "Démarrage"
-        description: "Ne vous inquiétez pas, nous allons vous aider à envoyer vos premières factures à Poolpybot. Choisissez l'une des 2 méthodes :"
-        choice_1:
-          title: "Transférez vos e-mails à Poolpybot"
-          description: "Lorsque vous commencez à transférer vos factures à l'e-mail suivant, Poolpybot traitera ces e-mails et collectera les bonnes informations.<br/> À un moment donné, Poolpybot pourra vous fournir des règles de transfert spécifiques à votre client e-mail."
-        choice_2:
-          title: "...ou téléchargez le document PDF d'une facture (ou plusieurs)"
-          description: "Dans certaines situations, vous pourriez vouloir télécharger des documents PDF depuis votre ordinateur."
-          button_link: "Télécharger le PDF"
+        title: "Pour commencer"
+        description: "Ne vous inquiétez pas, nous allons vous aider à envoyer vos premières factures à Poolpybot. Tout d'abord, choisissez l'une des 2 méthodes :"
+      forward_address:
+        title: "Transférez vos e-mails à Poolpybot"
+        description: "Dès que vous commencez à transférer vos factures à l'adresse e-mail suivante, Poolpybot traitera ces e-mails et recueillera les informations appropriées.<br/> 
+        À un moment donné, Poolpybot sera capable de vous fournir des règles de transfert spécifiques à votre client de messagerie."
+      first_upload:
+        title: "...ou téléchargez le document PDF d'une facture (ou de plusieurs)"
+        description: "Dans certaines situations, vous voudrez peut-être télécharger des documents PDF depuis votre ordinateur."
+        button_link: "Télécharger le PDF"
+      mail_filters:
+        title: "Créez des filtres pour votre application de messagerie"
+        description: "Pour exploiter pleinement la puissance de Poolpybot, configurez votre application de messagerie pour transférer certains types d'e-mails au service Poolpybot."
+
 
     notifications:
       index:
@@ -316,7 +321,6 @@ fr:
           Pour voir toutes vos factures, veuillez cliquer sur le lien suivant : %{url}.
 
           Passez une excellente journée !
-
 
   activerecord:
     attributes:

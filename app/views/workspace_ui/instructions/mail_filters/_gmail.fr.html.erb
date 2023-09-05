@@ -1,0 +1,74 @@
+<div id="gmail-pane" class="hidden" data-pane-selector-target="pane">
+  <div class="prose prose-sm max-w-full">
+    <ol>
+      <li>
+        <b>Connectez-vous à Gmail :</b>
+        <ul>
+          <li>Ouvrez votre navigateur web et allez sur <a href="https://mail.google.com/">Gmail</a>.</li>
+          <li>Entrez votre nom d'utilisateur et mot de passe Gmail pour vous connecter.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Accédez aux Paramètres :</b>
+        <ul>
+          <li>Dans le coin supérieur droit de la boîte de réception Gmail, cliquez sur l'icône d'engrenage (⚙️) puis choisissez "Voir tous les paramètres".</li>
+        </ul>
+      </li>
+      <li>
+        <b>Ajoutez une Adresse de Transfert :</b>
+        <ul>
+          <li>Dans le menu Paramètres, cliquez sur l'onglet "Transfert et POP/IMAP".</li>
+          <li>Cliquez sur "Ajouter une adresse de transfert".</li>
+          <li>Ajoutez <code><%= current_user.simple_reply_email %></code> comme adresse e-mail.</li>
+          <li>Cliquez sur "Suivant" puis sur "Continuer".</li>
+          <li>Nous vous enverrons le code de vérification Google à votre adresse e-mail. Consultez l'email, récupérez le code de vérification et saisissez-le dans Gmail pour vérifier.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Créez une Règle de Filtrage :</b>
+        <ul>
+          <li>Revenez à la page principale des Paramètres en cliquant sur l'onglet "Général".</li>
+          <li>Cliquez sur l'onglet "Filtres et adresses bloquées".</li>
+          <li>Cliquez sur "Créer un nouveau filtre" en bas.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Définissez les Critères pour le Filtre concernant le fournisseur "<%= @invoice_emails.first.invoice_supplier.real_name %>" :</b>
+        <ul>
+          <li>Dans le champ <u>"De"</u>, entrez <code><%= @invoice_emails.first.from %></code></li>
+          <li>Dans le champ <u>"Objet"</u>, entrez la ligne d'objet spécifique qui doit déclencher la règle. Par exemple, quelques mots consécutifs et génériques de <code><%= @invoice_emails.first.subject %></code>.<br/>🚨 Ne saisissez pas l'identifiant de la facture ni une date car ils sont spécifiques à une seule facture.🚨</li>
+          <li>Cliquez sur le bouton "Créer un filtre" (et non le bouton de recherche).</li>
+        </ul>
+      </li>
+      <li>
+        <b>Choisissez l'Action de Transfert :</b>
+        <ul>
+          <li>Dans la fenêtre suivante, cochez la case "Transférer à" et choisissez l'adresse de Poolpybot précédemment vérifiée dans le menu déroulant.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Enregistrez le Filtre :</b>
+        <ul>
+          <li>Cliquez sur "Créer un filtre" pour enregistrer et activer la règle.</li>
+        </ul>
+      </li>
+      <% if @invoice_emails.size > 1 %>
+      <li>
+        <b>Répétez les étapes 4 à 7 pour chaque fournisseur</b>
+        <ul>
+          <% @invoice_emails.each_with_index do |email, index| %>
+          <% next if index == 0 %>
+          <li>
+            <b><%= email.invoice_supplier.name %></b>
+            <br/>
+            <u>De :</u> <code><%= email.from %></code>
+            <br/>
+            <u>Objet :</u> <code><%= email.subject %></code>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

@@ -28,7 +28,11 @@ class User < ApplicationRecord
 
   ## methods ##
   def reply_email
-    "#{ENV['INBOUND_REPLY_EMAIL_NAME']} <#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}>"
+    "#{ENV['INBOUND_REPLY_EMAIL_NAME']} <#{simple_reply_email}>"
+  end
+
+  def simple_reply_email
+    "#{uuid}@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}"
   end
 
   def change_password(new_password, raise_on_failure: false)

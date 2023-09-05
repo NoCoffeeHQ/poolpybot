@@ -1,0 +1,58 @@
+{
+  "items":[
+    {
+      "Uuid":[
+        "e0b986be-589b-419e-9520-3d3c2c728c09"
+      ],
+      "Recipients":[
+        "a5c656df-c501-4d2c-bf8f-7259c8111991@reply-dev.poolpybot.fr"
+      ],
+      "MessageId":"\u003cCAC9buzy86_isZ90QKHLDTkf_OG72QxSDBY5Scm4Td_EVQm1_1g@mail.gmail.com\u003e",
+      "InReplyTo":null,
+      "From":{
+        "Name":"L'équipe Gmail",
+        "Address":"forwarding-noreply@google.com"
+      },
+      "To":[
+        {
+          "Name":null,
+          "Address":"a5c656df-c501-4d2c-bf8f-7259c8111991@reply-dev.poolpybot.fr"
+        }
+      ],
+      "Cc":[
+        
+      ],
+      "Bcc":[
+        
+      ],
+      "ReplyTo":null,
+      "SentAtDate":"Tue, 5 Sep 2023 18:32:15 +0200",
+      "Subject":"(#115250375) Confirmation du transfert par Gmail - Réception du message de didier.lafforgue@gmail.com",
+      "Attachments":[
+        
+      ],
+      "Headers":{
+        "Received":"by mail-oo1-f54.google.com with SMTP id 006d021491bc7-5734f54dc44so1621909eaf.2 for \u003ca5c656df-c501-4d2c-bf8f-7259c8111991@reply-dev.poolpybot.fr\u003e; Tue, 05 Sep 2023 09:32:16 -0700 (PDT)",
+        "DKIM-Signature":"v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20221208; t=1693931536; x=1694536336; darn=reply-dev.poolpybot.fr; h=content-transfer-encoding:to:from:subject:message-id:date :mime-version:from:to:cc:subject:date:message-id:reply-to; bh=1fz4hEEQWTfLypKIAxkhZYye9Fbjv142YbJwqlMh24A=; b=kP3jLYhd4CXzFHkYGOMKafdgFOHYlw82FMQw3rcVYgKm6/AKzqi0Jj27ly56mqrEG9 XfoUpnjH0rSBZqVXEeq5VGIuFJFQPLwOafaui9X9Smk+75q84pbgIFDPdzuOBlEwdPdO /ExSbg/ZXQKKJ4yggBZvIYxI0TZ2TNZBufuWJrl5iD8di3IiTeQtMrw5YbE4Oi7/TZet R53aD5Z4wLnCUydbgfp01bJF7DpqdkIGBmQ3fsp0ulQE7I/3ciOBeYAgQ7UuKtlM1aYf S1G0gLtwSLbCOlAakoUFj//BFCXiSA1dA9iqf/UAHFMkK0DxXl+h2fvkdSxGOSK1ImD+ vrIg==",
+        "X-Google-DKIM-Signature":"v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20221208; t=1693931536; x=1694536336; h=content-transfer-encoding:to:from:subject:message-id:date :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id :reply-to; bh=1fz4hEEQWTfLypKIAxkhZYye9Fbjv142YbJwqlMh24A=; b=IcXPQzKjCSFi3vcfpG66VW3mqCNRKTMdMfaJTBiCITmO7ZAnMqz1ZM/6tCXqkchhBQ jc4+a7szfzsouz7+qC1sxRzBtuulGluOr1Iifb/4fggsjgZrTlgBN23Tjzy56u+Q5GqA pIxGB2ikfjZ4uqJEi/SPhCW9/fegmWD3nek887oBTfFwRFiVEk7XlNVF3h5fSovh66Og 2g62avoUIjXmB/FQ9LCqJWgDlwo/Y4sqnDQPyT+7F0+KkE+hp2iAySgA2tTEn/RUa1MS PG+4fc+DcKT5KOXbibmI674J2/B+oqrE74unO8OrZIlZJhY8hP0Z3ko+nEmRu8xAcRQl oNqg==",
+        "X-Gm-Message-State":"AOJu0Yyl9dqHhwemSo6Wcd/mMbNycZ8Ruyrn96K1w2abOZKqq0vLSag/ QcrOsozTc60ggwQ8Cz0ZwwpRNnkBRhcu6n+gKSCTr9MOVbppNyZHOI0=",
+        "X-Google-Smtp-Source":"AGHT+IHvjxZRqcUsuv2UI0/Ch0nJRNlMXqCjsHJ2XsuscrCJYVxBjk062AdAer+17PlbsTP1g86wfQhRAQg8I+3e8plPj0rQjSr/Bg==",
+        "MIME-Version":"1.0",
+        "X-Received":"by 2002:a4a:2a0f:0:b0:573:55f4:5175 with SMTP id k15-20020a4a2a0f000000b0057355f45175mr11226077oof.0.1693931535721; Tue, 05 Sep 2023 09:32:15 -0700 (PDT)",
+        "X-Google-Address-Confirmation":"RpZf9kuk6t-6aLj-mV-bcgin6ks",
+        "Date":"Tue, 5 Sep 2023 18:32:15 +0200",
+        "Message-ID":"\u003cCAC9buzy86_isZ90QKHLDTkf_OG72QxSDBY5Scm4Td_EVQm1_1g@mail.gmail.com\u003e",
+        "Subject":"(#115250375) Confirmation du transfert par Gmail - Réception du message de didier.lafforgue@gmail.com",
+        "From":"L'équipe Gmail \u003cforwarding-noreply@google.com\u003e",
+        "To":"a5c656df-c501-4d2c-bf8f-7259c8111991@reply-dev.poolpybot.fr",
+        "Content-Type":"text/plain",
+        "Content-Transfer-Encoding":"quoted-printable"
+      },
+      "SpamScore":1.9,
+      "ExtractedMarkdownMessage":"didier.lafforgue@gmail.com a demandé à transférer·automatiquement ses  \nmessages à·votre adresse e-mail  \na5c656df-c501-4d2c-bf8f-7259c8111991@reply-dev.poolpybot.fr.  \nCode de confirmation : 115250375  \n\nPour autoriser didier.lafforgue@gmail.com à transférer automatiquement  \nses messages à votre adresse e-mail,  \ncliquez sur le lien ci-dessous afin d'accepter la demande :  \n\nhttps://mail-settings.google.com/mail/vf-%5BANGjdJ9zn2k7twpCZrPMPK2SqXKV_qf2PAEwSsIx1Qzvgcx6XYFB_QZ3yJp8HkWtNC8WU5i68duq-cBp6z61mfzWadW_yoemdpwoIw4gU0pMpR4HSqGgo64XfsuWpxxiMmtLiZsTFVqt4tF1JIu_%5D-QGwGpoZqYPQBxIzI5Pq3EjT2Udc  \n\nSi le lien ne semble pas fonctionner, copiez-le et collez-le dans une  \nnouvelle fenêtre de navigateur. Si vous ne parvenez pas à accéder à la  \npage de destination du lien, vous pouvez envoyer le code de  \nconfirmation  \n115250375 à didier.lafforgue@gmail.com.  \n",
+      "ExtractedMarkdownSignature":"Merci d'utiliser Gmail !  \n\nCordialement,  \n\nL'équipe Gmail  \n\nSi vous n'acceptez pas cette demande, aucune autre action de votre  \npart n'est nécessaire.  \ndidier.lafforgue@gmail.com ne pourra pas transférer de messages  \nautomatiquement à votre adresse e-mail  \ntant que vous n'aurez pas accepté sa demande en cliquant sur le lien  \nci-dessus. Si vous avez cliqué sur le lien par inadvertance, mais que  \nvous ne souhaitiez pas autoriser didier.lafforgue@gmail.com à  \ntransférer automatiquement des messages à votre adresse, cliquez sur  \nle lien ci-après pour annuler la validation :  \nhttps://mail-settings.google.com/mail/uf-%5BANGjdJ-Qh-TcSJtpoiHDieRSZWc3Gj5kTl9BDjFAJ-rd2hkGDDp2_Y7f-SDaLNi75F67ECqiK3sz44T5J7QOU_iw9d9JbmTurZOeCwhvTGnUDLp3sIDPU0ZZZxi1-PTEYp5Z2bzAlTl--m-9xCBY%5D-QGwGpoZqYPQBxIzI5Pq3EjT2Udc  \n\nPour en savoir plus sur les raisons pour lesquelles vous avez reçu ce  \nmessage, consultez la page suivante :  \nhttp://support.google.com/mail/bin/answer.py?answer=184973.  \n\nNe répondez pas à ce message. Si vous souhaitez contacter l'équipe  \nGoogle.com, connectez-vous à votre compte et cliquez sur \"Aide\" en  \nhaut d'une page. Cliquez ensuite sur \"Contactez-nous\" au bas du Centre  \nd'aide.",
+      "RawHtmlBody":null,
+      "RawTextBody":"didier.lafforgue@gmail.com a demandé à transférer·automatiquement ses\r\nmessages à·votre adresse e-mail\r\na5c656df-c501-4d2c-bf8f-7259c8111991@reply-dev.poolpybot.fr.\r\nCode de confirmation : 115250375\r\n\nPour autoriser didier.lafforgue@gmail.com à transférer automatiquement\r\nses messages à votre adresse e-mail,\r\ncliquez sur le lien ci-dessous afin d'accepter la demande :\r\n\nhttps://mail-settings.google.com/mail/vf-%5BANGjdJ9zn2k7twpCZrPMPK2SqXKV_qf2PAEwSsIx1Qzvgcx6XYFB_QZ3yJp8HkWtNC8WU5i68duq-cBp6z61mfzWadW_yoemdpwoIw4gU0pMpR4HSqGgo64XfsuWpxxiMmtLiZsTFVqt4tF1JIu_%5D-QGwGpoZqYPQBxIzI5Pq3EjT2Udc\r\n\nSi le lien ne semble pas fonctionner, copiez-le et collez-le dans une\r\nnouvelle fenêtre de navigateur. Si vous ne parvenez pas à accéder à la\r\npage de destination du lien, vous pouvez envoyer le code de\r\nconfirmation\r\n115250375 à didier.lafforgue@gmail.com.\r\n\nMerci d'utiliser Gmail !\r\n\nCordialement,\r\n\nL'équipe Gmail\r\n\nSi vous n'acceptez pas cette demande, aucune autre action de votre\r\npart n'est nécessaire.\r\ndidier.lafforgue@gmail.com ne pourra pas transférer de messages\r\nautomatiquement à votre adresse e-mail\r\ntant que vous n'aurez pas accepté sa demande en cliquant sur le lien\r\nci-dessus. Si vous avez cliqué sur le lien par inadvertance, mais que\r\nvous ne souhaitiez pas autoriser didier.lafforgue@gmail.com à\r\ntransférer automatiquement des messages à votre adresse, cliquez sur\r\nle lien ci-après pour annuler la validation :\r\nhttps://mail-settings.google.com/mail/uf-%5BANGjdJ-Qh-TcSJtpoiHDieRSZWc3Gj5kTl9BDjFAJ-rd2hkGDDp2_Y7f-SDaLNi75F67ECqiK3sz44T5J7QOU_iw9d9JbmTurZOeCwhvTGnUDLp3sIDPU0ZZZxi1-PTEYp5Z2bzAlTl--m-9xCBY%5D-QGwGpoZqYPQBxIzI5Pq3EjT2Udc\r\n\nPour en savoir plus sur les raisons pour lesquelles vous avez reçu ce\r\nmessage, consultez la page suivante :\r\nhttp://support.google.com/mail/bin/answer.py?answer=184973.\r\n\nNe répondez pas à ce message. Si vous souhaitez contacter l'équipe\r\nGoogle.com, connectez-vous à votre compte et cliquez sur \"Aide\" en\r\nhaut d'une page. Cliquez ensuite sur \"Contactez-nous\" au bas du Centre\r\nd'aide.\r\n"
+    }
+  ]
+}

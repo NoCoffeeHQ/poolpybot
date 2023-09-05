@@ -1,0 +1,13 @@
+<div class="bg-gray-50 sm:rounded-lg">
+  <div class="px-4 py-5 sm:p-6">
+    <h3 class="text-base font-semibold leading-6 text-gray-900">
+      <%= t('.title') %></h3>
+    <div class="mt-2 text-sm text-gray-500">
+      <p><%= t('.description').html_safe %></p>
+    </div>
+    <div class="mt-5 flex items-center justify-center space-x-4">
+      <pre><code><%= current_user.reply_email %></code></pre>
+      <%= ui_kit :copy_to_clipboard, value: current_user.reply_email %>
+    </div>
+  </div>
+</div>

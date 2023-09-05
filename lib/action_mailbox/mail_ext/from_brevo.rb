@@ -26,7 +26,7 @@ module BrevoSupport
     end
     mail.html_part = Mail::Part.new do
       content_type 'text/html; charset=UTF-8'
-      body item['RawHtmlBody'].gsub(/^> /, '')
+      body item['RawHtmlBody']&.gsub(/^> /, '')
     end
   end
 

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   scope '/workspace', module: 'workspace_ui', as: :workspace do
     root to: 'home#index'
+    get 'instructions', to: 'instructions#index', as: :instructions
     resources :notifications, only: %i[index]
     resource :notifications_status, controller: 'notifications_status', only: %i[show]
     resources :invoices, only: %i[index destroy] do

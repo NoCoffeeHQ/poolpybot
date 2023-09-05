@@ -1,0 +1,72 @@
+<div id="apple-pane" class="hidden" data-pane-selector-target="pane">
+  <div class="prose prose-sm max-w-full">
+    <ol>
+      <li>
+        <b>Open Apple Mail:</b>
+        <ul>
+          <li>Navigate to the Apple Mail application on your macOS device and open it.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Access Mail Preferences:</b>
+        <ul>
+          <li>In the menu bar at the top of your screen, click on "Mail" and then select "Preferences" from the dropdown menu.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Navigate to Rules:</b>
+        <ul>
+          <li>In the Preferences window, click on the "Rules" tab located on the far right.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Add a New Rule regarding the "<%= @invoice_emails.first.invoice_supplier.real_name %>" vendor:</b>
+        <ul>
+          <li>Give your rule a descriptive name, e.g., "Forward Invoices to Poolpybot".</li>
+          <li>Set the conditions for the rule:
+            <ul>
+              <li>From the first dropdown, select "From," then "contains," and then input <code><%= @invoice_emails.first.from %></code> in the text box.</li>
+              <li>Click on the "+" button to add another condition.</li>
+              <li>
+                From the new dropdown, select "Subject," then "contains," and input some consecutive and generic words from <code><%= @invoice_emails.first.subject %></code> in the input box.
+                <br/>🚨 Don't enter the invoice id or a date since they're specific to a single invoice.
+              </li>
+            </ul>
+          </li>
+          <li>Ensure that the two conditions are set to "all" which means both conditions must be met.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Choose Forwarding Action:</b>
+        <ul>
+          <li>For the actions, select "Forward message" from the dropdown.</li>
+          <li>Enter the Poolpybot email address: <code><%= current_user.simple_reply_email %></code></li>
+        </ul>
+      </li>
+      <li>
+        <b>Save the Rule:</b>
+        <ul>
+          <li>Click on the "OK" button to save and activate the rule.</li>
+          <li>A prompt will ask if you want to apply the rule to messages in the mailbox, click "Don't Apply" if you only want the rule to be active for new incoming emails, or "Apply" if you want it to be retroactive.</li>
+        </ul>
+      </li>
+      <% if @invoice_emails.size > 1 %>
+      <li>
+        <b>Repeat steps 4 through 6 for each vendor</b>
+        <ul>
+          <% @invoice_emails.each_with_index do |email, index| %>
+          <% next if index == 0 %>
+          <li>
+            <b><%= email.invoice_supplier.name %></b>
+            <br/>
+            <u>From:</u> <code><%= email.from %></code>
+            <br/>
+            <u>Subject:</u> <code><%= email.subject %></code>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="bg-gray-50 sm:rounded-lg">
+  <div class="px-4 py-5 sm:p-6">
+    <h3 class="text-base font-semibold leading-6 text-gray-900">
+      <%= t('.title') %></h3>
+    <div class="mt-2 text-sm text-gray-500">
+      <p><%= t('.description') %></p>
+    </div>
+    <div class="mt-5 flex items-center justify-start">
+      <%= ui_kit :direct_upload_button, label: t('.button_link'), url: bulk_create_workspace_invoices_path, accept: 'application/pdf', multiple: true %>
+    </div>
+  </div>
+</div>

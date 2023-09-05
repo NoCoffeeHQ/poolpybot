@@ -3,6 +3,7 @@
 class InvoiceEmail < ApplicationRecord
   ## associations ##
   belongs_to :invoice
+  has_one :invoice_supplier, through: :invoice
 
   ## validations ##
   validates :subject, :from, :forwarded_at, presence: true

@@ -3,9 +3,9 @@
 module WorkspaceUI
   class HomeController < BaseController
     def index
-      return unless current_user.invoices.count.positive? && params[:no_redirection].blank?
-
-      redirect_to current_invoices_path
+      has_invoices = current_user.invoices.count.positive?
+      path = has_invoices ? current_invoices_path : workspace_instructions_path
+      redirect_to path
     end
   end
 end

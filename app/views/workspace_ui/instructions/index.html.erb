@@ -1,0 +1,20 @@
+<% content_for :header do %>
+  <h1 class="text-3xl font-semibold leading-tight tracking-tight text-gray-900">
+    <%= t('.main_title', name: current_user.username).html_safe %>
+  </h1>
+<% end %>
+
+<div class="px-4 sm:px-6 lg:px-8">
+  <h2 class="text-2xl font-semibold leading-6 text-gray-900">
+    <%= t('.title') %>
+  </h2>
+  <p class="mt-2 text-sm text-gray-700"><%= t('.description') %></p>
+
+  <div class="mt-10 space-y-10">
+    <%= render 'forward_address' %>
+
+    <%= render 'first_upload' unless @has_invoices %>
+      
+    <%= render 'mail_filters' if @has_invoices %>
+  </div>
+</div>
