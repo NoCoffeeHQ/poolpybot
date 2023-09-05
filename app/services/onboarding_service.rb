@@ -27,7 +27,7 @@ class OnboardingService < ApplicationService
   end
 
   def notify(user, has_invitation)
-    Notification.trigger(user: user, event: :company_created) unless has_invitation
+    Notification.trigger(user: user, event: :company_created, data: { company: user.company.name }) unless has_invitation
     Notification.trigger(user: user, event: :user_joined)
   end
 end
