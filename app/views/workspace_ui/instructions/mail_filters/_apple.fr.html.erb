@@ -22,7 +22,8 @@
       <li>
         <b>Ajoutez une nouvelle règle concernant le fournisseur "<%= @invoice_emails.first.invoice_supplier.real_name %>" :</b>
         <ul>
-          <li>Donnez à votre règle un nom descriptif, par exemple, "Transférer les factures à Poolpybot".</li>
+          <li>Donnez à votre règle un nom descriptif, par exemple, "Transférer les factures <%= @invoice_emails.first.invoice_supplier.real_name %> à Poolpybot".</li>
+          <li>Sélectionnez 'Tous' dans la premier menu déroulant afin d'appliquer toutes les conditions.</li>
           <li>Définissez les conditions de la règle :
             <ul>
               <li>Dans le premier menu déroulant, sélectionnez "De", puis "contient", et entrez <code><%= @invoice_emails.first.from %></code> dans le champ texte.</li>
@@ -57,7 +58,7 @@
           <% @invoice_emails.each_with_index do |email, index| %>
           <% next if index == 0 %>
           <li>
-            <b><%= email.invoice_supplier.name %></b>
+            <b><%= email.invoice_supplier.real_name %></b>
             <br/>
             <u>De :</u> <code><%= email.from %></code>
             <br/>

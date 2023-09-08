@@ -59,7 +59,7 @@
           <% @invoice_emails.each_with_index do |email, index| %>
           <% next if index == 0 %>
           <li>
-            <b><%= email.invoice_supplier.name %></b>
+            <b><%= email.invoice_supplier.real_name %></b>
             <br/>
             <u>De :</u> <code><%= email.from %></code>
             <br/>

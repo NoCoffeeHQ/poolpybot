@@ -22,7 +22,8 @@
       <li>
         <b>Add a New Rule regarding the "<%= @invoice_emails.first.invoice_supplier.real_name %>" vendor:</b>
         <ul>
-          <li>Give your rule a descriptive name, e.g., "Forward Invoices to Poolpybot".</li>
+          <li>Give your rule a descriptive name, e.g., "Forward <%= @invoice_emails.first.invoice_supplier.real_name %> invoices to Poolpybot".</li>
+          <li>Select 'all' in the first select box ("If ... of the following").</li>
           <li>Set the conditions for the rule:
             <ul>
               <li>From the first dropdown, select "From," then "contains," and then input <code><%= @invoice_emails.first.from %></code> in the text box.</li>
@@ -57,7 +58,7 @@
           <% @invoice_emails.each_with_index do |email, index| %>
           <% next if index == 0 %>
           <li>
-            <b><%= email.invoice_supplier.name %></b>
+            <b><%= email.invoice_supplier.real_name %></b>
             <br/>
             <u>From:</u> <code><%= email.from %></code>
             <br/>
