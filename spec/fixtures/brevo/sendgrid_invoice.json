@@ -1,0 +1,110 @@
+{
+  "items":[
+    {
+      "Uuid":[
+        "9d9c7f17-55b9-48b4-8844-29f38dc77209"
+      ],
+      "Recipients":[
+        "a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr"
+      ],
+      "MessageId":"\u003c1403795218.475641.1694126691641@bet20-0f0f3cdca2c3f34f8.4.prod.auw2.zuora\u003e",
+      "InReplyTo":null,
+      "From":{
+        "Name":"SendGrid",
+        "Address":"noreply@sendgrid.com"
+      },
+      "To":[
+        {
+          "Name":null,
+          "Address":"estelle@nocoffee.fr"
+        }
+      ],
+      "Cc":[
+        
+      ],
+      "Bcc":[
+        
+      ],
+      "ReplyTo":{
+        "Name":null,
+        "Address":"noreply@sendgrid.com"
+      },
+      "SentAtDate":"Thu, 07 Sep 2023 22:44:52 +0000 (UTC)",
+      "Subject":"You have a new invoice from SendGrid (INV12430225)",
+      "Attachments":[],
+      "Headers":{
+        "Received":[
+          "by mail-qt1-f175.google.com with SMTP id d75a77b69052e-414b3da2494so9643091cf.3 for \u003cb3d9a573-0d9c-45b6-b042-22eabc38de52@reply.poolpybot.fr\u003e; Thu, 07 Sep 2023 15:45:02 -0700 (PDT)",
+          "by 2002:ac8:4548:0:b0:410:9407:6978 with SMTP id z8csp56099qtn; Thu, 7 Sep 2023 15:44:58 -0700 (PDT)",
+          "from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41]) by mx.google.com with SMTPS id h5-20020a17090a2ec500b0026b5ba44950sor171973pjs.2.2023.09.07.15.44.57 for \u003cestelle@locomotivecms.com\u003e (Google Transport Security); Thu, 07 Sep 2023 15:44:57 -0700 (PDT)",
+          "by 2002:a05:6a10:8f83:b0:4e9:7d85:61e2 with SMTP id lc3csp92984pxb; Thu, 7 Sep 2023 15:44:54 -0700 (PDT)",
+          "from o3.email.sendgrid.com (o3.email.sendgrid.com. [167.89.32.50]) by mx.google.com with ESMTPS id q7-20020a25b007000000b00d7e2d9c1f88si485902ybf.170.2023.09.07.15.44.52 for \u003cestelle@nocoffee.fr\u003e (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128); Thu, 07 Sep 2023 15:44:53 -0700 (PDT)",
+          "by filterdrecv-86c7d77d8f-6r8bv with SMTP id filterdrecv-86c7d77d8f-6r8bv-1-64FA5263-85 2023-09-07 22:44:52.018785532 +0000 UTC m=+10364915.143555971",
+          "from zgateway.zuora.com (unknown) by geopod-ismtpd-14 (SG) with ESMTP id J3IwoZgLQVeJLBcE-3sN6w for \u003cestelle@nocoffee.fr\u003e; Thu, 07 Sep 2023 22:44:51.730 +0000 (UTC)"
+        ],
+        "X-Google-DKIM-Signature":"v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20230601; t=1694126702; x=1694731502; h=to:reply-to:mime-version:subject:message-id:from:date :dkim-signature:delivered-to:x-forwarded-to:delivered-to :x-forwarded-for:x-forwarded-to:x-gm-message-state:from:to:cc :subject:date:message-id:reply-to; bh=aUCg3DYvrVqAZfxefoncVempqIWvGNEWSkaY2odDmdU=; b=SMzMDeB0d699/aSpSoUyWSDojYpl6VwSHmuhQQH/MjCjAzeHMkOFLF7JWBvl0BB8TD Wt0M91864CbFv+2jOUFXF1TXXlaKS0xArb1O31G/oaGssAcZaIJ0/UwEo/9aR6V4McMC aASScLXdZSb35bXaBMdUPZVZY94HlfB0QbOCggugkGppDwpGIwtXvVRC3DYAnOOlQ/o5 7mo+gxQwVaP59Nr7E7+jf9NvKd6KMqLCdLeIoe6Pm1QtOWjD0KQxbrZJfq51XfqV3MuI 84xShQwcwgL0S4ggKGH9bcFMIIbIlFH6Nj3dwZQT0UhOMZkuM6usPPhhfsUz1x/vSbdn 5hkQ==",
+        "X-Gm-Message-State":"AOJu0Yxu3aHGRm4pVt+MJV5fquA9C+1XdQIWRVnGXrLiVjOuUcpJ3RsG rqd49MjPMjIHnXo1717iBxpIr4yl3iPsef92WuBxLz/H7wzsG2Y5XwqgcYKLLg==",
+        "X-Received":[
+          "by 2002:a05:622a:64e:b0:403:b33f:5d21 with SMTP id a14-20020a05622a064e00b00403b33f5d21mr971797qtb.12.1694126701459; Thu, 07 Sep 2023 15:45:01 -0700 (PDT)",
+          "by 2002:a17:90a:72c7:b0:262:ee7d:2d20 with SMTP id l7-20020a17090a72c700b00262ee7d2d20mr1044367pjk.12.1694126697637; Thu, 07 Sep 2023 15:44:57 -0700 (PDT)",
+          "by 2002:a17:90a:4982:b0:267:70a8:abff with SMTP id d2-20020a17090a498200b0026770a8abffmr962532pjh.29.1694126696747; Thu, 07 Sep 2023 15:44:56 -0700 (PDT)",
+          "by 2002:a25:a2c8:0:b0:d0c:110b:2f17 with SMTP id c8-20020a25a2c8000000b00d0c110b2f17mr647056ybn.53.1694126693943; Thu, 07 Sep 2023 15:44:53 -0700 (PDT)"
+        ],
+        "X-Forwarded-To":[
+          "b3d9a573-0d9c-45b6-b042-22eabc38de52@reply.poolpybot.fr",
+          "estelle@locomotivecms.com"
+        ],
+        "X-Forwarded-For":"estelle@locomotivecms.com b3d9a573-0d9c-45b6-b042-22eabc38de52@reply.poolpybot.fr",
+        "Delivered-To":[
+          "estelle@locomotivecms.com",
+          "estelle@nocoffee.fr"
+        ],
+        "ARC-Seal":[
+          "i=2; a=rsa-sha256; t=1694126697; cv=pass; d=google.com; s=arc-20160816; b=YEMsUjNH7FprP7O+dnZ9u5ZO0ii22N8sE1EMXfa4JGX8f5Xm9vxw5kmkxuf+7CQv1w zy/jkXg4Ozp/rddrkGP6rLwMCik3fQrRJatR7PiNgzSjS3Hmhvc6i+mghU4Ab6H9ti7X fR2jXEn44e1ArYkfYI3wLR+pGMRiDJo3AFSeP+Dfup29yLpoUrPROhlnTe3p8+yEajGh 7u8d0fFpoxVTZRytPW4eqlkNZBAGRKoZoHsgTtN2hVcgaB6DWy/FCJUhbgPNDm4uKM9/ Ls4AvyAnHYBXDBQRT9ODufgl0Oy1/XJrac+Fi2RDwq/M3X9yMX5tYLx0NHwA3vCrCx7A 9zHw==",
+          "i=1; a=rsa-sha256; t=1694126693; cv=none; d=google.com; s=arc-20160816; b=xF0jj3IjeXSm4x1JhlLlgO1mWBOqNweOuBK3E58MMjK8hxCA9/WDYbzww7KT45xLKp lJqREz/tt0pxQCjneJEbMX6EoIyCVEhCqE7yiiJfxCiTNBgOyjCROZF8f39lVfcGn7bt 57XFtDqIC6f7UrMIMYbZyjGPIRqN6L++PgnkmpX7tsXmd5WoxIr8IWI06g+8CJCVGu5x VPGkGJkVlLmpoo3vNDszUWB8t2QKghjk0qlq7B6gixXQIeTsRdRwS0tzLVSopbhM9GqC 4245eQTwl05RxFog4QT7wbPyJ1BBuvBnqknT8/wFPHkqxOmt0DZWSUKmMRWeS5UuGDFc +p/A=="
+        ],
+        "ARC-Message-Signature":[
+          "i=2; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816; h=to:reply-to:mime-version:subject:message-id:from:date :dkim-signature:delivered-to; bh=aUCg3DYvrVqAZfxefoncVempqIWvGNEWSkaY2odDmdU=; fh=CQnnztFU6W5Hxtlxy+vED41e3x0BUge0aWHKNKjbAz0=; b=PgaS9/bfjxsbPPi7jRuCkjKie+iWA3elyO7c0BB9oFxupps5W8LawTZxRFZDrJd+L+ yT0TS5/ZtbDfdVroryHgXi5cZzQha0D/I47JbZBVf4de2ThxQIhYiMprkjR0tkz8XNlN LrruRIjWcl/A2KbV07jMnitVVuZFz2K6g8bkJfVDC+3Jx3Ohu42bkq+Cxgj7YT84CP8N uGQnkHv57khcHxLksFJnsuiTeYKRbXAmn8jfzkQg44fmKJnDTL/ffVi9ikwBlNl/6tJI PG38HNxODJJ7B7ZfQ2ajqY8fVImUjx9yx7yXW9LXoGNFhaHnWpIVNMIxhD9+f8bIQbRZ S7TA==",
+          "i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816; h=to:reply-to:mime-version:subject:message-id:from:date :dkim-signature; bh=aUCg3DYvrVqAZfxefoncVempqIWvGNEWSkaY2odDmdU=; fh=CQnnztFU6W5Hxtlxy+vED41e3x0BUge0aWHKNKjbAz0=; b=YDk6vREw3IIbDj8DtUKPvWYNX8y+arAvjc/zoyXl2ItvrF4c9sGUIjVy5EYHBa8qzM 5Pal1rE4o1A4i4xuaMx34b7zgS1MGDozRvpf6VpCA0fN8zAkdzFU4OJ8URnjKsWL9Pi2 LUw2F35cSZERTofo/nJX5JfqzV4JadIuFXUMv6LjEgQqHCMSWtOxnV117cl26D+USF5Z hrOVrMadITkAF0rDlgMu9qGJg92G6zSCqlDcPEng33JjMySbeOKVPsAOyJOqiDwKvZLQ +ZmmVTFmWKXhPW7xQMMRpXHDOkbMx0BkTaDYg4+qg+UX5dFO4/eN85lzVxjIfPjEYKV+ qgeQ=="
+        ],
+        "ARC-Authentication-Results":[
+          "i=2; mx.google.com; dkim=pass header.i=@sendgrid.com header.s=smtpapi header.b=LjPh4Tmi; arc=pass (i=1 spf=pass spfdomain=sendgrid.com dkim=pass dkdomain=sendgrid.com dmarc=pass fromdomain=sendgrid.com); spf=pass (google.com: domain of estelle+caf_=estelle=locomotivecms.com@nocoffee.fr designates 209.85.220.41 as permitted sender) smtp.mailfrom=\"estelle+caf_=estelle=locomotivecms.com@nocoffee.fr\"; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=sendgrid.com",
+          "i=1; mx.google.com; dkim=pass header.i=@sendgrid.com header.s=smtpapi header.b=LjPh4Tmi; spf=pass (google.com: domain of noreply@sendgrid.com designates 167.89.32.50 as permitted sender) smtp.mailfrom=noreply@sendgrid.com; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=sendgrid.com"
+        ],
+        "Return-Path":[
+          "\u003cestelle+caf_=estelle=locomotivecms.com@nocoffee.fr\u003e",
+          "\u003cnoreply@sendgrid.com\u003e"
+        ],
+        "Received-SPF":[
+          "pass (google.com: domain of estelle+caf_=estelle=locomotivecms.com@nocoffee.fr designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;",
+          "pass (google.com: domain of noreply@sendgrid.com designates 167.89.32.50 as permitted sender) client-ip=167.89.32.50;"
+        ],
+        "Authentication-Results":"mx.google.com; dkim=pass header.i=@sendgrid.com header.s=smtpapi header.b=LjPh4Tmi; arc=pass (i=1 spf=pass spfdomain=sendgrid.com dkim=pass dkdomain=sendgrid.com dmarc=pass fromdomain=sendgrid.com); spf=pass (google.com: domain of estelle+caf_=estelle=locomotivecms.com@nocoffee.fr designates 209.85.220.41 as permitted sender) smtp.mailfrom=\"estelle+caf_=estelle=locomotivecms.com@nocoffee.fr\"; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=sendgrid.com",
+        "X-X-Forwarded-For":"estelle@nocoffee.fr estelle@locomotivecms.com",
+        "X-Google-Smtp-Source":"AGHT+IFl1a5iht8LqtMi76pUpU5bMmMP5GHez6ECnQV818OOdJWhPSqgyINZNN/tuxykGyCL8Q1n",
+        "DKIM-Signature":"v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.com; h=from:subject:mime-version:content-type:reply-to:to:cc:content-type: from:subject:to; s=smtpapi; bh=aUCg3DYvrVqAZfxefoncVempqIWvGNEWSkaY2odDmdU=; b=LjPh4TmiS+cDq+wmrEB34EWfysYEET/spbl3LmNgARRHlZGiXBGjpnvdm/zy0gKq777o t0jTiJJsliYREh51rDPzWUQwl6M1V2BZyBAwXYImLIuS4NZ1uVrdFERTNWrdHXUbOfAzeV aDsp69dGN7IGUb1BESXyegywGBlSkGhrY=",
+        "Date":"Thu, 07 Sep 2023 22:44:52 +0000 (UTC)",
+        "From":"SendGrid \u003cnoreply@sendgrid.com\u003e",
+        "Message-ID":"\u003c1403795218.475641.1694126691641@bet20-0f0f3cdca2c3f34f8.4.prod.auw2.zuora\u003e",
+        "Subject":"You have a new invoice from SendGrid (INV12430225)",
+        "MIME-Version":"1.0",
+        "Content-Type":"multipart/mixed",
+        "X-Priority":"3",
+        "X-Zuora-GlobalTenantId":"815",
+        "X-Zuora-EntityId":"11e64eefada4b500965800259058c29c",
+        "X-Zuora-TenantId":"815",
+        "X-Zuora-SourceEnv":"prod02",
+        "X-Zuora-NotificationId":"8a1286898a69edef018a71d1d2f379f2",
+        "Reply-To":"noreply@sendgrid.com",
+        "X-SG-EID":" I8eEC1pv03fmNo5m8yNIzWI9WftnOX/GHnqs4twxOaIBBiuI+yDx3wk5Qk9CwhXsFZyj6FJYDl1SwzkGVx+wPnZsesJ64X4zTSU8RBXpuREQSBnhkjUO/wDB1XZsxGes/Cvxiqr71O5Yq2PmVesqDSJb5cNCRxeDJP7lNNbT6qDG9x01Xi59euFCOi3FBvQJxfg1fMP+IF3aiSGDxFFZNrmJG7iE/U8tXdsw/MZRvoHFje/5v/OsKqtGBll3Z+1V",
+        "To":"estelle@nocoffee.fr",
+        "X-Entity-ID":"AudLs0noDGcyPSEhIl+aOQ=="
+      },
+      "SpamScore":0.849999,
+      "ExtractedMarkdownMessage":"You have a new invoice from SendGrid.  \n[SendGrid](https://sendgrid.com)\n\n## You have a new invoice from SendGrid.\n\nWe're writing to let you know that your 09/01/2023 SendGrid invoice (INV12430225), for account number 887452, is attached to this message as a PDF file. The outstanding balance due for this invoice is $0.00. \n\nIf you have a valid payment method on file with us, you don't need to do anything. Your payment will be automatically processed and you will receive an email confirmation of the charge shortly. \n[View Billing Information](https://app.sendgrid.com/settings/billing)\n\nIf you have any questions regarding this message, please refer to our [Billing Support Knowledge Base](https://sendgrid.com/docs/Classroom/Basics/Billing/billing_info_and_faqs.html). \n\nYou may also contact us at any time by submitting a ticket through the support portal - https://support.sendgrid.com/hc/en-us. \n\nThank you for your business,  ",
+      "ExtractedMarkdownSignature":"The Billing Operations Team at SendGrid \n[SendGrid](https://sendgrid.com) \n\nDeliver email that matters \n\n© SendGrid Inc. 1801 California Street, Suite 500, Denver, CO 80202 USA \n\n[Blog](https://sendgrid.com/blog) [GitHub](https://github.com/sendgrid) [Twitter](https://twitter.com/sendgrid) [Facebook](https://www.facebook.com/SendGrid) [LinkedIn](https://www.linkedin.com/company/sendgrid)",
+      "RawHtmlBody":"",
+      "RawTextBody":""
+    }
+  ]
+}

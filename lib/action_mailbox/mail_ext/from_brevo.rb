@@ -15,7 +15,7 @@ module BrevoSupport
       message_id: item.dig('Headers', 'Message-ID'),
       date: item.dig('Headers', 'Date'),
       from: item.dig('Headers', 'From'),
-      to: item.dig('Headers', 'To'),
+      to: (([] + item['Recipients']) << item.dig('Headers', 'To')).compact.uniq,
       subject: item['Subject']
     }
   end
