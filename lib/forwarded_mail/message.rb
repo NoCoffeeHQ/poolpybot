@@ -18,11 +18,11 @@ module ForwardedMail
     end
 
     def from_address
-      forwarded? && original_from ? original_from[:address] : from.addresses.first
+      forwarded? && original_from ? original_from[:address] : self[:from].address
     end
 
     def from_name
-      forwarded? && original_from ? original_from[:name] : from.display_names.first
+      forwarded? && original_from ? original_from[:name] : self[:from].display_names.first
     end
 
     def text_body
