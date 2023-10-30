@@ -14,7 +14,6 @@ export default class extends Controller {
   }
 
   async pollCallback() {
-    console.log('called!')
     const response = await get(this.urlValue)
 
     if (response.ok) {

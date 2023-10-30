@@ -7,10 +7,17 @@
       <%= ui_kit :avatar, attachment: notification.user.avatar %>
       <div class="min-w-0 flex-1">
         <div>
-          <div class="text-sm">
-            <span class="font-medium text-gray-700"><%= notification.user.username %></span>
-            <span class="text-gray-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
-          </div>
+          <% if notification.failed_event? %>
+            <%= link_to workspace_failed_invoice_path(notification.data['invoice_id']), class: 'text-sm block bg-orange-50', data: { turbo_frame: 'modal' } do %>
+              <span class="font-medium text-orange-700"><%= notification.user.username %></span>
+              <span class="text-orange-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
+            <% end %>
+          <% else %>
+            <div class="text-sm">
+              <span class="font-medium text-gray-700"><%= notification.user.username %></span>
+              <span class="text-gray-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
+            </div>
+          <% end %>
           <p class="mt-0.5 text-xs text-gray-500"><%= time_ago_in_words(notification.created_at) %></p>
         </div>
       </div>

@@ -146,6 +146,25 @@ en:
         flash:
           success: "Your invoice has been deleted."
 
+    failed_invoices:
+      show:
+        unknown_status: "Unknown error"
+        unknown_description: "We couldn't process your e-mail / PDF. Please contact us so that we can investiguate more."
+
+        extract_text_status: "Unable to extract the text"
+        extract_text_description: "We were unable to extract the text out of the uploaded PDF. Please contact us so that we can investiguate more."
+
+        parse_with_ai_status: "Unable to parse the invoice"
+        parse_with_ai_description: "Our AI was unable to parse the invoice and extract the data out of it. Please contact us so that we can investiguate more."
+
+        missing_identifier_status: "Missing identifier"
+        missing_identifier_description: "Our AI was unable to find the identifier of the invoice. Please contact us so that we can investiguate more."
+
+        duplicated_status: "Duplicated invoice"
+        duplicated_description: "This invoice has already been processed."
+
+        invoice_number: "Invoice#%{number}"
+
     invoice_suppliers:
       index:
         title: "Suppliers"

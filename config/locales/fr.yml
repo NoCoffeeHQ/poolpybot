@@ -117,6 +117,25 @@ fr:
         flash:
           success: "Votre facture a été supprimée."
 
+    failed_invoices:
+      show:
+        unknown_status: "Erreur inconnue"
+        unknown_description: "Nous n'avons pas pu traiter votre e-mail / PDF. Veuillez nous contacter afin que nous puissions enquêter davantage."
+
+        extract_text_status: "Impossible d'extraire le texte"
+        extract_text_description: "Nous n'avons pas pu extraire le texte du PDF téléchargé. Veuillez nous contacter afin que nous puissions enquêter davantage."
+
+        parse_with_ai_status: "Impossible d'analyser la facture"
+        parse_with_ai_description: "Notre IA n'a pas pu analyser la facture et en extraire les données. Veuillez nous contacter afin que nous puissions enquêter davantage."
+
+        missing_identifier_status: "Identifiant manquant"
+        missing_identifier_description: "Notre IA n'a pas pu trouver l'identifiant de la facture. Veuillez nous contacter afin que nous puissions enquêter davantage."
+
+        duplicated_status: "Facture dupliquée"
+        duplicated_description: "Cette facture a déjà été traitée."
+
+        invoice_number: "Facture n°%{number}"
+
     invoice_suppliers:
       index:
         title: "Fournisseurs"

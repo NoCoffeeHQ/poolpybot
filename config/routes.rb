@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     end
     resources :invoice_suppliers, only: %i[index edit update destroy]
     resources :invoices_exports, only: [:create]
+    resources :failed_invoices, only: %i[show]
     resource :settings, controller: 'settings', only: %i[edit]
     resource :my_profile, controller: 'my_profile', only: %i[update]
     resource :company, controller: 'company', only: %i[update]

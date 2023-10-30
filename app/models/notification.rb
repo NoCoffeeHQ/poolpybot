@@ -22,6 +22,10 @@ class Notification < ApplicationRecord
 
   ## methods ##
 
+  def failed_event?
+    %i[email_not_processed uploaded_pdf_not_processed].include?(event.to_sym)
+  end
+
   def full_data
     (data || {}).merge(
       company: company.name,

@@ -14,7 +14,7 @@ module InvoiceCreatorServices
       create_invoice(user, mail).tap do |invoice|
         create_invoice_email(invoice, mail) unless invoice.invoice_email
 
-        notify(user, mail, invoice.none_error?)
+        notify(user, mail, invoice)
       end
     end
 
@@ -32,11 +32,13 @@ module InvoiceCreatorServices
       end
     end
 
-    def notify(user, mail, success)
+    def notify(user, mail, invoice)
+      success = invoice.none_error?
       event = success ? :email_processed : :email_not_processed
       Notification.trigger(user: user, event: event, data: {
                              subject: mail.original_subject || mail.subject.to_s,
-                             from: mail.from.to_s
+                             from: mail.from.to_s,
+                             invoice_id: invoice.id
                            })
     end
   end
