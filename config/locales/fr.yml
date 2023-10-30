@@ -67,7 +67,7 @@ fr:
       first_upload:
         title: "...ou téléchargez le document PDF d'une facture (ou de plusieurs)"
         description: "Dans certaines situations, vous voudrez peut-être télécharger des documents PDF depuis votre ordinateur."
-        button_link: "Télécharger le PDF"
+        button_link: "Téléverer le PDF"
       mail_filters:
         title: "Créez des filtres pour votre application de messagerie"
         description: "Pour exploiter pleinement la puissance de Poolpybot, configurez votre application de messagerie pour transférer certains types d'e-mails au service Poolpybot."
