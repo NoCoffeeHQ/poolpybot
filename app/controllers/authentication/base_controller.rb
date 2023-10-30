@@ -9,7 +9,7 @@ module Authentication
     private
 
     def set_locale
-      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first rescue nil
       locale = I18n.default_locale unless I18n.available_locales.map(&:to_s).include?(locale)
       I18n.locale = locale
     end

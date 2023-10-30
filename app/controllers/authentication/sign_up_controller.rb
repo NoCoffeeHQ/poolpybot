@@ -30,6 +30,7 @@ module Authentication
     def user_params
       params.require(:user).permit(:username, :email, :password).tap do |permitted_params|
         permitted_params[:password_confirmation] = permitted_params[:password]
+        permitted_params[:locale] = I18n.locale
       end
     end
 

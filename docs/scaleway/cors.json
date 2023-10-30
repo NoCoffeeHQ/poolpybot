@@ -5,7 +5,7 @@
       "AllowedMethods": ["PUT"],
       "AllowedOrigins": [
         "http://localhost:5100", 
-        "https://994f-83-113-98-241.ngrok-free.app", 
+        "https://3597-83-113-98-241.ngrok-free.app", 
         "https://poolpybot.fr",
         "https://www.poolpybot.fr"
       ],
