@@ -7,8 +7,8 @@
       <%= ui_kit :avatar, attachment: notification.user.avatar %>
       <div class="min-w-0 flex-1">
         <div>
-          <% if notification.failed_event? %>
-            <%= link_to workspace_failed_invoice_path(notification.data['invoice_id']), class: 'text-sm block bg-orange-50', data: { turbo_frame: 'modal' } do %>
+          <% if notification.failed_event? && notification.invoice_id %>
+            <%= link_to workspace_failed_invoice_path(notification.invoice_id), class: 'text-sm block bg-orange-50', data: { turbo_frame: 'modal' } do %>
               <span class="font-medium text-orange-700"><%= notification.user.username %></span>
               <span class="text-orange-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
             <% end %>

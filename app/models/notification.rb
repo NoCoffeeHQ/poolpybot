@@ -22,6 +22,10 @@ class Notification < ApplicationRecord
 
   ## methods ##
 
+  def invoice_id
+    data['invoice_id']
+  end
+
   def failed_event?
     %i[email_not_processed uploaded_pdf_not_processed].include?(event.to_sym)
   end
