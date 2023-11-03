@@ -21,7 +21,8 @@ module ApplicationHelper
   def grouped_months_for_select(grouped_months, selected)
     grouped_options_for_select(
       (grouped_months || [Time.zone.today.year, [Time.zone.today]]).inject([]) do |groups, (year, months)|
-        groups.push([year, months.map { |date| [l(date, format: :month), date.strftime('%Y-%m')] }])
+        months.unshift(Time.zone.today) if year == Time.zone.today.year
+        groups.push([year, months.map { |date| [l(date, format: :month), date.strftime('%Y-%m')] }.uniq])
       end,
       selected
     )

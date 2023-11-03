@@ -1,11 +1,11 @@
 <% if url %>
-  <%= button_to url, class: "rounded-md bg-gray-800 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 shrink-0 #{'w-full' if full_width?}", data: { turbo_frame: '_top', turbo_method: :post } do %>
+  <%= button_to url, class: "rounded-md bg-gray-800 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:enabled:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 shrink-0 #{'w-full' if full_width?} disabled:opacity-25", data: { turbo_frame: '_top', turbo_method: :post }, disabled: disabled? do %>
     <%= label || content %>
   <% end %>
 <% else %>
   <button 
     type="<%= type %>" 
-    class="rounded-md bg-gray-800 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 shrink-0 <%= 'w-full' if full_width? %>">
+    class="rounded-md bg-gray-800 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:enabled:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 shrink-0 <%= 'w-full' if full_width? %> disabled:opacity-25" <%= 'disabled' if disabled? %>>
     <%= label || content %>
   </button>
 <% end %>
