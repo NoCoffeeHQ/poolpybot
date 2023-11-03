@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrevoConcern
   extend ActiveSupport::Concern
 
@@ -6,7 +8,8 @@ module BrevoConcern
   end
 
   def decode_brevo_attachments
-    return unless brevo_mail? 
+    return unless brevo_mail?
+
     Mail.brevo_decode_attachments(mail, only_pdf: true)
   end
 

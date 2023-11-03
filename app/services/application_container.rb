@@ -4,9 +4,9 @@ class ApplicationContainer < ServiceOrchestrator::Container
   # API clients
   register(:aleph_alpha_client) { ApiClients::AlephAlphaClient.new(api_token: credentials.aleph_alpha.api_token) }
   register(:openai_client) { ApiClients::OpenaiClient.new(api_key: credentials.openai.api_key) }
-  register(:pdfkit_client) { 
+  register(:pdfkit_client) do
     ApiClients::PdfkitClient.new(api_key: credentials(:pdfkit, :api_key), base_url: credentials(:pdfkit, :base_url))
-  }
+  end
 
   # PDF services
   register :pdf_to_text, 'PdfServices::Pdfkit::PdfToTextService'

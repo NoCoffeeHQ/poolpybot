@@ -11,7 +11,6 @@ RSpec.describe InvoicesMailbox, type: :mailbox do
   end
 
   describe 'Given the Mailbox ingress is Sendgrid' do
-
     subject { receive_inbound_email_from_fixture("mails/#{name}.eml") }
 
     describe 'Given the email is an invoice from Amazon' do
@@ -34,7 +33,6 @@ RSpec.describe InvoicesMailbox, type: :mailbox do
   end
 
   describe 'Given the Mailbox ingress is Brevo' do
-
     subject { receive_inbound_email_from_source(mail.to_s) }
 
     describe 'Given the email is an invoice from Apple' do

@@ -79,7 +79,7 @@ Rails.application.configure do
 
   # config.action_mailbox.ingress = :brevo
   config.action_mailbox.ingress = :sendgrid
-  
+
   config.active_job.queue_adapter = :sidekiq
 
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
