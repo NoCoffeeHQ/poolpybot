@@ -1,13 +1,13 @@
 Return-Path: <didier@nocoffee.fr>
 Received: from mail-lj1-f180.google.com (mxd [209.85.208.180]) by
  mx.sendgrid.net with ESMTP id Vkki7Nv7T2ySZKQhRu1ukA for
- <f2435296-179a-4f16-86ac-4c1aa6064052@reply.poolpybot.fr>; Fri,
+ <a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr>; Fri,
  03 Nov 2023 10:48:10.927 +0000 (UTC)
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-2c4fdf94666so26042321fa.2        for <f2435296-179a-4f16-86ac-4c1aa6064052@reply.poolpybot.fr>; Fri, 03 Nov 2023 03:48:10 -0700
-Received: from smtpclient.apple (amontpellier-657-1-161-241.w83-113.abo.wanadoo.fr. [83.113.98.241])        by smtp.gmail.com with ESMTPSA id h17-20020adff4d1000000b0031c52e81490sm1543789wrp.72.2023.11.03.03.48.07        for <f2435296-179a-4f16-86ac-4c1aa6064052@reply.poolpybot.fr>        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128); Fri, 03 Nov 2023 03:48:07 -0700
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-2c4fdf94666so26042321fa.2        for <a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr>; Fri, 03 Nov 2023 03:48:10 -0700
+Received: from smtpclient.apple (amontpellier-657-1-161-241.w83-113.abo.wanadoo.fr. [83.113.98.241])        by smtp.gmail.com with ESMTPSA id h17-20020adff4d1000000b0031c52e81490sm1543789wrp.72.2023.11.03.03.48.07        for <a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr>        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128); Fri, 03 Nov 2023 03:48:07 -0700
 Date: Fri, 03 Nov 2023 11:47:56 +0100
 From: Didier Lafforgue <didier@nocoffee.fr>
-To: f2435296-179a-4f16-86ac-4c1aa6064052@reply.poolpybot.fr
+To: a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr
 Message-ID: <601C73EC-E760-4AB1-9530-4C7CE1498592@nocoffee.fr>
 References: <0100018b9218c1fa-61480504-c6c1-497f-b518-ae07342548ea-000000@email.amazonses.com>
 Subject: Fwd: Amazon Web Services Invoice Available [Account: 950826473621]
@@ -16,7 +16,7 @@ Mime-Version: 1.0
 Content-Type: multipart/alternative;
  boundary="Apple-Mail=_6535AF02-E918-4977-8165-CE2509E58981"
 Content-Transfer-Encoding: 7bit
-X-Original-To: f2435296-179a-4f16-86ac-4c1aa6064052@reply.poolpybot.fr
+X-Original-To: a5c656df-c501-4d2c-bf8f-7259c8111991@reply.poolpybot.fr
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;       
  d=nocoffee-fr.20230601.gappssmtp.com; s=20230601; t=1699008488; x=1699613288;
  darn=sendgrid-reply-dev.poolpybot.fr;       

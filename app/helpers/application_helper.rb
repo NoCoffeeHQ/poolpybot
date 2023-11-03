@@ -21,11 +21,15 @@ module ApplicationHelper
   def grouped_months_for_select(grouped_months, selected)
     grouped_options_for_select(
       (grouped_months || [Time.zone.today.year, [Time.zone.today]]).inject([]) do |groups, (year, months)|
-        months.unshift(Time.zone.today) if year == Time.zone.today.year
-        groups.push([year, months.map { |date| [l(date, format: :month), date.strftime('%Y-%m')] }.uniq])
+        groups.push([year, month_options(year, months)])
       end,
       selected
     )
+  end
+
+  def month_options(year, months)
+    months.unshift(Time.zone.today) if year == Time.zone.today.year
+    months.map { |date| [l(date, format: :month), date.strftime('%Y-%m')] }.uniq
   end
 
   def locales_choices

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ForwardedMail do
   describe 'Given the mail was forwarded from Apple Mail' do
-    subject { mail(:apple) }
+    subject { fetch_mail(:apple) }
 
     it 'is detected as a forwarded email' do
       expect(subject.forwarded?).to eq true
@@ -29,7 +29,7 @@ RSpec.describe ForwardedMail do
   end
 
   describe 'Given the mail is an invoice from Akamai' do
-    subject { mail(:akamai) }
+    subject { fetch_mail(:akamai) }
 
     it 'is detected as a forwarded email' do
       expect(subject.forwarded?).to eq true

@@ -47,7 +47,7 @@ class Invoice < ApplicationRecord
   end
 
   def year_month
-    self.created_at.strftime('%Y-%m')
+    date&.strftime('%Y-%m')
   end
 
   def currency_symbol

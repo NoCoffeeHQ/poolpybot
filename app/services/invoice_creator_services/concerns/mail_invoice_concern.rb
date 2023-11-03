@@ -23,7 +23,7 @@ module InvoiceCreatorServices
         pdf_invoice_creator.call(user: user, pdf: {
                                    io: StringIO.new(pdf_attachment.decoded),
                                    filename: pdf_attachment.filename,
-                                   content_type: pdf_attachment.content_type
+                                   content_type: pdf_attachment.mime_type
                                  }, disable_notification: true)
       end
 
@@ -101,7 +101,7 @@ module InvoiceCreatorServices
 
       def find_pdf_attachment(mail)
         mail.attachments.find do |attachment|
-          attachment.content_type == 'application/pdf'
+          attachment.mime_type == 'application/pdf'
         end
       end
     end
