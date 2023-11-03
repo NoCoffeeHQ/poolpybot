@@ -32,7 +32,7 @@ module WorkspaceUI
 
     def search_params
       params.permit(:month, :status, :supplier_id).tap do |safe_params|
-        safe_params[:month] = @highlighted_invoice.year_month if @highlighted_invoice
+        safe_params[:month] = params[:month] = @highlighted_invoice.year_month if @highlighted_invoice
       end
     end
   end
