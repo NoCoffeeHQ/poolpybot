@@ -32,7 +32,9 @@ This step is required to receive emails locally.
 ngrok http 5100
 ```
 
-Get the URL and create Brevo weebhook.
+Update the URL in the [Sendgrid Admin UI](https://app.sendgrid.com/settings/parse)
+
+Get the URL and create Brevo weebhook **LEGACY**
 
 ```bash
 rails brevo:create_local_webhook https://def1-2a01-cb19-8a61-e000-b598-f01-c3ec-2956.ngrok-free.app
@@ -61,6 +63,12 @@ bin/rails generate component UIKit::FormInput form attribute --sidecar
 ```
 
 ### Installation in production
+
+#### Sendgrid Inbound ingress
+
+https://prabinpoudel.com.np/articles/action-mailbox-with-sendgrid/
+
+#### Brevo Inbound ingress **Legacy**
 
 Get the URL and create Brevo weebhook.
 

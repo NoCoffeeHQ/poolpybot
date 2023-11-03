@@ -62,7 +62,7 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :test
 
-  config.action_mailbox.ingress = :brevo
+  config.action_mailbox.ingress = ENV.fetch('INBOUND_INGRESS', :sendgrid).to_sym
 
   config.hosts << 'www.poolpybot.local'
   config.hosts << 'app.poolpybot.local'

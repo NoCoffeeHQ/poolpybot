@@ -9,4 +9,10 @@ class ApplicationMailbox < ActionMailbox::Base
 
   routing /\@#{ENV['INBOUND_REPLY_EMAIL_DOMAIN']}$/i => :invoices
   # rubocop:enable Lint/AmbiguousRegexpLiteral, Style/RedundantRegexpEscape
+
+  private
+
+  def application_container
+    @application_container ||= ApplicationContainer.new
+  end
 end

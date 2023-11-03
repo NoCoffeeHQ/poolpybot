@@ -10,35 +10,61 @@ RSpec.describe InvoicesMailbox, type: :mailbox do
     allow_any_instance_of(InvoicesMailbox).to receive(:application_container).and_return(container)
   end
 
-  subject { receive_inbound_email_from_source(mail.to_s) }
+  describe 'Given the Mailbox ingress is Sendgrid' do
 
-  describe 'Given the email is from Apple' do
-    let(:mail) { brevo_mails(:apple).first }
+    subject { receive_inbound_email_from_fixture("mails/#{name}.eml") }
 
-    it 'creates a new invoice' do
-      expect(container.mail_invoice_creator).to receive(:call).once
-      subject
+    describe 'Given the email is an invoice from Amazon' do
+      let(:name) { :amazon }
+
+      it 'creates a new invoice' do
+        expect(container.mail_invoice_creator).to receive(:call).once
+        subject
+      end
+    end
+
+    describe 'Given the email is an invoice from Apple' do
+      let(:name) { :apple }
+
+      it 'creates a new invoice' do
+        expect(container.mail_invoice_creator).to receive(:call).once
+        subject
+      end
     end
   end
 
-  describe 'Given the email has been forwarded from a Gmail rule' do
-    let(:mail) { brevo_mails(:sendgrid).first }
+  describe 'Given the Mailbox ingress is Brevo' do
 
-    it 'creates a new invoice' do
-      expect(container.mail_invoice_creator).to receive(:call).once
-      subject
+    subject { receive_inbound_email_from_source(mail.to_s) }
+
+    describe 'Given the email is an invoice from Apple' do
+      let(:mail) { brevo_mails(:apple).first }
+
+      it 'creates a new invoice' do
+        expect(container.mail_invoice_creator).to receive(:call).once
+        subject
+      end
     end
-  end
 
-  describe 'Given the email from AWS including a PDF' do
-    let(:mail) { brevo_mails(:aws).first }
+    describe 'Given the email has been forwarded from a Gmail rule' do
+      let(:mail) { brevo_mails(:sendgrid).first }
 
-    it 'creates a new invoice with a PDF attached to it' do
-      expect_any_instance_of(BrevoRuby::InboundParsingApi).to receive(
-        :get_inbound_email_attachment
-      ).once.and_return(File.open(file_fixture('invoices/aws.pdf')))
-      expect(container.mail_invoice_creator).to receive(:call).once
-      subject
+      it 'creates a new invoice' do
+        expect(container.mail_invoice_creator).to receive(:call).once
+        subject
+      end
+    end
+
+    describe 'Given the email from Amazon including a PDF' do
+      let(:mail) { brevo_mails(:aws).first }
+
+      it 'creates a new invoice with a PDF attached to it' do
+        expect_any_instance_of(BrevoRuby::InboundParsingApi).to receive(
+          :get_inbound_email_attachment
+        ).once.and_return(File.open(file_fixture('invoices/aws.pdf')))
+        expect(container.mail_invoice_creator).to receive(:call).once
+        subject
+      end
     end
   end
 end

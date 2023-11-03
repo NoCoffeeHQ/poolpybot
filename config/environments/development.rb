@@ -77,8 +77,9 @@ Rails.application.configure do
   config.hosts << 'app.poolpybot.local'
   config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
 
-  config.action_mailbox.ingress = :brevo
-
+  # config.action_mailbox.ingress = :brevo
+  config.action_mailbox.ingress = :sendgrid
+  
   config.active_job.queue_adapter = :sidekiq
 
   Rails.application.routes.default_url_options[:host] = ENV['HOST']

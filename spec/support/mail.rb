@@ -5,7 +5,7 @@ module MailLoaderHelper
     ForwardedMail.new(
       Mail.read_from_string(
         File.read(
-          Rails.root.join("spec/fixtures/mails/#{email_type}.txt").to_s
+          Rails.root.join("spec/fixtures/files/mails/#{email_type}.eml").to_s
         )
       )
     )
