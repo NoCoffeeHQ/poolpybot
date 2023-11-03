@@ -5,6 +5,7 @@ module WorkspaceUI
     helper_method :search_params
 
     def index
+      @highlighted_invoice = current_company.invoices.find_by(id: params[:invoice_id])
       @invoices = current_company.invoices.optimized
                                  .search(
                                    **search_params.to_h.symbolize_keys
@@ -30,7 +31,9 @@ module WorkspaceUI
     private
 
     def search_params
-      params.permit(:month, :status, :supplier_id)
+      params.permit(:month, :status, :supplier_id).tap do |safe_params|
+        params[:month] = @highlighted_invoice.year_month if @highlighted_invoice
+      end
     end
   end
 end

@@ -1,4 +1,4 @@
-<tr>
+<tr class="<%= 'bg-yellow-50' if highlighted_invoice&.id == invoice.id %>">
   <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
     <%= invoice.supplier&.display_name || invoice.supplier&.name || '-' %>
   </td>

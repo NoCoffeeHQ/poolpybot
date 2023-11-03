@@ -12,6 +12,11 @@
               <span class="font-medium text-orange-700"><%= notification.user.username %></span>
               <span class="text-orange-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
             <% end %>
+          <% elsif notification.invoice_id %>
+            <%= link_to workspace_invoices_path(invoice_id: notification.invoice_id), class: 'text-sm block', data: { turbo_frame: '_top' } do %> 
+              <span class="font-medium text-gray-700"><%= notification.user.username %></span>
+              <span class="text-gray-600"><%= t(".#{notification.event}", **notification.full_data) %></span>
+            <% end %>
           <% else %>
             <div class="text-sm">
               <span class="font-medium text-gray-700"><%= notification.user.username %></span>

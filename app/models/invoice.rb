@@ -46,6 +46,10 @@ class Invoice < ApplicationRecord
     (total_amount * (1.0 - (1 / (1.0 + tax_rate.to_f / 100.0)).to_f)).round(2)
   end
 
+  def year_month
+    self.created_at.strftime('%Y-%m')
+  end
+
   def currency_symbol
     case currency
     when 'EUR' then '€'
