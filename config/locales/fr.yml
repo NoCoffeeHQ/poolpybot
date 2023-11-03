@@ -359,3 +359,12 @@ fr:
           already_a_workmate: "fait déjà partie de l'entreprise"
           already_active_elsewhere: "a déjà collecté des factures pour une autre entreprise"
 
+  services:
+    invoices_export:
+      csv_headers:
+        supplier: "Fournisseur"
+        identifier: "Identifiant"
+        date: "Émis le"
+        total_amount: "Montant total"
+        tax_amount: "Montant de la taxe"
+        pdf_filepath: "Chemin du fichier PDF"

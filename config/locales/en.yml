@@ -384,3 +384,16 @@ en:
         user_invitation:
           already_a_workmate: "is already in the company"
           already_active_elsewhere: "has already collected invoices for another company"
+
+  services:
+    invoices_export:
+      csv_headers:
+        supplier: Vendor
+        identifier: Identifier 
+        date: Issued at 
+        total_amount: Total amount
+        tax_amount: Tax amount
+        pdf_filepath: PDF
+
+
+
