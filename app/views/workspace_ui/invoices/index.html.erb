@@ -9,7 +9,7 @@
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex items-center space-x-4">
       <%= render 'workspace_ui/invoices/index/filter' %>
 
-      <%= ui_kit :primary_button, type: 'button', url: workspace_invoices_exports_path(search_params), disabled: search_params[:month].blank? do %>
+      <%= ui_kit :primary_button, type: 'button', url: workspace_invoices_exports_path(search_params), disabled: search_params[:month].blank? || @invoices.empty? do %>
         <span class="flex items-center space-x-2">
           <i class="ri-download-cloud-2-line"></i>
           <span><%= t('.export_pdfs_button') %></span>
