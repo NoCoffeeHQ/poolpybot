@@ -206,6 +206,12 @@ en:
         title: "My profile"
         description: "Information about yourself. If you want to change your password, sign out and follow the 'Forgot my password' link."
         submit_button: "Save your profile changes"
+
+      notification_settings_form:
+        title: "Notification settings"
+        description: "Poolpybot sends notifications when collecting a new invoice. It also can send you daily or weekly digests."
+        submit_button: "Save your notification settings"
+
       update:
         flash:
           success: "Your profile has been updated."
@@ -369,6 +375,28 @@ en:
 
           Have a great day!
 
+    daily_activity_digest:
+      subject: "[Poolpybot] Daily activity report / %{date}"
+      title: "Hello, %{username}"
+      html_body: |
+        <p>Please find below 👇 what happened yesterday on Poolpybot.</p>
+        <p>Have a great day!</p>
+      body: |
+        Please find below 👇 what happened yesterday on Poolpybot.
+
+        Have a great day!
+
+    weekly_activity_digest:
+      subject: "[Poolpybot] Weekly activity report / %{begin_date} -> %{end_date}"
+      title: "Hello, %{username}"
+      html_body: |
+        <p>Please find below 👇 what happened last week on Poolpybot.</p>
+        <p>Have a great day!</p>
+      body: |
+        Please find below 👇 what happened last week on Poolpybot.
+
+        Have a great day!
+
   activerecord:
     attributes:
       invoice:
@@ -379,6 +407,12 @@ en:
           failed: "Error"
       user:
         locale: "Language"
+        notification_on_collecting: "Send a notification when collecting an invoice"
+        report_frequency: "Frequency of the activity report email"
+        report_frequency_list:
+          never: "Never"
+          daily: "Daily"
+          weekly: "Weekly"
     errors:
       models:
         user_invitation:
@@ -394,6 +428,3 @@ en:
         total_amount: Total amount
         tax_amount: Tax amount
         pdf_filepath: PDF
-
-
-

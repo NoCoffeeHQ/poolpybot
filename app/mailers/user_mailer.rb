@@ -34,6 +34,23 @@ class UserMailer < ApplicationMailer
     end
   end
 
+  def daily_activity_digest(user, notifications, date)
+    @user = user
+    @notifications = notifications
+    I18n.with_locale(@user.locale) do
+      mail to: @user.email, subject: t('.subject', date: date.strftime('%Y-%m-%d'))
+    end
+  end
+
+  def weekly_activity_digest(user, notifications, begin_date, end_date)
+    @user = user
+    @notifications = notifications
+    I18n.with_locale(@user.locale) do
+      mail to: @user.email,
+           subject: t('.subject', begin_date: begin_date.strftime('%Y-%m-%d'), end_date: end_date.strftime('%Y-%m-%d'))
+    end
+  end
+
   private
 
   def invitation_url(invitation, user_exists)

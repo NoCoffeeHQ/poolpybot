@@ -37,4 +37,8 @@ module ApplicationHelper
       [t("locales.#{locale}"), locale]
     end
   end
+
+  def report_frequencies_choices
+    User.translated_report_frequencies.map { |translation, value, _| [translation, value] }
+  end
 end

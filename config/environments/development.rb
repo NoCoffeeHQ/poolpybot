@@ -83,5 +83,7 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
 
   Rails.application.routes.default_url_options[:host] = ENV['HOST']
+
+  config.time_zone = 'Paris'
 end
 # rubocop:enable Metrics/BlockLength

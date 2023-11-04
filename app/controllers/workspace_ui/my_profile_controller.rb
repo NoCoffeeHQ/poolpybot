@@ -16,7 +16,8 @@ module WorkspaceUI
     private
 
     def user_params
-      params.require(:user).permit(:username, :email, :password, :avatar, :locale)
+      params.require(:user).permit(:username, :email, :password, :avatar, :locale,
+                                   :report_frequency, :notification_on_collecting)
     end
 
     def apply_flash_message(message)

@@ -1,0 +1,8 @@
+<%= t('.title', username: @user.username) %>
+===============================================
+ 
+<%= t('.body') %>
+
+<%= @notifications.each do |notification| %>
+  • <%= I18n.l(notification.created_at) %> | <%= notification.user.username %> <%= t("workspace_ui.notifications.notification.#{notification.event}", **notification.full_data) %>
+<% end %>

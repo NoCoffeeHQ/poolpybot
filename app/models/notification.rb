@@ -19,6 +19,10 @@ class Notification < ApplicationRecord
   ## scopes ##
   scope :optimized, -> { includes(:company, user: [:avatar_attachment]).joins(:company, :user) }
   scope :ordered, -> { order(created_at: :desc) }
+  scope :created_on, ->(date) { where(Notification[:created_at].between(date.beginning_of_day..date.end_of_day)) }
+  scope :created_between, lambda { |begin_date, end_date|
+                            where(Notification[:created_at].between(begin_date.beginning_of_day..end_date.end_of_day))
+                          }
 
   ## methods ##
 
@@ -38,7 +42,8 @@ class Notification < ApplicationRecord
   end
 
   def send_email?
-    email_processed? || uploaded_pdf_processed?
+    user.notification_on_collecting? &&
+      (email_processed? || uploaded_pdf_processed?)
   end
 
   def send_email

@@ -1,0 +1,16 @@
+<h1><%= t('.title', username: @user.username) %></h1>
+
+<%= t('.html_body').html_safe %>
+
+<ul>
+  <% @notifications.each do |notification| %>
+    <li>
+      <%= I18n.l(notification.created_at) %>
+      &nbsp;|&nbsp;
+      <strong><%= notification.user.username %></strong>
+      &nbsp;
+      <%= t("workspace_ui.notifications.notification.#{notification.event}", **notification.full_data) %>
+    </li>
+  <% end %>
+</ul>
+

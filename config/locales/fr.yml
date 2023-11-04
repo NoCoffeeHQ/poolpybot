@@ -177,6 +177,10 @@ fr:
         title: "Mon profil"
         description: "Informations à votre sujet. Si vous souhaitez changer votre mot de passe, déconnectez-vous et suivez le lien 'J'ai oublié mon mot de passe'."
         submit_button: "Enregistrer les modifications de votre profil"
+      notification_settings_form:
+        title: "Paramètres de notification"
+        description: "Poolpybot envoie des notifications lors de la collecte d'une nouvelle facture. Il peut également vous envoyer des résumés quotidiens ou hebdomadaires."
+        submit_button: "Enregistrer vos paramètres de notification"
       update:
         flash:
           success: "Votre profil a été mis à jour."
@@ -341,6 +345,28 @@ fr:
 
           Passez une excellente journée !
 
+    daily_activity_digest:
+      subject: "[Poolpybot] Rapport d'activité quotidien / %{date}"
+      title: "Bonjour, %{username}"
+      html_body: |
+        <p>Veuillez trouver ci-dessous 👇 ce qui s'est passé hier sur Poolpybot.</p>
+        <p>Passez une excellente journée !</p>
+      body: |
+        Veuillez trouver ci-dessous 👇 ce qui s'est passé hier sur Poolpybot.
+
+        Passez une excellente journée !
+
+    weekly_activity_digest:
+      subject: "[Poolpybot] Rapport d'activité hebdomadaire / %{begin_date} -> %{end_date}"
+      title: "Bonjour, %{username}"
+      html_body: |
+        <p>Veuillez trouver ci-dessous 👇 ce qui s'est passé la semaine dernière sur Poolpybot.</p>
+        <p>Passez une excellente journée !</p>
+      body: |
+        Veuillez trouver ci-dessous 👇 ce qui s'est passé la semaine dernière sur Poolpybot.
+
+        Passez une excellente journée !
+
   activerecord:
     attributes:
       invoice:
@@ -353,6 +379,12 @@ fr:
         username: "Nom d'utilisateur"
         email: "E-mail"
         locale: "Langue"
+        notification_on_collecting: "Envoyer une notification lors de la collecte d'une facture"
+        report_frequency: "Fréquence de l'email de rapport d'activité"
+        report_frequency_list:
+          never: "Jamais"
+          daily: "Quotidien"
+          weekly: "Hebdomadaire"
     errors:
       models:
         user_invitation:

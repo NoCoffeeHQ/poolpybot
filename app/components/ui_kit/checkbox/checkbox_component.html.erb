@@ -1,0 +1,11 @@
+<div class="relative flex items-start">
+  <div class="flex h-6 items-center">
+    <%= form.check_box translated_attribute, class: 'h-4 w-4 rounded border-gray-300 text-black focus:ring-black' %>
+  </div>
+  <div class="ml-3 text-sm leading-6">
+    <%= form.label attribute, label? ? label : nil, class: 'font-medium text-gray-900', for: form_for %>
+    <% if hint? %>
+      <span class="text-gray-500"><%= hint %></span>
+    <% end %>
+  </div>
+</div>

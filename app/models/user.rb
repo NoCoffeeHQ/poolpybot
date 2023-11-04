@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  ## concerns ##
+  include ::TranslateEnum
+
+  ## enums ##
+  enum :report_frequency, %i[never daily weekly], prefix: :report
+
   ## associations ##
   belongs_to :company
   has_many :invoices, dependent: :destroy
@@ -22,6 +28,7 @@ class User < ApplicationRecord
 
   ## behaviors ##
   authenticates_with_sorcery!
+  translate_enum :report_frequency
 
   ## virtual attributes ##
   attr_accessor :changing_password
@@ -68,7 +75,9 @@ end
 #  crypted_password                    :string
 #  email                               :string           not null
 #  locale                              :string           default("en")
+#  notification_on_collecting          :boolean          default(TRUE)
 #  notifications_read_at               :datetime
+#  report_frequency                    :integer          default("never")
 #  reset_password_email_sent_at        :datetime
 #  reset_password_token                :string
 #  reset_password_token_expires_at     :datetime

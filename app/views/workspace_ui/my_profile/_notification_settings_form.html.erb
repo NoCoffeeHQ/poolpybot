@@ -6,20 +6,12 @@
     </div>
 
     <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-      <div class="col-span-3">
-        <%= ui_kit :text_field, form: form, attribute: :username %>
+      <div class="col-span-full">
+        <%= ui_kit :checkbox, form: form, attribute: :notification_on_collecting %>
       </div>
 
-      <div class="col-span-3">
-        <%= ui_kit :email_field, form: form, attribute: :email %>
-      </div>
-
-      <div class="col-span-3">
-        <%= ui_kit :image_field, form: form, attribute: :avatar %>
-      </div>
-
-      <div class="col-span-3">
-        <%= ui_kit :radio_buttons, form: form, attribute: :locale, choices: locales_choices %>
+      <div class="col-span-full">
+        <%= ui_kit :radio_buttons, form: form, attribute: :report_frequency, choices: report_frequencies_choices %>
       </div>
 
       <div class="col-span-full flex justify-start">

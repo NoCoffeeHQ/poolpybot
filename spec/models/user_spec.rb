@@ -39,7 +39,9 @@ end
 #  crypted_password                    :string
 #  email                               :string           not null
 #  locale                              :string           default("en")
+#  notification_on_collecting          :boolean          default(TRUE)
 #  notifications_read_at               :datetime
+#  report_frequency                    :integer          default("never")
 #  reset_password_email_sent_at        :datetime
 #  reset_password_token                :string
 #  reset_password_token_expires_at     :datetime

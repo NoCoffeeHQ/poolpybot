@@ -10,6 +10,12 @@
   </turbo-frame>
 <% end %>
 
+<%= turbo_stream.replace 'notification_settings_frame' do %>
+  <turbo-frame id="notification_settings_frame">
+    <%= render 'workspace_ui/my_profile/notification_settings_form' %>
+  </turbo-frame>
+<% end %>
+
 <%= turbo_stream.replace 'notification_frame' do %>
   <turbo-frame id="notification_frame">
     <%= ui_kit :notification, flash: flash %>
