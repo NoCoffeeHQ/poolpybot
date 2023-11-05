@@ -12,7 +12,7 @@
     <%= form_with model: @supplier, url: workspace_invoice_supplier_path(@supplier), method: :put do |form| %>
       <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-3">
-          <%= ui_kit :text_field, form: form, attribute: :name, readonly: true %>
+          <%= ui_kit :text_field, form: form, attribute: :name %>
         </div>
 
         <div class="sm:col-span-3">

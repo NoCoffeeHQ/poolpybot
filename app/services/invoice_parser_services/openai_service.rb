@@ -23,7 +23,7 @@ module InvoiceParserServices
         context[:email_subject] ? { role: 'user', content: 'Here is the email subject' } : nil,
         context[:email_subject] ? { role: 'user', content: context[:email_subject] } : nil,
         { role: 'user', content: 'Here is the email body' },
-        { role: 'user', content: text.to_s.gsub(/[^[:print:]]/,'').split("\n").map(&:strip).join("\n") }
+        { role: 'user', content: text.to_s.gsub(/[^[:print:]]/, '').split("\n").map(&:strip).join("\n") }
       ].compact
     end
 

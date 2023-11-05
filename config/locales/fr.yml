@@ -17,7 +17,7 @@ fr:
         email: "Entrez l'adresse e-mail d'une personne de votre entreprise."
     invoice_supplier:
       hints:
-        name: "C'est le nom que nous avons collecté à partir de vos e-mails ou documents PDF. Il ne peut pas être modifié."
+        name: "C'est le nom que nous avons collecté à partir de vos e-mails ou documents PDF. Il ne doit pas être modifié sauf rares exceptions."
         display_name: "C'est le nom que nous utiliserons pour afficher les informations d'une facture."
         follow_link: "Demander à Poolpybot de suivre le lien dans l'email pour récupérer la facture."
 

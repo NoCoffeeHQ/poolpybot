@@ -48,7 +48,7 @@ en:
         email: "Enter the email address of a person of your company."
     invoice_supplier:
       hints:
-        name: "This is the name we collected from your emails or PDF documents. It can't be changed."
+        name: "This is the name we collected from your emails or PDF documents. It mustn't be changed except exceptions."
         display_name: "This is the name we'll use when displaying the information of an invoice."
         follow_link: "Tell Poolpybot to follow the link in the email to get the invoice."
 
