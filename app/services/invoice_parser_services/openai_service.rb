@@ -23,7 +23,7 @@ module InvoiceParserServices
         context[:email_subject] ? { role: 'user', content: 'Here is the email subject' } : nil,
         context[:email_subject] ? { role: 'user', content: context[:email_subject] } : nil,
         { role: 'user', content: 'Here is the email body' },
-        { role: 'user', content: text.to_s.split("\n").map(&:strip).join("\n") }
+        { role: 'user', content: text.to_s.gsub(/[^[:print:]]/,'').split("\n").map(&:strip).join("\n") }
       ].compact
     end
 
@@ -40,7 +40,7 @@ module InvoiceParserServices
 
     def core_build_json(response)
       JSON.parse(
-        response['choices'].first.dig('message', 'content')
+        response['choices'].first.dig('message', 'content').strip
       ).with_indifferent_access
     end
 
