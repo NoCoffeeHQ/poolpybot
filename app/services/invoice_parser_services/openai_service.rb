@@ -4,7 +4,7 @@ module InvoiceParserServices
   class OpenaiService < ApplicationService
     dependency :openai_client
 
-    JSON_KEYS = %w[company_name identifier date total_amount tax_rate currency].sort.freeze
+    JSON_KEYS = %w[company_name identifier date total_amount tax_rate currency link].sort.freeze
 
     def call(text:, company_name:, context: {})
       build_json(
@@ -53,6 +53,7 @@ module InvoiceParserServices
         - total_amount: The total amount of the invoice as a float number, without the currency and in English format.
         - tax_rate: The VTA rate as a float number, null if not found.
         - currency: The currency in the ISO 4217 format.
+        - link: The url to view the invoice, null if not found or if the url is to report a problem or to view the payment receipt.
       PROMPT
         .strip
     end

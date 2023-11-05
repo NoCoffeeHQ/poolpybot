@@ -31,7 +31,7 @@ module WorkspaceUI
     end
 
     def invoice_supplier_params
-      params.require(:invoice_supplier).permit(:display_name).tap do |safe_params|
+      params.require(:invoice_supplier).permit(:display_name, :follow_link).tap do |safe_params|
         safe_params[:display_name] = nil if safe_params[:display_name].blank?
       end
     end

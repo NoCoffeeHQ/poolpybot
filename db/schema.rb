@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_225544) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_04_230120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_225544) do
     t.string "emails", default: [], array: true
     t.string "display_name"
     t.integer "invoices_count"
+    t.boolean "follow_link", default: false
     t.index ["company_id"], name: "index_invoice_suppliers_on_company_id"
     t.index ["name"], name: "index_invoice_suppliers_on_name_gin", opclass: :gin_trgm_ops, using: :gin
   end
@@ -96,6 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_225544) do
     t.string "currency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "external_link"
     t.index ["company_id", "external_id"], name: "index_invoices_on_company_id_and_external_id", unique: true
     t.index ["company_id"], name: "index_invoices_on_company_id"
     t.index ["duplicate_of_id"], name: "index_invoices_on_duplicate_of_id"

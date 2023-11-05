@@ -2,6 +2,7 @@
 
 class ApplicationContainer < ServiceOrchestrator::Container
   # API clients
+  register(:html_client) { ApiClients::HtmlClient.new }
   register(:aleph_alpha_client) { ApiClients::AlephAlphaClient.new(api_token: credentials.aleph_alpha.api_token) }
   register(:openai_client) { ApiClients::OpenaiClient.new(api_key: credentials.openai.api_key) }
   register(:pdfkit_client) do

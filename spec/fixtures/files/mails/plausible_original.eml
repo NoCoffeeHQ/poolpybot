@@ -1,0 +1,1045 @@
+Delivered-To: didier@nocoffee.fr
+Received: by 2002:a98:d20f:0:b0:1e3:58a:a965 with SMTP id x15csp2626797eii;
+ Sun, 29 Oct 2023 18:56:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IExNuPMLrixelLRQjOKrUCwlaeZVQLlpsF1Aiwdgh/wwAZgHdFFWEg0MMKweEdfzUKE/9VU
+X-Received: by 2002:a81:b717:0:b0:5a7:ec86:fc84 with SMTP id
+ v23-20020a81b717000000b005a7ec86fc84mr8566900ywh.21.1698631005841; Sun, 29
+ Oct 2023 18:56:45 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1698631005; cv=none; d=google.com;
+ s=arc-20160816;
+ b=MCLGg4lfFpllVy5scu4492r1qYf8g24zQgnJmdvMbsPGr5L8D1X/SGeCBUy3CdC31B
+ KVwW7t2CxYPWxj0aOnBR1wvEVX3lIrQ7NSl9v+vSkQFf4hMyLBhkrILu8ZL+uzx1Sdvs
+ rC+dc/tTW7Uv4IG4T1nXNMPaCXrBKIhfs03klHby6Bs1NrvKWgygSTjj1iKfQiO5veVm
+ 5MiZui+dkOeLs1Vhm07nNHGPVUTWlSSbOg6unHv/3TqB7MGZkV6BVsmUBmv2YP7fjeMi
+ YLFPEA+YxYxWm/OnCpZZEuhhRyu98fDWp/dqKuaz5T/xBIWtqbd23BmII1WCotTKce+Z mlkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20160816;
+ h=content-transfer-encoding:mime-version:feedback-id:to:reply-to
+ :message-id:subject:date:from:dkim-signature:dkim-signature;
+ bh=rrSCv+w9fP085Fyk7SxuLTBGfGa2SAbSEHFkdHZxubU=;
+ fh=xykPpuLaQSjbJ/djk9bFtTquFtYuEPWWx964FOE/Nb4=;
+ b=cNF0WM166oun5iomOdPWkLbNQBXVxU9pkJ3D3Wv0keQiGnB+TcdZdyK4uutqW3bZH3
+ IltT4j9XiJ5hcxPnm+F7K02X/sZNXM0ehez6R5TMqmW9b0K9AaWZuhH7noOSuJGRr0sv
+ J8yDlL+yxrgrdQf41CPgW+pTY8OfBi1XZE2aT+IP1RtqO5qZ1Aqzd70FddmVnattw7Ou
+ tWrcn3LIDmUgvUSo+zK4E3CF6PNHj/dCXI5vUX+AkzmvyerV7ISeOavTJwQdbxNDwbxM
+ VRDYchWaYf4f6IhW6nHcqEPCplvMzLlmaCyeTrFnPQhHPjP9kLGwK1nzM/QCHjXLacWO BAAA==
+ARC-Authentication-Results: i=1; mx.google.com; dkim=pass
+ header.i=@ab.mtasv.net header.s=ab20231012 header.b=+v3ICbZF; dkim=pass
+ header.i=@paddle.com header.s=20160525114544pm header.b=FbnMXz1Y; spf=pass
+ (google.com: domain of pm_bounces@pm-bounces.paddle.com designates
+ 50.31.205.26 as permitted sender)
+ smtp.mailfrom=pm_bounces@pm-bounces.paddle.com; dmarc=pass (p=REJECT
+ sp=QUARANTINE dis=NONE) header.from=paddle.com
+Return-Path: <pm_bounces@pm-bounces.paddle.com>
+Received: from mta26-ab1.mtasv.net (mta26-ab1.mtasv.net. [50.31.205.26]) by
+ mx.google.com with ESMTPS id
+ n186-20020a8172c3000000b005a825c985cbsi5229845ywc.520.2023.10.29.18.56.45 for
+ <didier@nocoffee.fr> (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384
+ bits=256/256); Sun, 29 Oct 2023 18:56:45 -0700 (PDT)
+Received-SPF: pass (google.com: domain of pm_bounces@pm-bounces.paddle.com
+ designates 50.31.205.26 as permitted sender) client-ip=50.31.205.26;
+Authentication-Results: mx.google.com; dkim=pass header.i=@ab.mtasv.net
+ header.s=ab20231012 header.b=+v3ICbZF; dkim=pass header.i=@paddle.com
+ header.s=20160525114544pm header.b=FbnMXz1Y; spf=pass (google.com: domain of
+ pm_bounces@pm-bounces.paddle.com designates 50.31.205.26 as permitted sender)
+ smtp.mailfrom=pm_bounces@pm-bounces.paddle.com; dmarc=pass (p=REJECT
+ sp=QUARANTINE dis=NONE) header.from=paddle.com
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=ab20231012;
+ d=ab.mtasv.net;
+ h=From:Date:Subject:Message-Id:Reply-To:To:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Date:From:Message-ID:Reply-To:Sender:Subject:To:CC;
+ t=1698631005; x=1698717405; bh=YjBcaobZpR1phztKkvt61qFlYN8=;
+ b=+v3ICbZF4fCgQMvegEvUa3Wkr2O7kMqEUCDocna6yEAONOmLmF3MMC9621FeyTg4oJnQWMA4rTx2
+ pZTZjwUGJyIM/sD6OqVQ/lQ7dR7XoRwse+ddXsIWhOUPrlO3R2qISDzJ2Fsx7em4SN2hWG8U6RVR
+ eBhYWkqDaOXexsG9Nrk=
+Received: by mta26-ab1.mtasv.net id h7s6lq34o8g4 for <didier@nocoffee.fr>;
+ Sun, 29 Oct 2023 21:56:45 -0400 (envelope-from
+ <pm_bounces@pm-bounces.paddle.com>)
+X-PM-IP: 50.31.205.26
+X-IADB-IP: 50.31.205.26
+X-IADB-IP-REVERSE: 26.205.31.50
+DKIM-Signature: v=1; a=rsa-sha256; d=paddle.com; s=20160525114544pm;
+ c=relaxed/relaxed; i=help@paddle.com; t=1698631005;
+ h=date:date:from:from:message-id:reply-to:reply-to:sender:subject:subject:to:
+ to:cc:feedback-id:mime-version:content-type:content-transfer-encoding;
+ bh=rrSCv+w9fP085Fyk7SxuLTBGfGa2SAbSEHFkdHZxubU=;
+ b=FbnMXz1Ysi+ISPo3nV2CgAQTreePHHY45v9rUmcBOodY7WazfyZ/mYPB0n1ICegeo6RiK6/a6I+
+ SUiNJbtANiHDD991+qeBkCGOb7cvILhpdHBa2t2gi+6D52ABQvPy3ndr5U2xoQ1rPP8tzUA8jdkyP
+ a3ZqqaXlzpHEDSdPk/M=
+From: "Plausible Analytics (via Paddle.com)" <help@paddle.com>
+Date: Mon, 30 Oct 2023 01:56:45 +0000
+Subject: Your Plausible Analytics invoice
+Message-Id: <1959c115-3cc3-42c8-9e79-2a93c9f4bc7e@mtasv.net>
+Reply-To: help@paddle.com
+To: didier@nocoffee.fr
+X-PM-TrackOpens: true
+X-Mailgun-Track-Opens: yes
+X-Mailgun-Tag: subscription_receipt
+Feedback-ID: s50413-c3Vic2NyaXB0aW9uX3JlY2VpcHQ=:s50413:a27307:postmark
+X-Complaints-To: abuse@postmarkapp.com
+X-PM-Message-Id: 1959c115-3cc3-42c8-9e79-2a93c9f4bc7e
+X-PM-Tag: subscription_receipt
+X-PM-RCPT: |bTB8MjczMDd8NTA0MTN8ZGlkaWVyQG5vY29mZmVlLmZy|
+X-PM-Message-Options: v1;1.2zxPuvj2zmcvdlS7wXc7Dg.5NOVf82Prd-obVq8y7xPLbWEGzuQzJKW2pTcmKwdWXLzJwoLM3D7uSpchgi91jPADXg-SSU2VYzAqLkEV6ozvVkW0TLeXPedAR4JMLaZ9JaS-JifuBpiIGzsbpRUi_0HD2oba3Fabhkmx-RD1LxWkFBMRuXgkP0i3pwoyiKNPlx8-PookpRHy5T8MEv9IF0t
+MIME-Version: 1.0
+X-PM-MTA-Pool: paddle-com
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+        <meta charset=3D"utf-8"><meta name=3D"color-scheme" content=3D"ligh=
+t dark">
+        <meta name=3D"supported-color-schemes" content=3D"light dark">
+ =20
+        <style data-styled=3D"true" data-styled-version=3D"5.3.3">
+@media (max-width:630px) {
+  .icPhtA {
+    width: 100% !important;
+  }
+}
+@media (max-width:630px) {
+  .dsRHJY {
+    padding: 30px 10px !important;
+  }
+}
+@media (max-width:630px) {
+  .dNxHHs {
+    border: none !important;
+  }
+}
+@media (max-width:630px) {
+  .ijmOMo {
+    border: none !important;
+  }
+}
+@media (max-width:630px) {
+  .kaVZnY {
+    border: none !important;
+  }
+}
+@media (max-width:630px) {
+  .cFacE {
+    border: none !important;
+  }
+}
+@media (max-width:630px) {
+  .kpydUo {
+    border: none !important;
+  }
+}
+@media (max-width:630px) {
+  .idljME {
+    border-top: 1px solid #D2D4DE !important;
+    padding: 20px 0 12px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .cwzaMf {
+    border-top: 1px solid #D2D4DE !important;
+    padding: 20px 0 12px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .bLmEhs {
+    border-top: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .ekXQiC {
+    border-top: 0 !important;
+    padding: 0 0 10px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .bplkiN {
+    border-top: 0 !important;
+    padding: 0 0 10px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .jEuguD {
+    border-top: 0 !important;
+    padding: 3px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .kRnZRs {
+    border-top: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .iFaOEz {
+    border-top: 0 !important;
+    padding: 10px 0 6px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .jfSRyA {
+    border-top: 0 !important;
+    padding: 10px 0 6px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .hQelTi {
+    border-top: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .cITDaV {
+    border-top: 0 !important;
+    padding: 5px 5px 5px 16px !important;
+  }
+}
+@media (max-width:630px) {
+  .eYeYHW {
+    border-top: 0 !important;
+    padding: 5px 16px 5px 5px !important;
+  }
+}
+@media (max-width:630px) {
+  .dHaJZW {
+    border-top: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .evIyxY {
+    border-top: 0 !important;
+    padding: 0 0 12px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .beABTr {
+    border-top: 0 !important;
+    padding: 0 0 12px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .emohke {
+    border-top: 0 !important;
+    padding: 0 0 20px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .kJtrzd {
+    border-top: 0 !important;
+    padding: 0 0 20px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .joqGUf {
+    border-top: 0 !important;
+    padding: 3px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .kTjnKY {
+    border-top: 0 !important;
+    padding: 10px 0 6px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .cGUKLL {
+    border-top: 0 !important;
+    padding: 10px 0 6px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .fVuKma {
+    border-top: 0 !important;
+    padding: 6px 0 20px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .bWUSjt {
+    border-top: 0 !important;
+    padding: 6px 0 20px 0 !important;
+  }
+}
+@media (max-width:630px) {
+  .bORRIC {
+    border-top: 0 !important;
+    padding: 15px 0px !important;
+  }
+}
+@media (max-width:630px) {
+  .iXHUu {
+    border-top: 0 !important;
+    padding: 0px !important;
+  }
+}
+@media (max-width:630px) {
+  .mJJIf {
+    height: 0px !important;
+  }
+}
+@media (max-width:630px) {
+  .bibbXQ {
+    height: 26px !important;
+  }
+}
+@media (max-width:630px) {
+  .isJfhY {
+    height: 20px !important;
+  }
+}
+@media (max-width:630px) {
+  .hSDLeU {
+    height: 10px !important;
+  }
+}
+@media (max-width:630px) {
+  .hNHNzH {
+    display: none !important;
+  }
+}
+@media (max-width:630px) {
+  .jKMVET {
+    display: inline-block !important;
+  }
+}
+data-styled.g27[id=3D"link__Link-sc-7cmohc-0"] {
+  content: "kUgjiH,";
+}
+@media (max-width:630px) {
+  .ecARAV {
+    display: none;
+  }
+}
+@media (max-width:630px) {
+  .dnuTcc {
+    width: 50%;
+  }
+}
+@media (max-width:630px) {
+  .kMDWPj {
+    margin-bottom: 16px !important;
+  }
+}
+</style>
+       =20
+       =20
+        <style type=3D"text/css">
+@media (max-width: 630px) {
+  body,
+.footerContainer {
+    background-color: #FFFFFF !important;
+  }
+}
+@media (prefers-color-scheme: dark ) {
+  body,
+.footerContainer,
+.licenceKeyContainer {
+    background-color: #323232 !important;
+  }
+
+  .textPrimary {
+    color: #E2E2E2 !important;
+  }
+
+  .textSecondary {
+    color: #8A8A8A !important;
+  }
+
+  .textFooter {
+    color: #BBBBBB !important;
+  }
+
+  .pbTextPrimary {
+    color: #FFFFFF !important;
+  }
+
+  .pbPaymentText {
+    color: #2F2F2F !important;
+  }
+
+  .textReseller {
+    color: #C4C4C4 !important;
+  }
+
+  .emailContainer {
+    background-color: #1E1E1E !important;
+  }
+
+  .lightModeDefault,
+.lightModeImage {
+    display: none !important;
+  }
+
+  .darkModeImageWrapper,
+.darkModeImage {
+    display: block !important;
+  }
+
+  .itemsListContainer {
+    background-color: #2F2F2F !important;
+  }
+
+  .itemsListedText,
+.discountPriceModifierText {
+    color: #FFFFFF !important;
+  }
+
+  @media (max-width: 630px) {
+    body,
+.footerContainer {
+      background-color: #1E1E1E !important;
+    }
+
+    @media (prefers-color-scheme: light) {
+      body,
+.footerContainer,
+.licenceKeyContainer,
+.itemsListContainer {
+        background-color: #F5F5F8 !important;
+      }
+
+      .textPrimary {
+        color: #45567C !important;
+      }
+
+      .textSecondary,
+.discountPriceModifierText {
+        color: #73809C !important;
+      }
+
+      .statementDescriptorText {
+        color: #2F2F2F !important;
+      }
+
+      .emailContainer {
+        background-color: #FFFFFF !important;
+      }
+
+      .pbTextPrimary {
+        color: #2F2F2F !important;
+      }
+
+      .pbPaymentText {
+        color: #2F2F2F !important;
+      }
+
+      .textReseller {
+        color: #555555 !important;
+      }
+
+      .lightModeDefault,
+.darkModeImage {
+        display: none !important;
+      }
+
+      .lightModeImageWrapper,
+.lightModeImage {
+        display: block !important;
+      }
+
+      .itemsListedText {
+        color: #36476C !important;
+      }
+
+      @media (max-width: 630px) {
+        body,
+.footerContainer {
+          background-color: #FFFFFF !important;
+        }
+
+      }
+
+    }
+
+  }
+}
+</style>
+     =20
+      <style>
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.=
+com/s/lato/v16/S6u9w4BMUTPHh7USSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+2=
+0AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  mso-font-alt: 'Arial';}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.=
+com/s/lato/v16/S6u9w4BMUTPHh7USSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+0=
+2DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U=
++2215, U+FEFF, U+FFFD;
+  mso-font-alt: 'Arial';}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gsta=
+tic.com/s/lato/v16/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+2=
+0AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  mso-font-alt: 'Arial';}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gsta=
+tic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+0=
+2DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U=
++2215, U+FEFF, U+FFFD;
+  mso-font-alt: 'Arial';}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.co=
+m/s/lato/v16/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+2=
+0AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  mso-font-alt: 'Arial';}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.co=
+m/s/lato/v16/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+0=
+2DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U=
++2215, U+FEFF, U+FFFD;
+  mso-font-alt: 'Arial';}
+</style></head>
+     =20
+      <body style=3D"color-scheme: light dark; supported-color-schemes: lig=
+ht dark; mso-generic-font-family: swiss; letter-spacing: 0; background-colo=
+r: #F5F5F8; margin: 0; padding: 0; font-family: Lato, Helvetica, Roboto, sa=
+ns-serif;"><center style=3D"margin:0">
+    <table cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" class=3D"tabl=
+e__Table-sc-17dv5k5-0 wrapper__StyledTable-sc-h2v5ti-1 klJgMH jGOwfY" style=
+=3D"max-width: 600px; font-family: 'Lato','Helvetica','Roboto',sans-serif;"=
+>
+        <tr>
+            <td height=3D"100%" width=3D"100%" class=3D"wrapper__StyledWrap=
+perCell-sc-h2v5ti-0 fYxgJW" style=3D"padding: 0;">
+                <table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" c=
+lass=3D"spacer__StyledTableWrapper-sc-nppksv-0 gNKRHx" style=3D"margin-top:=
+ 0;">
+                    <tr>
+                        <td height=3D"30" class=3D"spacer__StyledWrapperCel=
+l-sc-nppksv-1 mJJIf" style=3D"height: 30px;"></td>
+                    </tr>
+                </table>
+                <center style=3D"margin:0">
+                    <table cellspacing=3D"0" cellpadding=3D"0" width=3D"100=
+%" class=3D"table__Table-sc-17dv5k5-0 wrapper__StyledTable-sc-h2v5ti-1 klJg=
+MH jGOwfY" style=3D"max-width: 600px; font-family: 'Lato','Helvetica','Robo=
+to',sans-serif;">
+                        <tr>
+                            <td height=3D"100%" width=3D"100%" class=3D"wra=
+pper__StyledWrapperCell-sc-h2v5ti-0 fYxgJW" style=3D"padding: 0;">
+                                <table class=3D"container__StyledWrapperTab=
+le-sc-15tsr3r-0 cicRUS emailContainer" cellpadding=3D"0" cellspacing=3D"0" =
+width=3D"100%" style=3D"margin: 0; border-top: 0; border-radius: 0; backgro=
+und-color: #FFFFFF;" bgcolor=3D"#FFFFFF">
+                                    <tr>
+                                        <td align=3D"center" valign=3D"top"=
+>
+                                            <table cellspacing=3D"0" cellpa=
+dding=3D"0" width=3D"100%" class=3D"table__Table-sc-17dv5k5-0 klJgMH" style=
+=3D"font-family: 'Lato','Helvetica','Roboto',sans-serif;">
+                                                <tr>
+                                                    <td style=3D"padding: 5=
+0px;" class=3D"container__StyledWrapperCell-sc-15tsr3r-1 dsRHJY">
+                                                        <table style=3D"max=
+-width: none; font-family: 'Lato','Helvetica','Roboto',sans-serif;" cellspa=
+cing=3D"0" cellpadding=3D"0" width=3D"100%" class=3D"table__Table-sc-17dv5k=
+5-0 klJgMH">
+                                                            <tr>
+                                                                <td align=3D=
+"center" style=3D"text-align:left"><img height=3D"70" src=3D"https://paddle=
+.s3.amazonaws.com/user/49430/subs_749342_icon.png" class=3D"header__Product=
+Image-sc-nnwij7-0 cgSQRu" style=3D"display: block; margin: auto; margin-bot=
+tom: 28px;">
+                                                                    <div>
+                                                                        <!-=
+-[if mso]>
+              <table border=3D"0" cellPadding=3D"0" cellSpacing=3D"0" width=
+=3D"100%">
+              <tr>
+                <td style=3D"height: 28px;"></td>
+              </tr>
+            </table>
+          <![endif]-->
+                                                                    </div>
+                                                                    <h3 cla=
+ss=3D"textPrimary" style=3D"font-weight: 900; font-size: 24px; line-height:=
+ 32px; margin-bottom: 12px; text-align: center; color: #45567C; font-family=
+: Lato, Helvetica, Roboto, sans-serif;">Invoice for your 10k monthly pagevi=
+ews subscription</h3>
+                                                                    <p styl=
+e=3D"font-size: 14px; font-weight: 500; line-height: 24px; margin-bottom: 2=
+4px; text-align: center; margin-top: 0; margin-right: 0; margin-left: 0; co=
+lor: #73809C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"t=
+extSecondary">Invoice # 42574047-87718652</p>
+                                                                    <table =
+cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" class=3D"table__Table-sc=
+-17dv5k5-0 klJgMH" style=3D"font-family: 'Lato','Helvetica','Roboto',sans-s=
+erif;">
+                                                                        <tr=
+ class=3D"table__TableRow-sc-17dv5k5-2 fVvuvn" style=3D"font-family: 'Lato'=
+,'Helvetica','Roboto',sans-serif;">
+                                                                           =
+ <td class=3D"table__TableCell-sc-17dv5k5-4 payment-summary__TableCellHidde=
+nMobile-sc-akna8d-0 fxJHIR ecARAV" style=3D"vertical-align: top; font-famil=
+y: 'Lato','Helvetica','Roboto',sans-serif;" valign=3D"top">
+                                                                           =
+     <p style=3D"font-size: 12px; font-weight: 500; line-height: 24px; marg=
+in-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0; color: #45567=
+C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrimary"=
+>Amount Paid</p>
+                                                                           =
+     <p style=3D"font-size: 14px; font-weight: 900; line-height: 24px; marg=
+in-bottom: 4px; class-name: payment-summary__ParagraphMobile-sc-akna8d-2 kM=
+DWPj; margin-top: 0; margin-right: 0; margin-left: 0; color: #45567C; font-=
+family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrimary">=E2=82=AC=
+9.00</p>
+                                                                           =
+ </td>
+                                                                           =
+ <td class=3D"table__TableCell-sc-17dv5k5-4 payment-summary__TableCellMobil=
+e-sc-akna8d-1 fxJHIR dnuTcc" style=3D"vertical-align: top; font-family: 'La=
+to','Helvetica','Roboto',sans-serif;" valign=3D"top">
+                                                                           =
+     <p style=3D"font-size: 12px; font-weight: 500; line-height: 24px; marg=
+in-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0; color: #45567=
+C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrimary"=
+>Invoice Date</p>
+                                                                           =
+     <p style=3D"font-size: 14px; font-weight: 900; line-height: 24px; marg=
+in-bottom: 4px; class-name: payment-summary__ParagraphMobile-sc-akna8d-2 kM=
+DWPj; margin-top: 0; margin-right: 0; margin-left: 0; color: #45567C; font-=
+family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrimary">30th Oc=
+tober 2023</p>
+                                                                           =
+ </td>
+                                                                           =
+ <td class=3D"table__TableCell-sc-17dv5k5-4 payment-summary__TableCellMobil=
+e-sc-akna8d-1 fxJHIR dnuTcc" style=3D"vertical-align: top; font-family: 'La=
+to','Helvetica','Roboto',sans-serif;" valign=3D"top">
+                                                                           =
+     <p style=3D"font-size: 12px; font-weight: 500; line-height: 24px; marg=
+in-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0; color: #45567=
+C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrimary"=
+>Payment Method</p>
+                                                                           =
+     <table role=3D"presentation" style=3D"min-width:150px">
+                                                                           =
+         <tbody>
+                                                                           =
+             <tr>
+                                                                           =
+                 <td style=3D"vertical-align:middle;align:center;margin-rig=
+ht:4px"><img height=3D"28" src=3D"https://cdn.paddle.com/email-templates/im=
+ages/icon-amex.png" alt=3D"amex" style=3D"display:block" class=3D"lightMode=
+Default"></td>
+                                                                           =
+                 <td style=3D"vertical-align:middle;align:center;mso-hide:a=
+ll"><img height=3D"28" alt=3D"amex" src=3D"https://cdn.paddle.com/email-tem=
+plates/images/icon-amex.png" style=3D"display:none;margin-right:4px" class=3D=
+"lightModeImage"></td>
+                                                                           =
+                 <td style=3D"vertical-align:middle;align:center;mso-hide:a=
+ll"><img height=3D"28" alt=3D"amex" src=3D"https://cdn.paddle.com/email-tem=
+plates/images/icon-amex-dark-mode.png" style=3D"display:none" class=3D"dark=
+ModeImage"></td>
+                                                                           =
+                     <td style=3D"vertical-align:middle;align:center">
+                                                                           =
+                         <p style=3D"font-size: 14px; font-weight: 900; lin=
+e-height: 24px; margin-bottom: 4px; margin-top: 0; margin-right: 0; margin-=
+left: 0; color: #45567C; font-family: Lato, Helvetica, Roboto, sans-serif;"=
+ class=3D"textPrimary">ending in 1006</p>
+                                                                           =
+                     </td>
+                                                                           =
+             </tr>
+                                                                           =
+         </tbody>
+                                                                           =
+     </table>
+                                                                           =
+ </td>
+                                                                        </t=
+r>
+                                                                    </table=
+>
+                                                                    <table =
+cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" class=3D"spacer__StyledT=
+ableWrapper-sc-nppksv-0 gNKRHx" style=3D"margin-top: 0;">
+                                                                        <tr=
+>
+                                                                           =
+ <td height=3D"26" class=3D"spacer__StyledWrapperCell-sc-nppksv-1 bibbXQ" s=
+tyle=3D"height: 26px;"></td>
+                                                                        </t=
+r>
+                                                                    </table=
+>                                                                    <table=
+ cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" class=3D"data-table__Ta=
+ble-sc-11th571-0 dNxHHs" style=3D"border: 1px solid #D2D4DE; border-top-rig=
+ht-radius: 4px; border-top-left-radius: 4px; border-bottom-right-radius: 0;=
+ border-bottom-left-radius: 0; border-collapse: separate; font-family: 'Lat=
+o','Helvetica','Roboto',sans-serif;">
+                                                                        <tb=
+ody class=3D"data-table__Body-sc-11th571-2 bBAFEq" style=3D"font-family: 'L=
+ato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+     <tr class=3D"data-table__Row-sc-11th571-3 fUrIGd" style=3D"font-family=
+: 'Lato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+         <td font-weight=3D"900" font-size=3D"14px" class=3D"data-table__Ce=
+ll-sc-11th571-5 idljME" style=3D"color: #45567C; line-height: 20px; padding=
+: 20px 28px 16px 28px; text-align: left; font-weight: 900; font-size: 14px;=
+ border-top: 0; font-family: 'Lato','Helvetica','Roboto',sans-serif;" align=
+=3D"left">
+                                                                           =
+             <p style=3D"margin-top: 0; margin-bottom: 0; font-size: 14px; =
+font-weight: 500; line-height: 20px; margin-right: 0; margin-left: 0; color=
+: #45567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"text=
+Primary">10k monthly pageviews </p>
+                                                                           =
+         </td>
+                                                                           =
+         <td font-weight=3D"900" font-size=3D"14px" class=3D"data-table__Ce=
+ll-sc-11th571-5 cwzaMf" style=3D"color: #45567C; line-height: 20px; padding=
+: 20px 28px 16px 28px; text-align: right; font-weight: 900; font-size: 14px=
+; border-top: 0; font-family: 'Lato','Helvetica','Roboto',sans-serif;" alig=
+n=3D"right">
+                                                                           =
+             <p style=3D"margin-top: 0; margin-bottom: 0; font-size: 14px; =
+font-weight: 500; line-height: 20px; margin-right: 0; margin-left: 0; color=
+: #45567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"text=
+Primary">=E2=82=AC9.00</p>
+                                                                           =
+         </td>
+                                                                           =
+     </tr>                                                                 =
+              =20
+                                                                           =
+                                                                           =
+     =20
+                                                                           =
+ <tr class=3D"data-table__Row-sc-11th571-3 fUrIGd" style=3D"font-family: 'L=
+ato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+     <td class=3D"data-table__Cell-sc-11th571-5 joqGUf" style=3D"color: #45=
+567C; line-height: 20px; padding: 20px 28px 0 28px; text-align: left; font-=
+weight: 200; font-size: 11px; border-top: 1px solid #D2D4DE; font-family: '=
+Lato','Helvetica','Roboto',sans-serif;" align=3D"left"></td>
+                                                                           =
+     <td class=3D"data-table__Cell-sc-11th571-5 joqGUf" style=3D"color: #45=
+567C; line-height: 20px; padding: 20px 28px 0 28px; text-align: left; font-=
+weight: 200; font-size: 11px; border-top: 1px solid #D2D4DE; font-family: '=
+Lato','Helvetica','Roboto',sans-serif;" align=3D"left"></td>
+                                                                           =
+ </tr>
+                                                                           =
+     <tr class=3D"data-table__Row-sc-11th571-3 fUrIGd" style=3D"font-family=
+: 'Lato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+         <td font-weight=3D"500" font-size=3D"14px" class=3D"data-table__Ce=
+ll-sc-11th571-5 kTjnKY" style=3D"color: #45567C; line-height: 20px; padding=
+: 0 28px 12px 28px; text-align: left; font-weight: 500; font-size: 14px; bo=
+rder-top: 0; font-family: 'Lato','Helvetica','Roboto',sans-serif;" align=3D=
+"left">
+                                                                           =
+             <p style=3D"margin-top: 0; margin-bottom: 0; font-size: 14px; =
+font-weight: 500; line-height: 20px; margin-right: 0; margin-left: 0; color=
+: #45567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"text=
+Primary">VAT (20%)</p>
+                                                                           =
+         </td>
+                                                                           =
+         <td font-weight=3D"500" font-size=3D"14px" class=3D"data-table__Ce=
+ll-sc-11th571-5 cGUKLL" style=3D"color: #45567C; line-height: 20px; padding=
+: 0 28px 12px 28px; text-align: right; font-weight: 500; font-size: 14px; b=
+order-top: 0; font-family: 'Lato','Helvetica','Roboto',sans-serif;" align=3D=
+"right">
+                                                                           =
+             <p style=3D"margin-top: 0; margin-bottom: 0; font-size: 14px; =
+font-weight: 500; line-height: 20px; margin-right: 0; margin-left: 0; color=
+: #45567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"text=
+Primary">=E2=82=AC0.00</p>
+                                                                           =
+         </td>
+                                                                           =
+     </tr>
+                                                                           =
+ <tr class=3D"data-table__Row-sc-11th571-3 fUrIGd" style=3D"font-family: 'L=
+ato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+     <td font-weight=3D"500" font-size=3D"14px" class=3D"data-table__Cell-s=
+c-11th571-5 fVuKma" style=3D"color: #45567C; line-height: 20px; padding: 0 =
+28px 20px 28px; text-align: left; font-weight: 500; font-size: 14px; border=
+-top: 0; font-family: 'Lato','Helvetica','Roboto',sans-serif;" align=3D"lef=
+t">
+                                                                           =
+         <p style=3D"margin-top: 0; margin-bottom: 0; font-size: 14px; font=
+-weight: 900; line-height: 20px; margin-right: 0; margin-left: 0; color: #4=
+5567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrim=
+ary">Amount Paid</p>
+                                                                           =
+     </td>
+                                                                           =
+     <td font-weight=3D"900" font-size=3D"14px" class=3D"data-table__Cell-s=
+c-11th571-5 bWUSjt" style=3D"color: #45567C; line-height: 20px; padding: 0 =
+28px 20px 28px; text-align: right; font-weight: 900; font-size: 14px; borde=
+r-top: 0; font-family: 'Lato','Helvetica','Roboto',sans-serif;" align=3D"ri=
+ght">
+                                                                           =
+         <p style=3D"margin-top: 0; margin-bottom: 0; font-size: 14px; font=
+-weight: 900; line-height: 20px; margin-right: 0; margin-left: 0; color: #4=
+5567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"textPrim=
+ary">=E2=82=AC9.00</p>
+                                                                           =
+     </td>
+                                                                           =
+ </tr>
+                                                                        </t=
+body>
+                                                                    </table=
+>
+                                                                    <table =
+style=3D"border: 1px solid #D2D4DE; border-top-right-radius: 0; border-top-=
+left-radius: 0; border-bottom-right-radius: 4px; border-bottom-left-radius:=
+ 4px; border-collapse: separate; margin-bottom: 40px; border-top: 0; font-f=
+amily: 'Lato','Helvetica','Roboto',sans-serif;" cellspacing=3D"0" cellpaddi=
+ng=3D"0" width=3D"100%" class=3D"data-table__Table-sc-11th571-0 kpydUo">
+                                                                        <tb=
+ody class=3D"data-table__Body-sc-11th571-2 bBAFEq" style=3D"font-family: 'L=
+ato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+ <tr class=3D"data-table__Row-sc-11th571-3 fUrIGd" style=3D"font-family: 'L=
+ato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+     <td class=3D"data-table__Cell-sc-11th571-5 bORRIC" style=3D"color: #45=
+567C; line-height: 20px; padding: 15px; text-align: center; font-weight: 20=
+0; font-size: 11px; border-top: 0; font-family: 'Lato','Helvetica','Roboto'=
+,sans-serif;" align=3D"center">
+                                                                           =
+         <table role=3D"presentation" cellspacing=3D"0" cellpadding=3D"0" c=
+lass=3D"button__StyledTableWrapper-sc-1ucmmpy-0 kWZNwE" style=3D"text-align=
+: center; width: 100%;" width=3D"100%" align=3D"center">
+                                                                           =
+             <tr class=3D"button__StyledRowWrapper-sc-1ucmmpy-1 gTcrEM">
+                                                                           =
+                 <td class=3D"button__StyledCellWrapper-sc-1ucmmpy-2 bdWmBh=
+" style=3D"border-radius: '50px'; text-align: 'center';" align=3D"'center'"=
+>
+                                                                           =
+                     <div>
+                                                                           =
+                         <div>
+                                                                           =
+                             <!--[if mso]>
+            <v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D=
+"urn:schemas-microsoft-com:office:word" href=3D"http://my.paddle.com/receip=
+t/42574047-87718652/180040006-chrec6efd2523ae-af8d29169a" style=3D"height:3=
+4px;v-text-anchor:middle;width:216px; height: NaN;" arcsize=3D"5%" strokeco=
+lor=3D"#0096FF" fillcolor=3D"#0096FF">
+              <w:anchorlock/>
+              <center style=3D"color: #FFFFFF; font-family: Arial, sans-ser=
+if; font-size:16px;">View Invoice</center>
+            </v:roundrect>
+          <![endif]-->
+                                                                           =
+                         </div><a href=3D"http://my.paddle.com/receipt/4257=
+4047-87718652/180040006-chrec6efd2523ae-af8d29169a" width=3D"216px" target=3D=
+"_blank" font-size=3D"16px" font-weight=3D"900" class=3D"button__StyledButt=
+on-sc-1ucmmpy-3 icPhtA" style=3D"background-color: #0096FF; border: 2px sol=
+id none; border-radius: 4px; color: #FFFFFF; display: inline-block; font-si=
+ze: 16px; font-weight: 900; line-height: 44px; padding-top: 0; padding-righ=
+t: 0; padding-left: 0; padding-bottom: 0; margin-bottom: 0; mso-hide: all; =
+text-align: center; -webkit-text-decoration: none; text-decoration: none; -=
+webkit-text-size-adjust: none; width: 216px; font-family: 'Lato','Helvetica=
+','Roboto',sans-serif;"><span class=3D"button__StyledButtonSpan-sc-1ucmmpy-=
+4 bUOOwc" style=3D"color: #FFFFFF;">View Invoice</span></a>
+                                                                           =
+                     </div>
+                                                                           =
+                 </td>
+                                                                           =
+             </tr>
+                                                                           =
+         </table>
+                                                                           =
+             <p style=3D"font-size: 12px; font-weight: 500; line-height: 20=
+px; margin-top: 0; margin-right: 0; margin-bottom: 10px; margin-left: 0; co=
+lor: #73809C; margin: 12px 13px 5px 13px; font-family: Lato, Helvetica, Rob=
+oto, sans-serif;" class=3D"textSecondary">The =E2=82=AC9.00 payment will ap=
+pear on your bank/card statement as: <br><b class=3D"bold__Bold-sc-kxm4ee-0=
+ fSlGIx" style=3D"font-weight: 700;">PADDLE.NET* PLAUSIBLE</b></p>
+                                                                           =
+     </td>
+                                                                           =
+ </tr><tr class=3D"data-table__Row-sc-11th571-3 fUrIGd" style=3D"font-famil=
+y: 'Lato','Helvetica','Roboto',sans-serif;">
+                                                                           =
+     <td class=3D"data-table__Cell-sc-11th571-5 iXHUu" style=3D"color: #455=
+67C; line-height: 20px; padding: 0px; text-align: left; font-weight: 200; f=
+ont-size: 11px; border-top: 0; font-family: 'Lato','Helvetica','Roboto',san=
+s-serif;" align=3D"left"></td>
+                                                                           =
+ </tr>
+                                                            </tbody></table=
+></td></tr>
+                                                           =20
+                                                        </table>           =
+                                             <hr style=3D"margin: 40px 0; b=
+order: none; border-bottom: 1px solid #A2ABBD; margin-top: 0; margin-bottom=
+: 10px; border-bottom-color: #D2D4DE;" class=3D"separator__StyledSeparator-=
+sc-7pad2t-0 exUogw">
+                                                        <p style=3D"font-si=
+ze: 14px; font-weight: 500; line-height: 24px; margin-top: 0; margin-right:=
+ 0; margin-bottom: 10px; margin-left: 0; color: #45567C; font-family: Lato,=
+ Helvetica, Roboto, sans-serif;" class=3D"textPrimary">If you need help wit=
+h your Plausible Analytics subscription, please contact us on <a href=3D"ht=
+tps://paddle.net?h=3D1d55011a15e0af1980c4f2433e8e6c483ecdcc984523eb4d38c2f6=
+ce33f76a5f4de546c5ff4f2a5bcd6dc2dbef" target=3D"_blank" class=3D"link__Link=
+-sc-7cmohc-0 kUgjiH" style=3D"cursor: pointer; -webkit-text-decoration: non=
+e; text-decoration: none; color: #3FB0FF;">paddle.net</a> or reply to this =
+<a href=3D"mailto:help@paddle.com?subject=3DRe: Your Plausible Analytics in=
+voice" class=3D"link__Link-sc-7cmohc-0 kUgjiH" style=3D"cursor: pointer; -w=
+ebkit-text-decoration: none; text-decoration: none; color: #3FB0FF;">email<=
+/a>.</p>
+                                                        <hr style=3D"margin=
+: 40px 0; border: none; border-bottom: 1px solid #A2ABBD; margin-top: 2px; =
+margin-bottom: 28px; border-bottom-color: #D2D4DE;" class=3D"separator__Sty=
+ledSeparator-sc-7pad2t-0 exUogw">                                          =
+              <p style=3D"font-size: 14px; font-weight: 500; line-height: 2=
+4px; margin-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0; colo=
+r: #45567C; font-family: Lato, Helvetica, Roboto, sans-serif;" class=3D"tex=
+tPrimary">Thanks,</p>
+                                                        <p style=3D"font-si=
+ze: 14px; font-weight: 500; line-height: 24px; margin-bottom: 0; margin-top=
+: 0; margin-right: 0; margin-left: 0; color: #45567C; font-family: Lato, He=
+lvetica, Roboto, sans-serif;" class=3D"textPrimary">Plausible Analytics</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+            </center></td>
+        </tr>
+    </table>
+</center>
+<table class=3D"container__StyledWrapperTable-sc-15tsr3r-0 cicRUS footerCon=
+tainer" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" style=3D"margin:=
+ 0; border-top: 0; border-radius: 0; background-color: #F5F5F8;" bgcolor=3D=
+"#F5F5F8">
+    <tr>
+        <td align=3D"center" valign=3D"top">
+            <table cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" class=
+=3D"table__Table-sc-17dv5k5-0 klJgMH" style=3D"font-family: 'Lato','Helveti=
+ca','Roboto',sans-serif;">
+                <tr>
+                    <td style=3D"padding: 35px;" class=3D"container__Styled=
+WrapperCell-sc-15tsr3r-1 dsRHJY">
+                        <table style=3D"max-width: none; font-family: 'Lato=
+','Helvetica','Roboto',sans-serif;" cellspacing=3D"0" cellpadding=3D"0" wid=
+th=3D"100%" class=3D"table__Table-sc-17dv5k5-0 klJgMH">
+                            <tr>
+                                <td align=3D"center"><img width=3D"95" heig=
+ht=3D"30" src=3D"https://cdn.paddle.com/email-templates/images/paddle-logo-=
+light.png" alt=3D"logo" style=3D"margin-bottom:10px" class=3D"lightModeDefa=
+ult">
+                                    <div class=3D"lightModeImageWrapper" st=
+yle=3D"display:none;mso-hide:all"><img width=3D"95" height=3D"30" src=3D"ht=
+tps://cdn.paddle.com/email-templates/images/paddle-logo-light.png" alt=3D"l=
+ogo" style=3D"display:none;margin-bottom:10px" class=3D"lightModeImage"></d=
+iv>
+                                    <div class=3D"darkModeImageWrapper" sty=
+le=3D"display:none;mso-hide:all"><img width=3D"95" height=3D"30" src=3D"htt=
+ps://cdn.paddle.com/email-templates/images/paddle-logo-dark.png" alt=3D"log=
+o" style=3D"display:none;margin-bottom:10px" class=3D"darkModeImage"></div>
+                                    <div class=3D"footer-with-logo__Display=
+OnMobileOnly-sc-1g1ow9p-1 jKMVET" style=3D"display: none;">
+                                        <p style=3D"margin-bottom: 0; font-=
+weight: 500; font-size: 12px; line-height: 20px; margin-top: 0; margin-righ=
+t: 0; margin-left: 0; color: #A2ABBD; font-family: Lato, Helvetica, Roboto,=
+ sans-serif;" class=3D"textFooter">Paddle.com Market Ltd, Judd House, 18-29=
+ Mora Street, London EC1V 8BT. =C2=A9 2023 Paddle. All rights reserved.</p>
+                                    </div>
+                                    <div class=3D"footer-with-logo__Display=
+OnDesktopOnly-sc-1g1ow9p-0 hNHNzH" style=3D"display: block;">
+                                        <p style=3D"margin-bottom: 0; font-=
+weight: 500; font-size: 12px; line-height: 20px; margin-top: 0; margin-righ=
+t: 0; margin-left: 0; color: #A2ABBD; font-family: Lato, Helvetica, Roboto,=
+ sans-serif;" class=3D"textFooter">Paddle.com Market Ltd, Judd House, 18-29=
+ Mora Street, London EC1V 8BT </p>
+                                        <p style=3D"margin-bottom: 0; font-=
+weight: 500; font-size: 12px; line-height: 20px; margin-top: 0; margin-righ=
+t: 0; margin-left: 0; color: #A2ABBD; font-family: Lato, Helvetica, Roboto,=
+ sans-serif;" class=3D"textFooter">=C2=A9 2023 Paddle. All rights reserved.=
+</p>
+                                    </div>
+                                        <table cellpadding=3D"0" cellspacin=
+g=3D"0" width=3D"100%" class=3D"spacer__StyledTableWrapper-sc-nppksv-0 gNKR=
+Hx" style=3D"margin-top: 0;">
+                                            <tr>
+                                                <td height=3D"10" class=3D"=
+spacer__StyledWrapperCell-sc-nppksv-1 hSDLeU" style=3D"height: 10px;"></td>
+                                            </tr>
+                                        </table>
+                                        <p id=3D"order-id" style=3D"margin-=
+bottom: 0; font-weight: 500; font-size: 12px; line-height: 20px; margin-top=
+: 0; margin-right: 0; margin-left: 0; color: #A2ABBD; font-family: Lato, He=
+lvetica, Roboto, sans-serif;" class=3D"textFooter">42574047-87718652</p>
+                                    <div style=3D"display:none">
+                                        <paddle-subject>Your Plausible Anal=
+ytics invoice</paddle-subject>
+                                        <div id=3D"paddle-lang">en</div>
+                                        <div id=3D"paddle-type">subscriptio=
+n-receipt</div>
+                                        <div id=3D"paddle-sub-type">recurri=
+ng</div>
+                                        <div id=3D"paddle-hash">1d55011a15e=
+0af1980c4f2433e8e6c483ecdcc984523eb4d38c2f6ce33f76a5f4de546c5ff4f2a5bcd6dc2=
+dbef</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+
+<img src=3D"https://ea.pstmrk.it/open?m=3Dv3_1.E7bkJZi6qBtxJvx-IHq-kA.fza49=
+CQG_oUyDMfbtI7Eg1W-YTSo5kHWOfwzYeCifuyROUyfrwiT7-E76Ut_fzGXew0jdDEsnfTCuAqw=
+qTSblKGNdvmAWt_gd1BLHfz7KTUlfvMPkAFq5Kv-Ymf5YpuOMQx_lEzud0QEzpPFgzxgqAOXVi8=
+L8y8dZXDdMQNwlMsxhYVk1GHn3lKhXPOatOa4iY1A-U8S-enMrTUIDpknCiI1lGuHPfprtw-ZkL=
+ylPUOo5oL7WuWuESsUsYoeu4FxikUk_0mC99okc8mzcsiIol3fJvt6esrWzW9JrrI2IPL5sJU-x=
+XU4RlVEFxUvS7m5_tkoQXf4IOZRfnBgrcsD_TeV5yS4Jssn_t9XvuVHq7JasJ4-wn3yTKUEmeXt=
+frIMW0zOpjd5Suw9WHmqmvSXvCWrEfpD_5W28Yah0l3PKI5i7u0LjhAPs0bhsjnwTim_Ca1LUeW=
+72jDYhJzFqvcDIhVX4M5purpDTnK0ej5_pKcXsgGEMUs9brk_WdPxyQSTG4PgrHE4BCkBvyFEkt=
+fLn4C8b1Ch08qqr4Q7DpPs7VE" width=3D"1" height=3D"1" border=3D"0" alt=3D"" /=
+></body></html>=

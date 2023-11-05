@@ -35,7 +35,9 @@ module InvoiceCreatorServices
 
       def invoice_attributes(user, invoice_info)
         {
-          company: user.company, user: user, status: :processing, external_id: invoice_info[:identifier]
+          company: user.company, user: user, status: :processing,
+          external_id: invoice_info[:identifier],
+          external_link: invoice_info[:link]
         }.merge(
           invoice_info.slice(:date, :total_amount, :tax_rate, :currency)
         )
@@ -93,7 +95,7 @@ module InvoiceCreatorServices
 
       def persist_html_document(invoice, mail)
         invoice.html_document.attach(
-          io: StringIO.new(mail.original_html_body),
+          io: StringIO.new(get_html_body(invoice, mail)),
           filename: 'invoice.html', content_type: 'text/html', identify: false
         )
         invoice.save
@@ -103,6 +105,12 @@ module InvoiceCreatorServices
         mail.attachments.find do |attachment|
           attachment.mime_type == 'application/pdf'
         end
+      end
+
+      def get_html_body(invoice, mail)
+        if invoice.external_link.present? && invoice.invoice_supplier.follow_link?
+          html_client.call(url: invoice.external_link)
+        end || mail.html_body
       end
     end
   end

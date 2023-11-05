@@ -50,6 +50,7 @@ en:
       hints:
         name: "This is the name we collected from your emails or PDF documents. It can't be changed."
         display_name: "This is the name we'll use when displaying the information of an invoice."
+        follow_link: "Tell Poolpybot to follow the link in the email to get the invoice."
 
   layouts:
     workspace_ui:
@@ -405,6 +406,8 @@ en:
           processing: "In progress"
           processed: "Processed"
           failed: "Error"
+      invoice_supplier:
+        follow_link: "Follow the link to the PDF"
       user:
         locale: "Language"
         notification_on_collecting: "Send a notification when collecting an invoice"

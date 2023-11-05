@@ -8,6 +8,7 @@
 #  currency            :string
 #  date                :date
 #  error               :integer          default("none")
+#  external_link       :string
 #  status              :integer          default("created")
 #  tax_rate            :float
 #  total_amount        :float

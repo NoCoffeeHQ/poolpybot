@@ -7,6 +7,7 @@
 #  id             :bigint           not null, primary key
 #  display_name   :string
 #  emails         :string           default([]), is an Array
+#  follow_link    :boolean          default(FALSE)
 #  invoices_count :integer
 #  name           :string
 #  created_at     :datetime         not null

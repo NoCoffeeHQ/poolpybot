@@ -13,8 +13,13 @@ module ForwardedMail
 
     def initialize(mail:)
       @mail = mail
-      @raw_body = extract_original_body(mail.text_part.body.decoded.to_s.force_encoding('UTF-8'))
-      @html_body = mail.html_part.body.to_s
+      if mail.multipart?
+        @raw_body = extract_original_body(mail.text_part.body.decoded.to_s.force_encoding('UTF-8'))
+        @html_body = mail.html_part.body.to_s
+      else
+        # proboably not a forwarded email
+        @raw_body = @html_body = ''
+      end
     end
 
     def call
@@ -38,14 +43,7 @@ module ForwardedMail
     end
 
     def parse_from
-      # First method: extract the author via the From part
-      # (Apple Mail, Gmail, Outlook Live / 365, New Outlook 2019, Thunderbird)
-      parse_mailbox ||
-        # Second method: extract the author via the From part,
-        # using lax regexes (Yahoo Mail)
-        lax_parse_mailbox ||
-        # Unknown from
-        { name: nil, address: nil }
+      parse_mailbox || lax_parse_mailbox || { name: nil, address: nil }
     end
 
     def parse_mailbox
@@ -54,10 +52,7 @@ module ForwardedMail
       return nil unless matches&.size&.positive?
 
       if (mailbox_matches = loop_match(MAILBOX_REGEXP, matches[2]))
-        prepare_mailbox(
-          mailbox_matches.size == 3 ? mailbox_matches[1] : nil,
-          mailbox_matches[2]
-        )
+        prepare_mailbox(mailbox_matches.size == 3 ? mailbox_matches[1] : nil, mailbox_matches[2])
       else
         prepare_mailbox(nil, matches[2])
       end
@@ -131,9 +126,6 @@ module ForwardedMail
     def loop_match(regexps, text)
       regexps.each do |regexp|
         matches = text.match(regexp)
-
-        # pp [regexp, text.size, matches&.size]
-
         return matches if matches && matches.size > 1
       end
       nil

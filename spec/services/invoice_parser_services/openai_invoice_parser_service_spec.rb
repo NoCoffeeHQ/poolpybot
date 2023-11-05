@@ -72,7 +72,8 @@ RSpec.describe InvoiceParserServices::OpenaiService do
         date: '2023/06/26',
         total_amount: 12.99,
         tax_rate: 2.1,
-        currency: 'EUR'
+        currency: 'EUR',
+        link: 'https://support.apple.com/kb/HT204088?cid=email_receipt_itunes_article_HT204088'
       }.with_indifferent_access)
     end
   end
@@ -130,7 +131,54 @@ RSpec.describe InvoiceParserServices::OpenaiService do
         date: '2023/07/01',
         total_amount: 50.17,
         tax_rate: nil,
-        currency: 'USD'
+        currency: 'USD',
+        link: 'https://dashboard.heroku.com/orgs/nocoffee/invoices/2023/07'
+      }.with_indifferent_access)
+    end
+  end
+
+  describe 'Given the invoice is from an Plausible invoice' do
+    let(:text) do
+      <<~EMAIL
+        Invoice # 42574047-87718652
+
+        Amount Paid
+        €9.00
+        Invoice Date
+        30th October 2023
+        Payment Method
+
+        ending in 1006
+        10k monthly pageviews
+        €9.00
+        VAT (20%)
+        €0.00
+        Amount Paid
+        €9.00
+        View Invoice <http://my.paddle.com/receipt/42574047-87718652/180040006-chrec6efd2523ae-af8d29169a>
+        The €9.00 payment will appear on your bank/card statement as:
+        PADDLE.NET <http://paddle.net/>* PLAUSIBLE
+        If you need help with your Plausible Analytics subscription, please contact us on paddle.net <https://paddle.net/?h=1d55011a15e0af1980c4f2433e8e6c483ecdcc984523eb4d38c2f6ce33f76a5f4de546c5ff4f2a5bcd6dc2dbef> or reply to this email <mailto:help@paddle.com?subject=Re:%20Your%20Plausible%20Analytics%20invoice>.
+
+        Thanks,
+        Plausible Analytics
+
+        Paddle.com <http://paddle.com/> Market Ltd, Judd House, 18-29 Mora Street, London EC1V 8BT
+        © 2023 Paddle. All rights reserved.
+        42574047-87718652
+      EMAIL
+    end
+
+    it 'extracts the correct information' do
+      skip 'No need to spend money on that test' if ENV['RSPEC_DISABLE_OPENAI_CALLS'] == '1'
+      is_expected.to eq({
+        company_name: 'Plausible Analytics',
+        identifier: '42574047-87718652',
+        date: '2023/10/30',
+        total_amount: 9.00,
+        tax_rate: nil,
+        currency: 'EUR',
+        link: 'http://my.paddle.com/receipt/42574047-87718652/180040006-chrec6efd2523ae-af8d29169a'
       }.with_indifferent_access)
     end
   end

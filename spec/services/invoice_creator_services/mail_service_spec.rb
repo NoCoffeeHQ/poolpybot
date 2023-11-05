@@ -120,7 +120,7 @@ RSpec.describe InvoiceCreatorServices::MailService do
       allow(container.pdf_to_text).to receive(:call).and_return(pdf_text)
     end
 
-    describe 'Given the email was received by Sendgrid' do
+    describe 'Given the email was processed by Sendgrid' do
       let(:mail) { fetch_mail(:amazon) }
 
       it 'creates the invoice in DB' do
@@ -128,7 +128,7 @@ RSpec.describe InvoiceCreatorServices::MailService do
       end
     end
 
-    describe 'Given the email was received by Brevo' do
+    describe 'Given the email was processed by Brevo' do
       let(:mail) { brevo_mails(:aws).first }
       let(:pdf_file) { File.open(file_fixture('invoices/aws.pdf').to_s) }
       let(:brevo_parsing_api) { instance_double('FakeInboundParsingApi', get_inbound_email_attachment: pdf_file) }

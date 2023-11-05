@@ -19,7 +19,7 @@ fr:
       hints:
         name: "C'est le nom que nous avons collecté à partir de vos e-mails ou documents PDF. Il ne peut pas être modifié."
         display_name: "C'est le nom que nous utiliserons pour afficher les informations d'une facture."
-
+        follow_link: "Demander à Poolpybot de suivre le lien dans l'email pour récupérer la facture."
 
   layouts:
     workspace_ui:
@@ -375,6 +375,8 @@ fr:
           processing: "En cours"
           processed: "Traitée"
           failed: "Erreur"
+      invoice_supplier:
+        follow_link: "Suivez le lien vers le PDF"
       user:
         username: "Nom d'utilisateur"
         email: "E-mail"
@@ -385,6 +387,7 @@ fr:
           never: "Jamais"
           daily: "Quotidien"
           weekly: "Hebdomadaire"
+      
     errors:
       models:
         user_invitation:

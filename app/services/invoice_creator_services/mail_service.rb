@@ -4,7 +4,7 @@ module InvoiceCreatorServices
   class MailService < InvoiceCreatorServices::BaseService
     include Concerns::MailInvoiceConcern
 
-    dependencies :invoice_parser, :pdf_invoice_creator, :html_to_pdf
+    dependencies :invoice_parser, :pdf_invoice_creator, :html_to_pdf, :html_client
 
     def call(mail:)
       user = find_user(mail)
