@@ -14,10 +14,10 @@ module ForwardedMail
     def initialize(mail:)
       @mail = mail
       if mail.multipart?
-        @raw_body = extract_original_body(mail.text_part.body.decoded.to_s.force_encoding('UTF-8'))
+        @raw_body = extract_original_body_from_text_part(mail.text_part)
         @html_body = mail.html_part.body.to_s
       else
-        # proboably not a forwarded email
+        # probably not a forwarded email
         @raw_body = @html_body = ''
       end
     end
@@ -67,11 +67,14 @@ module ForwardedMail
     end
 
     def prepare_mailbox(name, address)
-      {
-        # Some clients fill the name with the address ("bessie.berry@acme.com <bessie.berry@acme.com>")
-        name: name != address ? name&.strip : nil,
-        address: address.strip
-      }
+      # Some clients fill the name with the address ("bessie.berry@acme.com <bessie.berry@acme.com>")
+      { name: name != address ? name&.strip : nil, address: address.strip }
+    end
+
+    def extract_original_body_from_text_part(text_part)
+      return '' unless text_part
+
+      extract_original_body(text_part.body.decoded.to_s.force_encoding('UTF-8'))
     end
 
     def extract_original_body(body)

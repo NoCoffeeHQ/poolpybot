@@ -26,7 +26,7 @@ module ForwardedMail
     end
 
     def text_body
-      return original_text_body if forwarded?
+      return original_text_body if forwarded? && original_text_body
 
       if multipart?
         # we assume that we'll get a text and html versions of the email
