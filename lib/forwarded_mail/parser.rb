@@ -15,7 +15,7 @@ module ForwardedMail
       @mail = mail
       if mail.multipart?
         @raw_body = extract_original_body_from_text_part(mail.text_part)
-        @html_body = mail.html_part.body.to_s
+        @html_body = mail.html_part&.body.to_s
       else
         # probably not a forwarded email
         @raw_body = @html_body = ''

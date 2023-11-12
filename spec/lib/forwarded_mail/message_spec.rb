@@ -33,6 +33,18 @@ RSpec.describe ForwardedMail::Message do
         expect(message.from_name).to eq 'Algolia Accounting'
       end
     end
+
+    describe 'Given the email is from Honeybadger' do
+      let(:message) { fetch_mail(:honeybadger) }
+
+      it 'has a from_address attribute' do
+        expect(message.from_address).to eq 'support@honeybadger.io'
+      end
+
+      it 'has a from_name attribute' do
+        expect(message.from_name).to eq 'Honeybadger Support'
+      end
+    end
   end
   describe 'Given the email is a forward' do
     describe 'Given the original email is from Plausible' do
